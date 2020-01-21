@@ -1,0 +1,23 @@
+#Route to redirect to the node edit form (to specify by query params)
+bo_additions.node_edit:
+  path: '/admin/node/edit'
+  defaults:
+    _controller: '\Drupal\bo_additions\Controller\EntityEditRedirectController::nodeEditFormRedirect'
+  requirements:
+    _permission: 'access content overview'
+
+#Route to redirect to the term edit form (to specify by query params)
+bo_additions.term_edit:
+  path: '/admin/term/edit'
+  defaults:
+    _controller: '\Drupal\bo_additions\Controller\EntityEditRedirectController::termEditFormRedirect'
+  requirements:
+    _permission: 'access content overview'
+
+#Route to redirect to the term edit form (to specify by query params)
+bo_additions.entity_edit:
+  path: '/admin/{entity_type}/edit'
+  defaults:
+    _controller: '\Drupal\bo_additions\Controller\EntityEditRedirectController::entityEditFormRedirect'
+  requirements:
+    _permission: 'access content overview'

@@ -1,0 +1,13 @@
+# Comment ajouter des liens au menu Contrib :
+#
+# Exemple de lien de menu de premier niveau :
+#
+#nom_machine_de_mon_module.news:
+#  title: 'Actualités'
+#  parent: contrib
+#  menu_name: contrib
+#  route_name: view.content.page_1
+#  options:
+#    query:
+#      type: 'news'
+#  weight: 0

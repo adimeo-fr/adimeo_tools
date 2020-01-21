@@ -1,0 +1,10 @@
+services:
+  media_enhancement.twig_extension:
+    class: Drupal\media_enhancement\Services\TwigTools
+    arguments: ["@entity_type.manager"]
+    public: false
+    tags:
+    - { name: twig.extension }
+
+  media_enhancement.manager:
+    class: Drupal\media_enhancement\Services\MediaEnhancementManager

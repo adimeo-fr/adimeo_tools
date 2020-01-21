@@ -1,0 +1,7 @@
+name: 'Icon Selector'
+type: module
+description: 'Sélecteur pour les icones svg'
+core: 8.x
+package: User interface
+dependencies:
+  - adimeo_tools

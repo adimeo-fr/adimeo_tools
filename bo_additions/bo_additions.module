@@ -1,0 +1,109 @@
+<?php
+
+use Drupal\Core\Url;
+use Drupal\bo_additions\Service\Toolbar;
+
+/**
+ * Implements hook_toolbar().
+ */
+function bo_additions_toolbar() {
+  $items = [];
+  $items['contrib'] = [
+    '#cache' => [
+      'contexts' => ['user.permissions'],
+    ],
+  ];
+  if (!\Drupal::currentUser()->hasPermission('access administration pages')) {
+    return $items;
+  }
+
+  $items['contrib'] += [
+    '#type' => 'toolbar_item',
+    '#weight' => 1,
+    'tab' => [
+      '#type' => 'link',
+      '#title' => t('Contribuer'),
+      '#url' => Url::fromRoute('<front>'),
+      '#attributes' => [
+        'title' => t('Contribuer'),
+        'class' => ['toolbar-icon', 'toolbar-icon-system-admin-content'],
+      ],
+    ],
+    'tray' => array(
+      '#heading' => t('Content management'),
+      '#attached' => array(
+        'library' => [
+          'admin_toolbar/toolbar.tree',
+        ],
+      ),
+      'toolbar_bo_additions_toolbar_content' => array(
+        '#pre_render' => array(
+          'bo_additions_toolbar_content_pre_render',
+        ),
+        '#type' => 'container',
+        '#attributes' => array(
+          'class' => array('toolbar-menu-administration'),
+        ),
+      ),
+    ),
+
+  ];
+
+  /** @var \Drupal\Core\Menu\LocalTaskManagerInterface $manager */
+  $manager = \Drupal::service('plugin.manager.menu.local_task');
+  $localTasks = $manager->getLocalTasks(\Drupal::routeMatch()->getRouteName());
+  uasort($localTasks['tabs'], function ($a, $b) {
+    return $a['#weight'] > $b['#weight'];
+  });
+
+  // Build a list of links for the menu.
+  $links = [];
+
+  if (!empty($localTasks['tabs'])) {
+    foreach ($localTasks['tabs'] as $routeName => $localTaskItem) {
+      $links[$routeName] = [
+        '#type'   => 'link',
+        '#title'  => $localTaskItem['#link']['title'],
+        '#url'    => $localTaskItem['#link']['url'],
+        '#access' => $localTaskItem['#access'],
+      ];
+    }
+  }
+
+  $items['tabs'] = [
+    '#cache'  => ['max-age' => 0],
+    '#type'   => 'toolbar_item',
+    'tab'     => [
+      '#type'  => 'link',
+      '#title' => t('Actions'),
+      '#url'   => Url::fromRoute('<front>'),
+    ],
+    'tray'    => [
+      'content' => [
+        '#theme'      => 'item_list',
+        '#type'       => 'ul',
+        '#items'      => $links,
+        '#attributes' => [
+          'class' => ['toolbar-menu'],
+        ],
+      ],
+    ],
+    '#weight' => 99,
+  ];
+
+  return $items;
+}
+
+function bo_additions_toolbar_content_pre_render($element) {
+  /** @var Toolbar $toolbarTools */
+  $toolbarTools = \Drupal::service(Toolbar::SERVICE_NAME);
+  $toolbarTools->setCacheContext(['user.roles']);
+  $toolbarTools->setMenuName('contrib');
+  $element = $toolbarTools->populate($element);
+
+  return $element;
+}
+
+function bo_additions_uninstall(){
+  \Drupal::configFactory()->getEditable('system.menu.contrib')->delete();
+}

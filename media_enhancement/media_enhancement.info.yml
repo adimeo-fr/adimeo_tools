@@ -1,0 +1,9 @@
+name: 'Media Enhancement'
+type: module
+description: 'Optimisation de la gestion des images'
+core: 8.x
+package: Adimeo
+version: 8.x-2.1
+dependencies:
+  - media
+  - adimeo_tools

@@ -1,0 +1,6 @@
+services:
+  bo_additions.toolbar:
+    class: Drupal\bo_additions\Service\Toolbar
+    arguments: ["@toolbar.menu_tree"]
+    tags:
+      - { name: backend_overridable }
