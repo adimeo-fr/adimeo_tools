@@ -14,21 +14,21 @@ tac_facebook:
   version: 1
   js:
     libraries/tac_facebook/tac_facebook.js: {}
-  depencies:
+  dependencies:
     - tac_services/tac_services
 
 tac_google_ga:
   version: 1
   js:
     libraries/tac_google_analytics/tac_ga.js: {}
-  depencies:
+  dependencies:
     - tac_services/tac_services
 
 tac_google_maps_api:
   version: 1
   js:
     libraries/tac_google_maps_api/tac_gmaps_api.js: {}
-  depencies:
+  dependencies:
     - tac_services/tac_services
 
 snazzy-info-window:
@@ -53,14 +53,14 @@ tac_youtube_api:
   version: 1
   js:
     libraries/tac_youtube_api/tac_youtube_api.js: {}
-  depencies:
+  dependencies:
     - tac_services/tac_services
 
 youtube_api:
   version: 1
   js:
     libraries/tac_youtube_api/youtube_api.js: {}
-  depencies:
+  dependencies:
     - tac_services/tac_services
     - tac_services/tac_youtube_api
 
@@ -68,7 +68,7 @@ tac_google_tag_manager:
   version: 1
   js:
     libraries/tac_google_tag_manager/tac_gtm.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
       - tac_services/tac_youtube_api
 
@@ -76,47 +76,47 @@ tac_facebook_pixel:
   version: 1
   js:
     libraries/tac_facebook_pixel/tac_facebook_pixel.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
 
 tac_clic2drive:
   version: 1
   js:
     libraries/tac_clic2drive/tac_clic2drive.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
 
 tac_youtube_embed:
   version: 1
   js:
     libraries/tac_youtube_embed/tac_youtube_embed.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
 
 tac_tradelab:
   version: 1
   js:
     libraries/tac_tradelab/tac_tradelab.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
 
 tac_gtag:
   version: 1
   js:
     libraries/tac_gtag/tac_gtag.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
 
 tac_twitter_timelines:
   version: 1
   js:
     libraries/tac_twitter_timelines/tac_twitter_timelines.js: {}
-  depencies:
+  dependencies:
       - tac_services/tac_services
 
 kissmetrics:
   version: 1
   js:
     libraries/tac_kissmetrics/tac_kissmetrics.js: {}
-  depencies:
+  dependencies:
     - tac_services/tac_services
