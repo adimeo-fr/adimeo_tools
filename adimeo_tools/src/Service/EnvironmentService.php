@@ -24,7 +24,7 @@ class EnvironmentService {
   const ENV_DEVELOPMENT = 'development';
 
   /**
-   * Return singleton.
+   * Retourne le singleton (quand pas d'injection de dépendances possible)
    *
    * @return static
    *    Static object.
@@ -67,8 +67,7 @@ class EnvironmentService {
    */
   public function isStaging() {
     return in_array($this->getEnvironment(), [
-      self::ENV_STAGING,
-      self::ENV_STAGING_OLD
+      self::ENV_STAGING
     ]);
   }
 

@@ -1,10 +1,18 @@
 services:
   media_enhancement.twig_extension:
-    class: Drupal\media_enhancement\Services\TwigTools
-    arguments: ["@entity_type.manager"]
+    class: Drupal\media_enhancement\Service\TwigTools
+    autowire: true
     public: false
     tags:
     - { name: twig.extension }
 
   media_enhancement.manager:
-    class: Drupal\media_enhancement\Services\MediaEnhancementManager
+    class: Drupal\media_enhancement\Service\MediaEnhancementManager
+
+  media_enhancement.tools:
+    class: Drupal\media_enhancement\Service\mediaTools
+    autowire: true
+
+  media_enhancement.ajax_popin_controller:
+    class: Drupal\media_enhancement\Controller\AjaxPopinMedia
+    autowire: true

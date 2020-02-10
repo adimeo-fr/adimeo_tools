@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media_enhancement\Services;
+namespace Drupal\media_enhancement\Service;
 
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
@@ -65,7 +65,7 @@ class MediaEnhancementManager extends ConfigServiceBase {
   const LAZYLOAD_ATTR = 'lazyload';
 
   /**
-   * Retourne le singleton.
+   * Retourne le singleton (quand pas d'injection de dépendances possible)
    *
    * @return static
    *   Le singleton.

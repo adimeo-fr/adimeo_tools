@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\media_enhancement\Services;
+namespace Drupal\media_enhancement\Service;
 
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\file\Entity\File;

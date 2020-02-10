@@ -2,6 +2,7 @@
 
 namespace Drupal\adimeo_tools\Service;
 
+use Drupal\adimeo_tools\Service\LanguageService;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManager;
@@ -35,15 +36,22 @@ class TwigFilters extends \Twig_Extension {
    * @var EntityTypeManager
    */
   private $entityTypeManager;
+  /**
+   * @var LanguageService
+   */
+  private $languageService;
 
   /**
    * TwigFilters constructor.
    *
    * @param EntityTypeManagerInterface $entityTypeManager
    *   The entity type manager service.
+   *
+   * @param LanguageService $languageService
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, LanguageService $languageService) {
     $this->entityTypeManager = $entityTypeManager;
+    $this->languageService = $languageService;
   }
 
   /**
@@ -320,7 +328,7 @@ class TwigFilters extends \Twig_Extension {
       $langCode = $entity->language()->getId();
     }
     else {
-      $langCode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $langCode = $this->languageService->getCurrentLanguageId();
     }
 
     $renderController = $this->entityTypeManager->getViewBuilder($entityType);
@@ -470,7 +478,7 @@ class TwigFilters extends \Twig_Extension {
 
     // Passed data is the id of the node.
     if (is_numeric($node)) {
-      $node = LanguageService::load('node', $node);
+      $node = $this->load('node', $node);
     }
     // Passed data is an array containing #node.
     elseif (is_array($node) && array_key_exists('#node', $node)) {
@@ -496,7 +504,7 @@ class TwigFilters extends \Twig_Extension {
    *   Le langcode courant.
    */
   public function getGlobalLanguage() {
-    return LanguageService::getCurrentLanguageId();
+    return $this->getCurrentLanguageId();
   }
 
   /**
@@ -507,7 +515,7 @@ class TwigFilters extends \Twig_Extension {
    */
   public function getEntityTranslation($entity, $language = NULL) {
     if ($entity && method_exists($entity, 'getTranslation')) {
-      $language = isset($language) ? $language : LanguageService::getCurrentLanguageId();
+      $language = isset($language) ? $language : $this->getCurrentLanguageId();
       if ($entity->hasTranslation($language)) {
         return $entity->getTranslation($language);
       }

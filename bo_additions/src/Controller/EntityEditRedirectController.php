@@ -8,6 +8,27 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EntityEditRedirectController extends ControllerBase{
+
+
+  /**
+   * The entity type manager service.
+   *
+   * @var EntityTypeManager
+   */
+  private $entityTypeManager;
+
+  /**
+   * TwigFilters constructor.
+   *
+   * @param EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   *
+   * @param LanguageService $languageService
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
   /**
    * Redirect to node edit form selected by the query params
    *
@@ -41,7 +62,7 @@ class EntityEditRedirectController extends ControllerBase{
     $conditions = \Drupal::request()->query->all();
 
     try {
-      $entityStorage = \Drupal::entityTypeManager()->getStorage($entity_type);
+      $entityStorage = $this->entityTypeManager->getStorage($entity_type);
       $query = $entityStorage->getQuery();
       foreach ($conditions as $field => $value) {
         $query->condition($field, $value);

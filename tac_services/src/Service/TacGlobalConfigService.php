@@ -52,6 +52,19 @@ class TacGlobalConfigService extends ConfigServiceBase {
   const ALERT_LABEL = 'alert_label';
 
   /**
+   * @var LanguageService
+   */
+  private $languageService;
+
+  /**
+   * Class constructor.
+   * @param LanguageService $languageService
+   */
+  public function __construct(LanguageService $languageService) {
+    $this->languageService = $languageService;
+  }
+
+  /**
    * Get the conf key.
    *
    * @return string
@@ -110,7 +123,7 @@ class TacGlobalConfigService extends ConfigServiceBase {
    */
   public function getAlertLabel($langCode = NULL) {
     if ($labels = $this->get(static::ALERT_LABEL)) {
-      $langCode = $langCode ?: LanguageService::getCurrentLanguageId();
+      $langCode = $langCode ?: $this->languageService->getCurrentLanguageId();
       if (array_key_exists($langCode, $labels)) {
         $label = $labels[$langCode];
         if (!empty($label) && !empty($label['value'])) {

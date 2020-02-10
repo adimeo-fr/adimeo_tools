@@ -5,8 +5,12 @@ namespace Drupal\adimeo_tools\Service;
 use Cocur\Slugify\Slugify;
 use Drupal\Core\Field\EntityReferenceFieldItemList;
 use Drupal\Core\Menu\MenuLinkManager;
-use \Drupal\node\Entity\Node;
+use Drupal\Core\Menu\MenuLinkManagerInterface;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\adimeo_tools\Service\LanguageService;
 
 /**
  * Class Misc.
@@ -25,13 +29,43 @@ class Misc {
   protected $currentPageNode;
 
   /**
-   * Retourne le singleton.
+   * The entity type manager service.
+   *
+   * @var EntityTypeManager
+   */
+  private $entityTypeManager;
+  /**
+   * @var LanguageService
+   */
+  private $languageService;
+  /**
+   * @var MenuLinkManager
+   */
+  private $menuLinkManager;
+
+  /**
+   * Retourne le singleton (quand pas d'injection de dépendances possible)
    *
    * @return static
    *   Le singleton.
    */
   public static function me() {
     return \Drupal::service(static::SERVICE_NAME);
+  }
+
+  /**
+   * Constructor
+   *
+   * @param EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   *
+   * @param LanguageService $languageService
+   * @param MenuLinkManagerInterface $menuLinkManager
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, LanguageService $languageService, MenuLinkManagerInterface $menuLinkManager) {
+    $this->entityTypeManager = $entityTypeManager;
+    $this->languageService = $languageService;
+    $this->menuLinkManager = $menuLinkManager;
   }
 
   /**
@@ -51,7 +85,7 @@ class Misc {
 
     // Get tree.
     /** @var \Drupal\taxonomy\TermStorage $taxonomy_storage */
-    $taxonomy_storage = \Drupal::service('entity_type.manager')
+    $taxonomy_storage = $this->entityTypeManager
       ->getStorage('taxonomy_term');
     $taxonomy = $taxonomy_storage->loadTree($vid, $parent, $max_depth, FALSE);
 
@@ -93,7 +127,7 @@ class Misc {
 
       if (!$parentTerm->children) {
         /** @var \Drupal\taxonomy\TermStorage $termStorage */
-        $termStorage = \Drupal::entityTypeManager()
+        $termStorage = $this->entityTypeManager
           ->getStorage('taxonomy_term');
         $parentTerm->children = $termStorage->loadChildren($parentTerm->id());
       }
@@ -117,7 +151,7 @@ class Misc {
    *   The array of parent Terms (Can be multiple...)
    */
   public function getParentTerms(Term $term) {
-    $storage = \Drupal::service('entity_type.manager')
+    $storage = $this->entityTypeManager
       ->getStorage('taxonomy_term');
     return $storage->loadParents($term->id());
   }
@@ -133,10 +167,13 @@ class Misc {
    * @param string $mode
    *   Le mode de traduction par défaut de l'enfant.
    */
-  public function translateTermTree(array &$terms, $languageId = NULL, $mode = LanguageService::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
+  public function translateTermTree(array &$terms, $languageId = NULL, $mode = NULL) {
+    if ($mode == NULL) {
+      $mode = $this->languageService::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS;
+    }
     /** @var Term $term */
     foreach ($terms as &$term) {
-      $term = LanguageService::translate($term, $languageId, $mode);
+      $term = $this->languageService->translate($term, $languageId, $mode);
       if (is_array($term->children)) {
         $this->translateTermTree($term->children, $languageId, $mode);
       }
@@ -150,12 +187,9 @@ class Misc {
    * @return Drupal\Core\Menu\MenuLinkInterface|bool
    */
   public function getCurrentNodeParent() {
-    /** @var MenuLinkManager $menu_link_manager */
-    $menu_link_manager = Drupal::service('plugin.manager.menu.link');
-
     $node_id = Drupal::routeMatch()->getRawParameter('node');
     if ($node_id) {
-      $menu_link = $menu_link_manager->loadLinksByRoute('entity.node.canonical', array('node' => $node_id));
+      $menu_link = $this->menuLinkManager->loadLinksByRoute('entity.node.canonical', array('node' => $node_id));
     }
     else {
       return '';
@@ -164,12 +198,12 @@ class Misc {
     if (is_array($menu_link) && count($menu_link)) {
       $menu_link = reset($menu_link);
       if ($menu_link->getParent()) {
-        $parents = $menu_link_manager->getParentIds($menu_link->getParent());
+        $parents = $this->menuLinkManager->getParentIds($menu_link->getParent());
         $parents = array_reverse($parents);
         $parent = reset($parents);
 
         try {
-          return $menu_link_manager->createInstance($parent);
+          return $this->menuLinkManager->createInstance($parent);
         }
         catch (\Drupal\Component\Plugin\Exception\PluginException $pluginException) {
           return FALSE;
@@ -209,19 +243,19 @@ class Misc {
    * @return \Drupal\Node\Entity\Node|null
    *   The current node.
    */
-  static public function getCurrentPageNode() {
-    if (!isset(static::me()->currentPageNode)) {
+  public function getCurrentPageNode() {
+    if (!isset($this->currentPageNode)) {
       if ($node = \Drupal::routeMatch()->getParameter('node')) {
         if (is_numeric($node)) {
-          static::me()->currentPageNode = LanguageService::load('node', $node);
+          $this->currentPageNode = $this->languageService->load('node', $node);
         }
         elseif ($node instanceof Node) {
-          static::me()->currentPageNode = LanguageService::translate($node);
+          $this->currentPageNode = $this->languageService->translate($node);
         }
       }
     }
 
-    return static::me()->currentPageNode;
+    return $this->currentPageNode;
   }
 
   /**

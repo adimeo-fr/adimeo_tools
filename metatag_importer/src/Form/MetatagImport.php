@@ -32,6 +32,28 @@ class MetatagImport extends FormBase {
     'title'       => 1,
     'description' => 2,
   ];
+  /**
+   * @var LanguageService
+   */
+  private $languageService;
+
+  /**
+   * Class constructor.
+   */
+  public function __construct(LanguageService $languageService) {
+    $this->languageService = $languageService;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load the service required to construct this class.
+      $container->get('adimeo_tools.language')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -251,11 +273,11 @@ class MetatagImport extends FormBase {
     if ($urlObject) {
       switch ($urlObject->getRouteName()) {
         case 'entity.node.canonical':
-          $entity = LanguageService::load('node', $urlObject->getRouteParameters()['node'], NULL, LanguageService::MODE_NO_ENTITY_IF_NO_TRANSLATION_EXISTS);
+          $entity = $this->languageService->load('node', $urlObject->getRouteParameters()['node'], NULL, $this->languageService::MODE_NO_ENTITY_IF_NO_TRANSLATION_EXISTS);
           break;
 
         case 'entity.taxonomy_term.canonical':
-          $entity = LanguageService::load('taxonomy_term', $urlObject->getRouteParameters()['taxonomy_term'], NULL, LanguageService::MODE_NO_ENTITY_IF_NO_TRANSLATION_EXISTS);
+          $entity = $this->languageService->load('taxonomy_term', $urlObject->getRouteParameters()['taxonomy_term'], NULL, $this->languageService::MODE_NO_ENTITY_IF_NO_TRANSLATION_EXISTS);
           break;
 
         default:

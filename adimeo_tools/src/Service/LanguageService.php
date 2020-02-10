@@ -4,7 +4,12 @@ namespace Drupal\adimeo_tools\Service;
 
 use Drupal\Core\Entity\Entity;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityRepository;
+use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\menu_link_content\Plugin\Menu\MenuLinkContent;
 
@@ -53,7 +58,51 @@ class LanguageService {
    *
    * @var array
    */
-  protected static $cache = [];
+  protected $cache = [];
+
+  /**
+   * The injected services :
+   *
+   *
+   *
+   * @var EntityTypeManager
+   */
+  private $entityTypeManager;
+  /**
+   * @var EntityRepository
+   */
+  private $entityRepository;
+  /**
+   * @var LanguageManagerInterface
+   */
+  private $languageManager;
+
+  /**
+   * Retourne le singleton (quand pas d'injection de dépendances possible)
+   *
+   * @return static
+   *   Le singleton.
+   */
+  public static function me() {
+    return \Drupal::service(static::SERVICE_NAME);
+  }
+
+  /**
+   * LanguageService constructor.
+   *
+   * @param EntityRepositoryInterface $entityRepository
+   *
+   * @param LanguageManagerInterface $language_manager
+   *   The language manager service.
+   *
+   * @param EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
+   */
+  public function __construct(EntityTypeManagerInterface $entityTypeManager,EntityRepositoryInterface $entityRepository, LanguageManagerInterface $languageManager) {
+      $this->entityTypeManager = $entityTypeManager;
+      $this->entityRepository = $entityRepository;
+      $this->languageManager = $languageManager;
+  }
 
   /**
    * Translate the entity if needed.
@@ -68,27 +117,26 @@ class LanguageService {
    * @return \Drupal\Core\Entity\EntityInterface
    *   The translated entity.
    */
-  static public function translate(EntityInterface $entity = NULL, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
+  public function translate(EntityInterface $entity = NULL, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
 
     if ($entity) {
-      $languageId = isset($languageId) ? $languageId : self::getCurrentLanguageId();
+      $languageId = isset($languageId) ? $languageId : $this->getCurrentLanguageId();
 
       // Création du cache de language.
-      if (!array_key_exists($languageId, static::$cache)) {
-        static::$cache[$languageId] = [];
+      if (!array_key_exists($languageId, $this->cache)) {
+        $this->cache[$languageId] = [];
       }
 
       // Création de l'id de cache.
       $cacheId = $entity->getEntityTypeId() . '_' . $entity->id() . '_' . $mode;
 
       // Si l'id de cache n'existe pas, c'est que l'entité n'a pas été loadée :
-      if (!array_key_exists($cacheId, static::$cache[$languageId])) {
+      if (!array_key_exists($cacheId, $this->cache[$languageId])) {
         $resultEntity = $entity;
 
         // Translate only if language is the not the default one.
         if ($entity->language()->getId() !== $languageId) {
-          $resultEntity = \Drupal::service('entity.repository')
-            ->getTranslationFromContext($entity, $languageId);
+          $resultEntity = $this->entityRepository->getTranslationFromContext($entity, $languageId);
         }
 
         if ($mode == self::MODE_NO_ENTITY_IF_NO_TRANSLATION_EXISTS && $resultEntity->language()
@@ -97,10 +145,10 @@ class LanguageService {
           $resultEntity = NULL;
         }
 
-        static::$cache[$languageId][$cacheId] = $resultEntity;
+        $this->cache[$languageId][$cacheId] = $resultEntity;
       }
 
-      return static::$cache[$languageId][$cacheId];
+      return $this->cache[$languageId][$cacheId];
     }
 
     return NULL;
@@ -119,13 +167,13 @@ class LanguageService {
    * @return array
    *   The list of translated entities
    */
-  static public function translateMultiple(array $entities, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
-    $languageId = isset($languageId) ? $languageId : self::getCurrentLanguageId();
+  public function translateMultiple(array $entities, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
+    $languageId = isset($languageId) ? $languageId : $this->getCurrentLanguageId();
 
     // Translate only if language is the not the default one.
     $translatedEntities = [];
     foreach ($entities as $key => $entity) {
-      $translatedEntities[$key] = self::translate($entity, $languageId, $mode);
+      $translatedEntities[$key] = $this->translate($entity, $languageId, $mode);
     }
     $translatedEntities = array_filter($translatedEntities);
     return $translatedEntities;
@@ -146,13 +194,13 @@ class LanguageService {
    * @return \Drupal\Core\Entity\EntityInterface|null
    *   The translated entity
    */
-  static public function load($type, $id, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
-    $languageId = isset($languageId) ? $languageId : self::getCurrentLanguageId();
+  public function load($type, $id, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
+    $languageId = isset($languageId) ? $languageId : $this->getCurrentLanguageId();
 
     // Translate only if language is the not the default one.
-    if ($entityManager = static::getEntityManager($type)) {
+    if ($entityManager = $this->getEntityManager($type)) {
       $entityToTranslate = $entityManager->load($id);
-      return static::translate($entityToTranslate, $languageId, $mode);
+      return $this->translate($entityToTranslate, $languageId, $mode);
     }
 
     return NULL;
@@ -173,13 +221,13 @@ class LanguageService {
    * @return \Drupal\Core\Entity\EntityInterface[]
    *   The list of translated entites.
    */
-  static public function loadMultiple($type, array $ids, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
-    $languageId = isset($languageId) ? $languageId : self::getCurrentLanguageId();
+  public function loadMultiple($type, array $ids, $languageId = NULL, $mode = self::MODE_DEFAULT_LANGUAGE_IF_NO_TRANSLATION_EXISTS) {
+    $languageId = isset($languageId) ? $languageId : $this->getCurrentLanguageId();
 
     // Translate only if language is the not the default one.
-    if ($entityManager = static::getEntityManager($type)) {
+    if ($entityManager = $this->getEntityManager($type)) {
       $entitiesToTranslate = $entityManager->loadMultiple($ids);
-      return static::translateMultiple($entitiesToTranslate, $languageId, $mode);
+      return $this->translateMultiple($entitiesToTranslate, $languageId, $mode);
     }
 
     return NULL;
@@ -196,8 +244,8 @@ class LanguageService {
    *
    * @throws \Exception
    */
-  static protected function getEntityManager($type) {
-    if ($entityManager = \Drupal::entityTypeManager()->getStorage($type)) {
+  protected function getEntityManager($type) {
+    if ($entityManager = $this->entityTypeManager()->getStorage($type)) {
       return $entityManager;
     }
     throw new \Exception('Unable to load entity type manager for \'' . $type . '\'');
@@ -209,8 +257,8 @@ class LanguageService {
    * @return string
    *   The current language id.
    */
-  static public function getCurrentLanguageId() {
-    return \Drupal::languageManager()
+  public function getCurrentLanguageId() {
+    return $this->languageManager
       ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
       ->getId();
   }
@@ -221,8 +269,8 @@ class LanguageService {
    * @return bool
    *   Whether the current language is the default language or not.
    */
-  static public function currentLanguageIsDefault() {
-    return self::languageIdIsDefault(self::getCurrentLanguageId());
+  public function currentLanguageIsDefault() {
+    return $this->languageIdIsDefault($this->getCurrentLanguageId());
   }
 
   /**
@@ -234,8 +282,8 @@ class LanguageService {
    * @return bool
    *   Whether the current language is the default language or not.
    */
-  static public function languageIdIsDefault($languageId) {
-    return $languageId == \Drupal::languageManager()
+  public function languageIdIsDefault($languageId) {
+    return $languageId == $this->languageManager
       ->getDefaultLanguage()
       ->getId();
   }
@@ -246,12 +294,12 @@ class LanguageService {
    * @param array $items
    *   Menu items.
    */
-  static public function filterMenusByCurrentLanguage(array &$items) {
-    $language = \Drupal::languageManager()
+  public function filterMenusByCurrentLanguage(array &$items) {
+    $language = $this->languageManager
       ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
       ->getId();
     foreach ($items as $key => $item) {
-      if (!$items[$key] = self::checkForMenuItemTranslation($item, $language)) {
+      if (!$items[$key] = $this->checkForMenuItemTranslation($item, $language)) {
         unset($items[$key]);
       }
     }
@@ -265,13 +313,13 @@ class LanguageService {
    *
    * @see admin/structure/menu/manage/main
    */
-  static public function filterFormMenusByCurrentLanguage(array &$form) {
-    $language = \Drupal::languageManager()
+  public function filterFormMenusByCurrentLanguage(array &$form) {
+    $language = $this->languageManager
       ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
       ->getId();
     foreach ($form['links']['links'] as $key => $link) {
       if (preg_match('/^menu_plugin_id:menu_link_content:(.*)$/', $key, $matches)) {
-        $menuLinkContent = \Drupal::service('entity.repository')
+        $menuLinkContent = $this->entityRepository
           ->loadEntityByUuid('menu_link_content', $matches[1]);
         $languages = $menuLinkContent->getTranslationLanguages();
         if (!array_key_exists($language, $languages)) {
@@ -292,8 +340,8 @@ class LanguageService {
    * @return bool|null
    *   Result.
    */
-  static private function checkForMenuItemTranslation(array $item, $language) {
-    $menuLinkEntity = self::loadLinkEntityByLink($item['original_link']);
+  protected function checkForMenuItemTranslation(array $item, $language) {
+    $menuLinkEntity = $this->loadLinkEntityByLink($item['original_link']);
 
     if ($menuLinkEntity != NULL) {
       $languages = $menuLinkEntity->getTranslationLanguages();
@@ -302,7 +350,7 @@ class LanguageService {
       }
       if (count($item['below']) > 0) {
         foreach ($item['below'] as $subkey => $subitem) {
-          if (!$item['below'][$subkey] = self::checkForMenuItemTranslation($subitem, $language)) {
+          if (!$item['below'][$subkey] = $this->checkForMenuItemTranslation($subitem, $language)) {
             unset($item['below'][$subkey]);
           }
         }
@@ -322,12 +370,11 @@ class LanguageService {
    * @return null|Entity
    *   Result.
    */
-  static private function loadLinkEntityByLink(MenuLinkInterface $menuLinkContentPlugin) {
+  protected function loadLinkEntityByLink(MenuLinkInterface $menuLinkContentPlugin) {
     if ($menuLinkContentPlugin instanceof MenuLinkContent) {
       $menu_link = explode(':', $menuLinkContentPlugin->getPluginId(), 2);
       $uuid = $menu_link[1];
-      $entity = \Drupal::service('entity.repository')
-        ->loadEntityByUuid('menu_link_content', $uuid);
+      $entity = $this->entityRepository->loadEntityByUuid('menu_link_content', $uuid);
       return $entity;
     }
     return NULL;

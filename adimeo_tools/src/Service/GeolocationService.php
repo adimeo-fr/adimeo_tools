@@ -133,6 +133,16 @@ class GeolocationService {
   static protected $apiCallsNb = 0;
 
   /**
+   * Retourne le singleton (quand pas d'injection de dépendances possible)
+   *
+   * @return static
+   *   Le singleton.
+   */
+  public static function me() {
+    return \Drupal::service(static::SERVICE_NAME);
+  }
+
+  /**
    * Set the google api Key.
    *
    * @param string $apiKey

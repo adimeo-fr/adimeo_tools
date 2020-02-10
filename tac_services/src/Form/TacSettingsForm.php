@@ -24,13 +24,31 @@ class TacSettingsForm extends FormBase {
    *
    * @var TacGlobalConfigService
    */
-  protected $config;
+  private $config;
 
   /**
-   * TacSettingsForm constructor.
+   * @var LanguageService
    */
-  public function __construct() {
-    $this->config = \Drupal::service(TacGlobalConfigService::SERVICE_NAME);
+  private $languageService;
+
+  /**
+   * Class constructor.
+   */
+  public function __construct(LanguageService $languageService, TacGlobalConfigService $configService) {
+    $this->languageService = $languageService;
+    $this->config = $configService;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load the service required to construct this class.
+      $container->get('adimeo_tools.language'),
+      $container->get('tac_services.settings_manager')
+    );
   }
 
   /**
@@ -57,24 +75,24 @@ class TacSettingsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $defaultValues = $this->config->getAllValues();
 
-    $form[TacGlobalConfigService::HIGH_PRIVACY] = [
+    $form[$this->config::HIGH_PRIVACY] = [
       '#type'          => 'checkbox',
       '#title'         => t('High privacy'),
-      '#default_value' => $defaultValues[TacGlobalConfigService::HIGH_PRIVACY],
+      '#default_value' => $defaultValues[$this->config::HIGH_PRIVACY],
       '#description'   => t('Désactiver le consentement implicite (en naviguant) ?'),
     ];
 
-    $form[TacGlobalConfigService::ALLOWED_BUTTON] = [
+    $form[$this->config::ALLOWED_BUTTON] = [
       '#type'          => 'checkbox',
       '#title'         => t('Bouton d\'acceptation des cookies'),
-      '#default_value' => $defaultValues[TacGlobalConfigService::ALLOWED_BUTTON],
+      '#default_value' => $defaultValues[$this->config::ALLOWED_BUTTON],
       '#description'   => t('Ce bouton s\'active uniquement si la case "High privacy" est cochée.'),
     ];
 
-    $form[TacGlobalConfigService::ORIENTATION] = [
+    $form[$this->config::ORIENTATION] = [
       '#type'          => 'radios',
       '#title'         => t('Orientation'),
-      '#default_value' => $defaultValues[TacGlobalConfigService::ORIENTATION],
+      '#default_value' => $defaultValues[$this->config::ORIENTATION],
       '#description'   => t('le bandeau doit être en haut ou en bas ?'),
       '#options'       => [
         'top'    => t('En haut'),
@@ -82,29 +100,29 @@ class TacSettingsForm extends FormBase {
       ],
     ];
 
-    $form[TacGlobalConfigService::ADBLOCKER] = [
+    $form[$this->config::ADBLOCKER] = [
       '#type'          => 'checkbox',
       '#title'         => t('Adblocker'),
-      '#default_value' => $defaultValues[TacGlobalConfigService::ADBLOCKER],
+      '#default_value' => $defaultValues[$this->config::ADBLOCKER],
       '#description'   => t('Afficher un message si un adblocker est détecté ?'),
     ];
 
-    $form[TacGlobalConfigService::SHOW_ALERT_SMALL] = [
+    $form[$this->config::SHOW_ALERT_SMALL] = [
       '#type'          => 'checkbox',
       '#title'         => t('Small alert box'),
-      '#default_value' => $defaultValues[TacGlobalConfigService::SHOW_ALERT_SMALL],
+      '#default_value' => $defaultValues[$this->config::SHOW_ALERT_SMALL],
       '#description'   => t('Afficher le petit bandeau en bas à droite ?'),
     ];
 
-    $form[TacGlobalConfigService::COOKIE_LIST] = [
+    $form[$this->config::COOKIE_LIST] = [
       '#type'          => 'checkbox',
       '#title'         => t('Cookies list'),
-      '#default_value' => $defaultValues[TacGlobalConfigService::COOKIE_LIST],
+      '#default_value' => $defaultValues[$this->config::COOKIE_LIST],
       '#description'   => t('Afficher la liste des cookies installés ?'),
     ];
 
     $default = $this->config->getAlertLabel();
-    $form[TacGlobalConfigService::ALERT_LABEL] = [
+    $form[$this->config::ALERT_LABEL] = [
       '#type'          => 'text_format',
       '#title'         => t('Message de l\'encart d\'alert'),
       '#default_value' => $default ? $default['value'] : '',
@@ -133,8 +151,8 @@ class TacSettingsForm extends FormBase {
     $data = $form_state->getValues();
 
     // Modification des données "languagée".
-    $data[TacGlobalConfigService::ALERT_LABEL] = $this->config->get(TacGlobalConfigService::ALERT_LABEL);
-    $data[TacGlobalConfigService::ALERT_LABEL][LanguageService::getCurrentLanguageId()] = $form_state->getValue(TacGlobalConfigService::ALERT_LABEL);
+    $data[$this->config::ALERT_LABEL] = $this->config->get($this->config::ALERT_LABEL);
+    $data[$this->config::ALERT_LABEL][$this->languageService->getCurrentLanguageId()] = $form_state->getValue($this->config::ALERT_LABEL);
     $this->config->setAllValues($data);
 
     // Add success message.

@@ -2,7 +2,7 @@
 bo_additions.node_edit:
   path: '/admin/node/edit'
   defaults:
-    _controller: '\Drupal\bo_additions\Controller\EntityEditRedirectController::nodeEditFormRedirect'
+    _controller: bo_additions.entity_edit_controller:nodeEditFormRedirect
   requirements:
     _permission: 'access content overview'
 
@@ -10,7 +10,7 @@ bo_additions.node_edit:
 bo_additions.term_edit:
   path: '/admin/term/edit'
   defaults:
-    _controller: '\Drupal\bo_additions\Controller\EntityEditRedirectController::termEditFormRedirect'
+    _controller: bo_additions.entity_edit_controller:termEditFormRedirect
   requirements:
     _permission: 'access content overview'
 
@@ -18,6 +18,6 @@ bo_additions.term_edit:
 bo_additions.entity_edit:
   path: '/admin/{entity_type}/edit'
   defaults:
-    _controller: '\Drupal\bo_additions\Controller\EntityEditRedirectController::entityEditFormRedirect'
+    _controller: bo_additions.entity_edit_controller:entityEditFormRedirect
   requirements:
     _permission: 'access content overview'
