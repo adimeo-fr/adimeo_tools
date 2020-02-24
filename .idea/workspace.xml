@@ -2,34 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f43c7be5-d070-46e4-8101-7d064ed11034" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/adimeo_tools.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/adimeo_tools.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adimeo_tools/adimeo_tools.services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/adimeo_tools/adimeo_tools.services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adimeo_tools/src/Service/EnvironmentService.php" beforeDir="false" afterPath="$PROJECT_DIR$/adimeo_tools/src/Service/EnvironmentService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adimeo_tools/src/Service/GeolocationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/adimeo_tools/src/Service/GeolocationService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adimeo_tools/src/Service/LanguageService.php" beforeDir="false" afterPath="$PROJECT_DIR$/adimeo_tools/src/Service/LanguageService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adimeo_tools/src/Service/Misc.php" beforeDir="false" afterPath="$PROJECT_DIR$/adimeo_tools/src/Service/Misc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adimeo_tools/src/Service/TwigFilters.php" beforeDir="false" afterPath="$PROJECT_DIR$/adimeo_tools/src/Service/TwigFilters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bo_additions/bo_additions.module" beforeDir="false" afterPath="$PROJECT_DIR$/bo_additions/bo_additions.module" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bo_additions/bo_additions.routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bo_additions/bo_additions.routing.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bo_additions/bo_additions.services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bo_additions/bo_additions.services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bo_additions/src/Controller/EntityEditRedirectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/bo_additions/src/Controller/EntityEditRedirectController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icon_selector/icon_selector.info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/icon_selector/icon_selector.info.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media_enhancement/media_enhancement.routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/media_enhancement/media_enhancement.routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media_enhancement/media_enhancement.services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/media_enhancement/media_enhancement.services.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media_enhancement/src/Services/MediaEnhancementManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/media_enhancement/src/Service/MediaEnhancementManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media_enhancement/src/Services/TwigTools.php" beforeDir="false" afterPath="$PROJECT_DIR$/media_enhancement/src/Service/TwigTools.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metatag_importer/src/Form/MetatagImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/metatag_importer/src/Form/MetatagImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tac_services/src/Form/TacSettingsForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/tac_services/src/Form/TacSettingsForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tac_services/src/Service/TacGlobalConfigService.php" beforeDir="false" afterPath="$PROJECT_DIR$/tac_services/src/Service/TacGlobalConfigService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tac_services/tac_services.services.yml" beforeDir="false" afterPath="$PROJECT_DIR$/tac_services/tac_services.services.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -51,11 +34,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore_missing_gitignore" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/media_enhancement/src/Service" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bo_additions/src/Controller" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bo_additions/src/Controller" />
       <recent name="$PROJECT_DIR$/media_enhancement/src/Service" />
       <recent name="$PROJECT_DIR$/media_enhancement/src/Controllers" />
       <recent name="$PROJECT_DIR$/adimeo_tools" />
@@ -85,22 +69,50 @@
       <option name="presentableId" value="Default" />
       <updated>1579592338672</updated>
       <workItem from="1579592340172" duration="4184000" />
-      <workItem from="1581317556270" duration="10139000" />
+      <workItem from="1581317556270" duration="13746000" />
+      <workItem from="1581439825073" duration="1382000" />
+      <workItem from="1582498980878" duration="2459000" />
     </task>
+    <task id="LOCAL-00001" summary="Refacto pour ajouter de l'injection de dépendance dans plusieurs vieux services">
+      <created>1581332388221</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581332388221</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Refacto pour ajouter de l'injection de dépendance dans plusieurs vieux services" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refacto pour ajouter de l'injection de dépendance dans plusieurs vieux services" />
   </component>
   <component name="WindowStateProjectService">
     <state x="578" y="298" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1581324409755">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="578" y="298" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1581324409755" />
+    <state x="396" y="139" key="CommitChangelistDialog2" timestamp="1581332387678">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="396" y="139" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1581332387678" />
+    <state x="2166" y="375" key="NewPhpClassDialog" timestamp="1582502463254">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2166" y="375" key="NewPhpClassDialog/0.23.1440.877/1440.23.1920.1057@1440.23.1920.1057" timestamp="1582502463254" />
     <state x="341" y="175" key="SettingsEditor" timestamp="1581319553886">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="341" y="175" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1581319553886" />
+    <state x="440" y="276" key="Vcs.Push.Dialog.v2" timestamp="1581375532032">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="440" y="276" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1581375532032" />
     <state x="498" y="293" width="837" height="550" key="find.popup" timestamp="1581332112090">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>

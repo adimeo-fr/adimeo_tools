@@ -21,3 +21,13 @@ bo_additions.entity_edit:
     _controller: bo_additions.entity_edit_controller:entityEditFormRedirect
   requirements:
     _permission: 'access content overview'
+
+#Route to display any menu in a dashboard interface (like page "Configurations")
+# --> used for the contrib menu
+bo_additions.admin_dashboard:
+  path: '/admin/menu-overview/{menu_name}'
+  defaults:
+    _controller: bo_additions.admin_dashboard_controller:overview
+    _title: 'Tableau de bord'
+  requirements:
+    _permission: 'access content overview'
