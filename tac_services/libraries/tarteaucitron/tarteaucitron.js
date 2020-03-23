@@ -506,6 +506,8 @@ var tarteaucitron = {
 
             function (serviceId) {
                 "use strict";
+                console.log(tarteaucitron.services[serviceId]);
+                console.log(serviceId);
                 var html = '',
                     s = tarteaucitron.services,
                     service = s[serviceId],
