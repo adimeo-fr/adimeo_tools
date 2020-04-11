@@ -5,17 +5,12 @@ d'ajouter des srcsets.
 
 
 ## buildImageTagFromMedia
-ex: 
+Exemple simple: 
 ```twig
-{{ buildImageTagFromMedia(product.field_medias, {  
-    'image_style': 'maClasse',  
-    'class': true,  
-    'item_prop': 'monStyle',  
-    'srcset': {'2x': 'default', '1x':'400w}  
-    'srcset_main_rule': '1x',  
-    'remove_dim_attrs': true,  
-    'lazyload': true,  
-    'image_field_name': 'field_media_image_02'  
+{{ buildImageTagFromMedia(content.field_media,{
+  'image_style':'news_teaser',
+  'srcset': {'2x': 'default', '1x':'720w'},
+  'srcset_main_rule': '1x',
 }) }}
 ```  
 
