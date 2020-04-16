@@ -70,7 +70,6 @@ tac_google_tag_manager:
     libraries/tac_google_tag_manager/tac_gtm.js: {}
   dependencies:
       - tac_services/tac_services
-      - tac_services/tac_youtube_api
 
 tac_facebook_pixel:
   version: 1
