@@ -90,15 +90,15 @@ class LanguageService {
   /**
    * LanguageService constructor.
    *
-   * @param EntityRepositoryInterface $entityRepository
+   * @param EntityRepository $entityRepository
    *
    * @param LanguageManagerInterface $language_manager
    *   The language manager service.
    *
-   * @param EntityTypeManagerInterface $entityTypeManager
+   * @param EntityTypeManager $entityTypeManager
    *   The entity type manager service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager,EntityRepositoryInterface $entityRepository, LanguageManagerInterface $languageManager) {
+  public function __construct(EntityTypeManager $entityTypeManager,EntityRepository $entityRepository, LanguageManagerInterface $languageManager) {
       $this->entityTypeManager = $entityTypeManager;
       $this->entityRepository = $entityRepository;
       $this->languageManager = $languageManager;

@@ -44,12 +44,12 @@ class TwigFilters extends \Twig_Extension {
   /**
    * TwigFilters constructor.
    *
-   * @param EntityTypeManagerInterface $entityTypeManager
+   * @param EntityTypeManager $entityTypeManager
    *   The entity type manager service.
    *
    * @param LanguageService $languageService
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, LanguageService $languageService) {
+  public function __construct(EntityTypeManager $entityTypeManager, LanguageService $languageService) {
     $this->entityTypeManager = $entityTypeManager;
     $this->languageService = $languageService;
   }

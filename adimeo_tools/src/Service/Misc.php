@@ -56,13 +56,13 @@ class Misc {
   /**
    * Constructor
    *
-   * @param EntityTypeManagerInterface $entityTypeManager
+   * @param EntityTypeManager $entityTypeManager
    *   The entity type manager service.
    *
    * @param LanguageService $languageService
    * @param MenuLinkManagerInterface $menuLinkManager
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, LanguageService $languageService, MenuLinkManagerInterface $menuLinkManager) {
+  public function __construct(EntityTypeManager $entityTypeManager, LanguageService $languageService, MenuLinkManagerInterface $menuLinkManager) {
     $this->entityTypeManager = $entityTypeManager;
     $this->languageService = $languageService;
     $this->menuLinkManager = $menuLinkManager;
