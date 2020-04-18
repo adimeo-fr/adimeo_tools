@@ -14,5 +14,5 @@ services:
     autowire: true
 
   media_enhancement.ajax_popin_controller:
-    class: Drupal\media_enhancement\Controller\AjaxPopinMedia
+    class: Drupal\media_enhancement\Controllers\AjaxPopinMedia
     autowire: true
