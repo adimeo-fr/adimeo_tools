@@ -5,29 +5,10 @@ namespace Drupal\bo_additions\Controller;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EntityEditRedirectController extends ControllerBase{
-
-
-  /**
-   * The entity type manager service.
-   *
-   * @var EntityTypeManager
-   */
-  private $entityTypeManager;
-
-  /**
-   * TwigFilters constructor.
-   *
-   * @param EntityTypeManagerInterface $entityTypeManager
-   *   The entity type manager service.
-   *
-   * @param LanguageService $languageService
-   */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
-    $this->entityTypeManager = $entityTypeManager;
-  }
 
   /**
    * Redirect to node edit form selected by the query params
