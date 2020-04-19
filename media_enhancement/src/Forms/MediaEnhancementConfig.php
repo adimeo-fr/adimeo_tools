@@ -4,7 +4,7 @@ namespace Drupal\media_enhancement\Forms;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\media_enhancement\Services\MediaEnhancementManager;
+use Drupal\media_enhancement\Service\MediaEnhancementManager;
 
 /**
  * Class MediaEnhancementConfig.
