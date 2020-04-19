@@ -11,3 +11,34 @@
 #    query:
 #      type: 'news'
 #  weight: 0
+
+###############
+#### TOOLS ####
+###############
+ui_additions.tools:
+  title: 'Outils'
+  route_name: <nolink>
+  parent: contrib
+  menu_name: contrib
+  weight: -100
+
+ui_additions.tools.flush:
+  title: 'Flush all caches'
+  route_name: admin_toolbar_tools.flush
+  menu_name: contrib
+  parent: ui_additions.tools
+  weight: 0
+
+ui_additions.tools.run_cron:
+  title: 'Run cron'
+  route_name: admin_toolbar.run.cron
+  menu_name: contrib
+  parent: ui_additions.tools
+  weight: 1
+
+ui_additions.tools.logout:
+  title: 'Se déconnecter'
+  route_name: user.logout
+  menu_name: contrib
+  parent: ui_additions.tools
+  weight: 2
