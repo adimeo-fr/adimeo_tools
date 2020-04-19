@@ -245,7 +245,7 @@ class LanguageService {
    * @throws \Exception
    */
   protected function getEntityManager($type) {
-    if ($entityManager = $this->entityTypeManager()->getStorage($type)) {
+    if ($entityManager = $this->entityTypeManager->getStorage($type)) {
       return $entityManager;
     }
     throw new \Exception('Unable to load entity type manager for \'' . $type . '\'');

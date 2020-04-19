@@ -11,6 +11,23 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class EntityEditRedirectController extends ControllerBase{
 
   /**
+   * The entity type manager service.
+   *
+   * @var EntityTypeManager
+   */
+  protected $entityTypeManager;
+
+  /**
+   * EntityEditRedirectController constructor.
+   *
+   * @param EntityTypeManager $entityTypeManager
+   *   The entity type manager service.
+   */
+  public function __construct(EntityTypeManager $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
+
+  /**
    * Redirect to node edit form selected by the query params
    *
    * @return RedirectResponse
