@@ -6,7 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\media_enhancement\Services\MediaEnhancementManager;
+use Drupal\media_enhancement\Service\MediaEnhancementManager;
 
 /**
  * Implements hook_help().
