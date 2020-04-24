@@ -23,3 +23,10 @@ function tac_google_map_field_theme($existing, $type, $theme, $path) {
   ];
   return $return;
 }
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function tac_google_map_field_menu_links_discovered_alter(&$links) {
+  unset($links['gmap.field.admin']);
+}
