@@ -15,10 +15,7 @@
                     $(this).addClass('selected');
                     $(this).find('[type=radio]').prop('checked','checked');
 
-                    console.log($(this).find('[type=radio]').val());
                     $parent.find( '[type="hidden"]' ).val($(this).find('[type=radio]').val());
-
-                    console.log($parent.find( '[type=hidden]' ));
                 });
 
                 // init
