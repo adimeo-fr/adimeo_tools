@@ -374,12 +374,12 @@ var tarteaucitron = {
                         }
 
                         html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '">';
-                        html += '   <span id="tarteaucitronDisclaimerAlert">';
+                        html += '<div class="tarteaucitronAlertBig-innerWrapper"><div id="tarteaucitronDisclaimerAlert">';
                         html += popupContentAlert;
-                        html += '   </span>';
+                        html += '   </div><div class="buttons-container">';
                         html += acceptAllButton;
                         html += personalizeButton;
-                        html += '</div>';
+                        html += '</div></div></div>';
                         html += suffix;
 
 
