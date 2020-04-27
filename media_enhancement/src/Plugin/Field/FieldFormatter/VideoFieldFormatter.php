@@ -5,6 +5,7 @@ namespace Drupal\media_enhancement\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
+use Drupal\media_enhancement\Plugin\Field\FieldType\VideoFieldType;
 
 /**
  * Plugin implementation of the 'Default' formatter for 'Video Field' fields.
