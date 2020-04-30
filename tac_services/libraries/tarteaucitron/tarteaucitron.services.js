@@ -1769,6 +1769,7 @@ tarteaucitron.services.youtube = {
     "needConsent": true,
     "cookies": ['VISITOR_INFO1_LIVE', 'YSC', 'PREF', 'GEUP'],
     "js": function () {
+        tarteaucitron.reloadThePage = true;
         "use strict";
         tarteaucitron.fallback(['youtube_player'], function (x) {
             var video_id = x.getAttribute("videoID"),
