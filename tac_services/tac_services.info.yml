@@ -7,5 +7,5 @@ interface translation project: tac_services
 interface translation server pattern: modules/contrib/adimeo_tools/tac_services/translations/%project-v1.%language.po
 package: Web services
 configure: tac_services.configuration_form
-dependencies: tac_services.configuration_form
+dependencies:
   - adimeo_tools

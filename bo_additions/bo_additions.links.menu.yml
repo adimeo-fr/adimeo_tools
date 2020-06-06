@@ -17,7 +17,7 @@
 ###############
 ui_additions.tools:
   title: 'Outils'
-  route_name: <nolink>
+  url: internal:/admin/menu-overview/contrib
   parent: contrib
   menu_name: contrib
   weight: -100
