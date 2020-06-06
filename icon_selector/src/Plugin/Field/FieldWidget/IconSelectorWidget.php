@@ -57,9 +57,13 @@ class IconSelectorWidget extends TextfieldWidget {
         '#type'       => 'container',
         'icone'       => [
           '#theme'  => 'image',
-          '#uri'    => $icon['file'],
+          //'#uri'    => $icon['file'],
           '#width'  => '50',
           '#height' => '50',
+          '#attributes' => [
+            'class' => ['lazy'],
+            'data-src' => $icon['file']
+          ]
         ],
         'input'       => [
           '#type'       => 'radio',

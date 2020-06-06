@@ -24,7 +24,22 @@
                 });
             })
 
+            $(function () {
+                var lazyloadImages = document.querySelectorAll("img.lazy");
+                var lazyloadThrottleTimeout;
 
+                if(lazyloadThrottleTimeout) {
+                    clearTimeout(lazyloadThrottleTimeout);
+                }
+                setTimeout(function() {
+                    lazyloadThrottleTimeout = setTimeout(function() {
+                        lazyloadImages.forEach(function(img) {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                        });
+                    }, 250);
+                },500);
+            })
         }
     };
 }(jQuery, Drupal, drupalSettings));
