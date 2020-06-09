@@ -122,19 +122,22 @@ function bo_additions_form_user_login_form_alter(&$form, FormStateInterface $for
 /**
  * Form submission handler for user_login_form().
  *
- * Redirects the user to the dashboard after logging in.
+ * Redirects the user to the dashboard after logging in
+ * (if user has access to admin pages)
  *
  * @param $form
  * @param \Drupal\Core\Form\FormStateInterface $form_state
  */
 function _bo_additions_user_login_submit(&$form, FormStateInterface $form_state) {
-  $url = Url::fromUserInput('/admin/menu-overview/contrib');
 
   // Check if a destination was set, probably on an exception controller.
   // @see \Drupal\user\Form\UserLoginForm::submitForm()
   $request = \Drupal::service('request_stack')->getCurrentRequest();
   if (!$request->request->has('destination')) {
-    $form_state->setRedirectUrl($url);
+    if(Drupal::currentUser()->hasPermission('access administration pages')) {
+      $url = Url::fromUserInput('/admin/menu-overview/contrib');
+      $form_state->setRedirectUrl($url);
+    }
   }
   else {
     $request->query->set('destination', $request->request->get('destination'));
