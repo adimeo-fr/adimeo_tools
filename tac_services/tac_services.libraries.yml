@@ -1,5 +1,8 @@
 tac_services:
   version: 1
+  css:
+    theme:
+      libraries/tarteaucitron/css/tarteaucitron.css: {}
   js:
     libraries/tac_additions/polyfill/CustomEvent.js: {}
     libraries/tarteaucitron/tarteaucitron.js: {}

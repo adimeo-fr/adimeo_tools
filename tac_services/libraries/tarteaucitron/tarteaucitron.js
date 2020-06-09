@@ -246,13 +246,13 @@ var tarteaucitron = {
                 tarteaucitron.hashtag = defaults.hashtag;
                 tarteaucitron.highPrivacy = defaults.highPrivacy;
 
-                // Step 1: load css
-                if( tarteaucitron.useDefaultStylesheet ){
-                    linkElement.rel = 'stylesheet';
-                    linkElement.type = 'text/css';
-                    linkElement.href = cdn + 'css/tarteaucitron.css?v=' + tarteaucitron.version;
-                    document.getElementsByTagName('head')[0].appendChild(linkElement);
-                }
+                // // Step 1: load css [LOADED VIA DRUPAL]
+                // if( tarteaucitron.useDefaultStylesheet ){
+                //     linkElement.rel = 'stylesheet';
+                //     linkElement.type = 'text/css';
+                //     linkElement.href = cdn + 'css/tarteaucitron.css?v=' + tarteaucitron.version;
+                //     document.getElementsByTagName('head')[0].appendChild(linkElement);
+                // }
 
 
 
