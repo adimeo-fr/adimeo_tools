@@ -143,3 +143,12 @@ function _bo_additions_user_login_submit(&$form, FormStateInterface $form_state)
     $request->query->set('destination', $request->request->get('destination'));
   }
 }
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function bo_additions_preprocess_page(&$variables) {
+  if ($variables['is_admin']) {
+    $variables['#attached']['library'][] = 'bo_additions/toolbar_front';
+  }
+}
