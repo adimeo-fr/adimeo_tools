@@ -71,26 +71,28 @@ function bo_additions_toolbar() {
     }
   }
 
-  $items['tabs'] = [
-    '#cache'  => ['max-age' => 0],
-    '#type'   => 'toolbar_item',
-    'tab'     => [
-      '#type'  => 'link',
-      '#title' => t('Actions'),
-      '#url'   => Url::fromRoute('<front>'),
-    ],
-    'tray'    => [
-      'content' => [
-        '#theme'      => 'item_list',
-        '#type'       => 'ul',
-        '#items'      => $links,
-        '#attributes' => [
-          'class' => ['toolbar-menu'],
+  if (!empty($links)) {
+    $items['tabs'] = [
+      '#cache'  => ['max-age' => 0],
+      '#type'   => 'toolbar_item',
+      'tab'     => [
+        '#type'  => 'link',
+        '#title' => t('Actions'),
+        '#url'   => Url::fromRoute('<front>'),
+      ],
+      'tray'    => [
+        'content' => [
+          '#theme'      => 'item_list',
+          '#type'       => 'ul',
+          '#items'      => $links,
+          '#attributes' => [
+            'class' => ['toolbar-menu '],
+          ],
         ],
       ],
-    ],
-    '#weight' => 99,
-  ];
+      '#weight' => 99,
+    ];
+  }
 
   return $items;
 }
