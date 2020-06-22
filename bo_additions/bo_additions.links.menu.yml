@@ -29,16 +29,23 @@ ui_additions.tools.flush:
   parent: ui_additions.tools
   weight: 0
 
+ui_additions.tools.maintenance:
+  title: 'Mettre le site en maintenance'
+  url: internal:/admin/config/development/maintenance
+  menu_name: contrib
+  parent: ui_additions.tools
+  weight: 1
+
 ui_additions.tools.run_cron:
   title: 'Run cron'
   route_name: admin_toolbar.run.cron
   menu_name: contrib
   parent: ui_additions.tools
-  weight: 1
+  weight: 2
 
 ui_additions.tools.logout:
   title: 'Se déconnecter'
   route_name: user.logout
   menu_name: contrib
   parent: ui_additions.tools
-  weight: 2
+  weight: 3
