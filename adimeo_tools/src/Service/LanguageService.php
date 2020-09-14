@@ -2,7 +2,7 @@
 
 namespace Drupal\adimeo_tools\Service;
 
-use Drupal\Core\Entity\Entity;
+use Drupal\Core\Entity\EntityBase;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
@@ -367,7 +367,7 @@ class LanguageService {
    * @param \Drupal\Core\Menu\MenuLinkInterface $menuLinkContentPlugin
    *   MenuLinkPlugin.
    *
-   * @return null|Entity
+   * @return null|EntityBase
    *   Result.
    */
   protected function loadLinkEntityByLink(MenuLinkInterface $menuLinkContentPlugin) {

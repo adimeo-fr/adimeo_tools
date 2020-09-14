@@ -3,6 +3,7 @@ description: Override the contrib module Google Map Field in order to use tac_se
 package: Web services
 
 type: module
+core_version_requirement: ^8 || ^9
 core: 8.x
 
 dependencies:

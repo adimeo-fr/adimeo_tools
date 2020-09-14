@@ -4,6 +4,7 @@ namespace Drupal\tac_services\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\tac_services\Service\TacServicePluginManager;
 use Drupal\tac_services\Service\TacServicesConfManager;
 use Drupal\tac_services\Interfaces\TacServiceInterface;
@@ -14,6 +15,8 @@ use Drupal\tac_services\Interfaces\TacServiceInterface;
  * @package Drupal\tac_services\Form
  */
 class TacServicesConfForm extends FormBase {
+
+  use MessengerTrait;
 
   /**
    * Constant which stores the form ID.
@@ -128,7 +131,7 @@ class TacServicesConfForm extends FormBase {
     $this->confManager->setTacServicesConf($data);
 
     // Add success message.
-    drupal_set_message(t('The configuration options have been saved.'));
+    $this->messenger()->addMessage(t('The configuration options have been saved.'));
   }
 
   /**

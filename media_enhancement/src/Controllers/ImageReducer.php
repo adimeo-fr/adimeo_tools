@@ -124,7 +124,7 @@ class ImageReducer extends ControllerBase {
     $fileName = pathinfo($uri)['filename'];
     /** @var \Drupal\Core\File\FileSystem $fileSystem */
     $fileSystem =\Drupal::service('file_system');
-    $files = file_scan_directory('public://styles', '/'.$fileName.'/');
+    $files = $fileSystem->scanDirectory('public://styles', '/'.$fileName.'/');
     foreach( $files as $data ){
       // Si l'image est bien dans un répertoire généré par ImageReducer
       if( strpos($data->uri, 'w__') !== FALSE || strpos($data->uri, 'h__') !== FALSE ){

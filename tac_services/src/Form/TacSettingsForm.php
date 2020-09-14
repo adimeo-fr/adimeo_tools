@@ -4,6 +4,7 @@ namespace Drupal\tac_services\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\adimeo_tools\Service\LanguageService;
 use Drupal\tac_services\Service\TacGlobalConfigService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -14,6 +15,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @package Drupal\tac_services\Form
  */
 class TacSettingsForm extends FormBase {
+
+  use MessengerTrait;
 
   /**
    * Constant which stores the form ID.
@@ -157,7 +160,7 @@ class TacSettingsForm extends FormBase {
     $this->config->setAllValues($data);
 
     // Add success message.
-    drupal_set_message(t('The configuration options have been saved.'));
+    $this->messenger()->addMessage(t('The configuration options have been saved.'));
   }
 
 }
