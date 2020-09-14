@@ -1,7 +1,7 @@
 services:
   adimeo_tools.twig_extension:
     class: Drupal\adimeo_tools\Service\TwigFilters
-    autowire: true
+    arguments: ['@entity_type.manager','@adimeo_tools.language']
     tags:
       - { name: twig.extension }
 
@@ -10,11 +10,11 @@ services:
 
   adimeo_tools.language:
     class: Drupal\adimeo_tools\Service\LanguageService
-    autowire: true
+    arguments: ['@entity_type.manager','@entity.repository','@language_manager']
 
   adimeo_tools.misc:
     class: Drupal\adimeo_tools\Service\Misc
-    autowire: true
+    arguments: ['@entity_type.manager','@adimeo_tools.language','@plugin.manager.menu.link']
 
   adimeo_tools.commands_drush_8:
     class: Drupal\adimeo_tools\Drush\AdimeoToolsCommandsDrush8

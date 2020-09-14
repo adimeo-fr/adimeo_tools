@@ -9,7 +9,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityRepository;
 use Drupal\Core\Entity\EntityRepositoryInterface;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Language\LanguageManager;
 use Drupal\Core\Menu\MenuLinkInterface;
 use Drupal\menu_link_content\Plugin\Menu\MenuLinkContent;
 
@@ -92,13 +92,13 @@ class LanguageService {
    *
    * @param EntityRepository $entityRepository
    *
-   * @param LanguageManagerInterface $language_manager
+   * @param LanguageManager $language_manager
    *   The language manager service.
    *
    * @param EntityTypeManager $entityTypeManager
    *   The entity type manager service.
    */
-  public function __construct(EntityTypeManager $entityTypeManager,EntityRepository $entityRepository, LanguageManagerInterface $languageManager) {
+  public function __construct(EntityTypeManager $entityTypeManager,EntityRepository $entityRepository, LanguageManager $languageManager) {
       $this->entityTypeManager = $entityTypeManager;
       $this->entityRepository = $entityRepository;
       $this->languageManager = $languageManager;

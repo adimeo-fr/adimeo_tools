@@ -12,4 +12,4 @@ services:
   #Tac global settings conf manager
   tac_services.settings_manager:
     class: Drupal\tac_services\Service\TacGlobalConfigService
-    autowire: true
+    arguments: ['@adimeo_tools.language']

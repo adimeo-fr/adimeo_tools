@@ -1,7 +1,6 @@
 services:
   media_enhancement.twig_extension:
     class: Drupal\media_enhancement\Service\TwigTools
-    autowire: true
     public: false
     tags:
     - { name: twig.extension }
@@ -11,8 +10,8 @@ services:
 
   media_enhancement.tools:
     class: Drupal\media_enhancement\Service\mediaTools
-    autowire: true
+    arguments: ['@entity_type.manager']
 
   media_enhancement.ajax_popin_controller:
     class: Drupal\media_enhancement\Controllers\AjaxPopinMedia
-    autowire: true
+    arguments: ['@media_enhancement.tools']

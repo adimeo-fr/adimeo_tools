@@ -7,7 +7,7 @@ services:
 
   bo_additions.entity_edit_controller:
     class: Drupal\bo_additions\Controller\EntityEditRedirectController
-    autowire: true
+    arguments: ['@entity_type.manager']
 
   bo_additions.admin_dashboard_controller:
     class: \Drupal\bo_additions\Controller\ContribMenuOverviewController
