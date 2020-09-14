@@ -2,7 +2,7 @@
 
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\bo_additions\Service\Toolbar;
+use Drupal\bo_additions\Service\ToolbarPrerender;
 
 /**
  * Implements hook_toolbar().
@@ -38,9 +38,7 @@ function bo_additions_toolbar() {
         ],
       ),
       'toolbar_bo_additions_toolbar_content' => array(
-        '#pre_render' => array(
-          'bo_additions_toolbar_content_pre_render',
-        ),
+        '#pre_render' => [[ToolbarPrerender::class, 'toolbar_content_pre_render']],
         '#type' => 'container',
         '#attributes' => array(
           'class' => array('toolbar-menu-administration'),
@@ -95,16 +93,6 @@ function bo_additions_toolbar() {
   }
 
   return $items;
-}
-
-function bo_additions_toolbar_content_pre_render($element) {
-  /** @var Toolbar $toolbarTools */
-  $toolbarTools = \Drupal::service(Toolbar::SERVICE_NAME);
-  $toolbarTools->setCacheContext(['user.roles']);
-  $toolbarTools->setMenuName('contrib');
-  $element = $toolbarTools->populate($element);
-
-  return $element;
 }
 
 function bo_additions_uninstall(){
