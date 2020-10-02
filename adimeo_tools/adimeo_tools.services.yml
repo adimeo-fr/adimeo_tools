@@ -18,6 +18,7 @@ services:
 
   adimeo_tools.commands_drush_8:
     class: Drupal\adimeo_tools\Drush\AdimeoToolsCommandsDrush8
+    arguments: ['@config.installer', '@keyvalue', '@logger.factory']
 
   adimeo_tools.environment:
     class: Drupal\adimeo_tools\Service\EnvironmentService
