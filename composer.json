@@ -8,5 +8,8 @@
             "name": "Adimeo",
             "email": "contact@adimeo.com"
         }
-    ]
+    ],
+    "require": {
+        "cocur/slugify": "^v4.0.0"
+    }
 }
