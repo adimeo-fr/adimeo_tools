@@ -10,6 +10,6 @@
         }
     ],
     "require": {
-        "cocur/slugify": "^v4.0.0"
+        "cocur/slugify": "^v3.2"
     }
 }
