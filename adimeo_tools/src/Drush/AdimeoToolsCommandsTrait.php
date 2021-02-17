@@ -63,4 +63,40 @@ trait AdimeoToolsCommandsTrait {
     drush_log(t('Install default config of @module has set.', ['@module' => $module]), 'ok');
   }
 
+  /**
+   * Executes exif rotation on images (file entity) through module exif_orientation method
+   *
+   *
+   * @command images-apply-exif-rotation
+   *
+   * @aliases iaer
+   */
+  public function imagesApplyExifRotation() {
+
+    if (!extension_loaded('exif')) {
+      drush_log(t('Cannot execute drush command, php-exif extension is not loaded for PHP CLI.'),'error' );
+      var_dump('Cannot execute drush command, php-exif extension is not loaded for PHP CLI.');
+      return;
+    }
+
+    $moduleHandler = \Drupal::service('module_handler');
+    if (!$moduleHandler->moduleExists('exif_orientation')) {
+      drush_log(t('Cannot execute drush command, exif_orientation drupal module is not enabled.'),'error' );
+      var_dump('Cannot execute drush command, exif_orientation drupal module is not enabled.');
+      return;
+    }
+
+    // charge images
+    $fids = \Drupal::entityQuery('file')
+      ->sort('fid', 'ASC')
+      ->condition('filemime', 'image/jpeg')
+      ->execute();
+
+    // put in queue
+    $queueFactory = \Drupal::service('queue');
+    $queue = $queueFactory->get('images_apply_exif_rotation');
+    foreach($fids as $fid) {
+      $queue->createItem($fid);
+    }
+  }
 }

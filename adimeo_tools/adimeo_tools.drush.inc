@@ -32,6 +32,10 @@ function adimeo_tools_drush_command() {
       'arguments' => [
         'module' => 'Module name',
       ],
+    ],
+    'images-apply-exif-rotation' => [
+      'description' => 'Executes exif rotation on images (file entity) through module exif_orientation method',
+      'aliases'   => ['iaer']
     ]
   ];
 
@@ -58,4 +62,13 @@ function drush_adimeo_tools_set_module_version($moduleName = NULL, $version = NU
   /** @var \Drupal\adimeo_tools\Drush\AdimeoToolsCommandsDrush8 $adimeoToolsDrushCommands8 */
   $adimeoToolsDrushCommands8 = \Drupal::service(AdimeoToolsCommandsDrush8::SERVICE_NAME);
   $adimeoToolsDrushCommands8->setModuleVersion($moduleName, $version);
+}
+
+/**
+ * Executes exif rotation on images (file entity) through module exif_orientation method
+ */
+function drush_adimeo_tools_images_apply_exif_rotation() {
+  /** @var \Drupal\adimeo_tools\Drush\AdimeoToolsCommandsDrush8 $adimeoToolsDrushCommands8 */
+  $adimeoToolsDrushCommands8 = \Drupal::service(AdimeoToolsCommandsDrush8::SERVICE_NAME);
+  $adimeoToolsDrushCommands8->imagesApplyExifRotation();
 }
