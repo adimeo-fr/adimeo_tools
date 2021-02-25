@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class StatusReportController extends ControllerBase {
 
-  const API_KEY_HEADER = 'ADIMEO_APM_TRACKING_API_KEY';
+  const API_KEY_HEADER = 'adimeo-apm-tracking-api-key';
 
   protected TrackingManager $trackingManager;
 

@@ -12,4 +12,4 @@ apm_tracking.get_report:
   defaults:
     _controller: '\Drupal\adimeo_apm_tracking\Controller\StatusReportController::getStatusReport'
   requirements:
-    _permission: 'access content'
+    _access: 'TRUE'
