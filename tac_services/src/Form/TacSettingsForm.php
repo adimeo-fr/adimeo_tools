@@ -79,6 +79,13 @@ class TacSettingsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $defaultValues = $this->config->getAllValues();
 
+    $form[$this->config::PRIVACY_URL] = [
+      '#type'          => 'textfield',
+      '#title'         => t('URL menant vers votre page de politique de vie privee.'),
+      '#default_value' => $defaultValues[$this->config::PRIVACY_URL],
+      '#description' => 'URL interne : //mysite/{url}'
+    ];
+
     $form[$this->config::HIGH_PRIVACY] = [
       '#type'          => 'checkbox',
       '#title'         => t('High privacy'),

@@ -36,6 +36,9 @@ function tac_services_page_attachments(array &$attachments) {
         $attachments['#attached']['drupalSettings']['tacServices']['translation_rep'] = '/' . drupal_get_path('module', 'tac_services').'/libraries/tarteaucitron/';
 
         $attachments['#attached']['drupalSettings']['tacServices']['globalSettings'] = [
+          // Privacy Policy URL
+          $globalTacConfService::PRIVACY_URL      => $globalConfValues[$globalTacConfService::PRIVACY_URL],
+
           $globalTacConfService::HIGH_PRIVACY     => ($globalConfValues[$globalTacConfService::HIGH_PRIVACY]) ? TRUE : FALSE,
           $globalTacConfService::ALLOWED_BUTTON     => ($globalConfValues[$globalTacConfService::ALLOWED_BUTTON]) ? TRUE : FALSE,
           $globalTacConfService::COOKIE_LIST      => ($globalConfValues[$globalTacConfService::COOKIE_LIST]) ? TRUE : FALSE,

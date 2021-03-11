@@ -108,6 +108,7 @@ var TacEventsHandlers = {
       if (contextIsRoot(context)) {
         var settings = drupalSettings.tacServices.globalSettings;
         tarteaucitron.init({
+          "privacyUrl": settings.privacy_url,
           "hashtag": "#tarteaucitron", /* Ouverture automatique du panel avec le hashtag */
           "highPrivacy": settings.high_privacy, /* désactiver le consentement implicite (en naviguant) ? */
           "allowedButton": settings.allowed_button, /* Active le bouton "accepter tout les cookies". */

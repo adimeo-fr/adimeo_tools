@@ -13,10 +13,16 @@ use Drupal\adimeo_tools\Service\LanguageService;
 class TacGlobalConfigService extends ConfigServiceBase
 {
 
+  
   /**
    * Constant which stores the service identifier.
    */
   const SERVICE_NAME = 'tac_services.settings_manager';
+
+  /**
+   * Constant which stores the Privacy policy URL field name
+   */
+  const PRIVACY_URL = "privacy_url";
 
   /**
    * Constant which stores the machine name of the High privacy field name.
@@ -97,8 +103,12 @@ class TacGlobalConfigService extends ConfigServiceBase
   public function getConfAllowedKeysDefaultValues()
   {
     return [
+      // Privacy policy URL
+      static::PRIVACY_URL => '',
+
       static::HIGH_PRIVACY     => FALSE,
       static::ALLOWED_BUTTON   => TRUE,
+
 
       // Orientation (first banner position)
       static::ORIENTATION => 'bottom',
