@@ -111,16 +111,19 @@ var TacEventsHandlers = {
           "hashtag": "#tarteaucitron", /* Ouverture automatique du panel avec le hashtag */
           "highPrivacy": settings.high_privacy, /* désactiver le consentement implicite (en naviguant) ? */
           "allowedButton": settings.allowed_button, /* Active le bouton "accepter tout les cookies". */
-          "orientation": settings.orientation, /* le bandeau doit être en haut (top) ou en bas (bottom) ? */
+
+          // Icon Management
+          "showIcon": settings.show_icon, 
+          "iconPosition": settings.icon_position, 
           "adblocker": settings.adblocker, /* Afficher un message si un adblocker est détecté */
           "showAlertSmall": settings.show_alert_small, /* afficher le petit bandeau en bas à droite ? */
           "cookieslist": settings.cookie_list, /* Afficher la liste des cookies installés ? */
           "removeCredit": true /* supprimer le lien vers la source ? */
         });
-        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
-        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
-        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_ALLOW_ALL, TacEventsHandlers.onServiceAllowAll);
-        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_DENY_ALL, TacEventsHandlers.onServiceDenyAll);
+        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
+        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
+        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_ALLOW_ALL, TacEventsHandlers.onServiceAllowAll);
+        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_DENY_ALL, TacEventsHandlers.onServiceDenyAll);
       }
     }
   };

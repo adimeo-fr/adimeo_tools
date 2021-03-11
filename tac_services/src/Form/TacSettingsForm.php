@@ -93,14 +93,23 @@ class TacSettingsForm extends FormBase {
       '#description'   => t('Ce bouton s\'active uniquement si la case "High privacy" est cochée.'),
     ];
 
-    $form[$this->config::ORIENTATION] = [
-      '#type'          => 'radios',
-      '#title'         => t('Orientation'),
-      '#default_value' => $defaultValues[$this->config::ORIENTATION],
-      '#description'   => t('le bandeau doit être en haut ou en bas ?'),
+    $form[$this->config::SHOW_ICON] = [
+      '#type' => 'checkbox',
+      '#title' => t("Afficher l'icone ?"),
+      '#default_value' => $defaultValues[$this->config::SHOW_ICON],
+      '#description' => t("Cette icone permet a l'utilisateur de modifier ses parametres de gestion de cookies"),
+    ];
+
+    $form[$this->config::ICON_POSITION] = [
+      '#type'          => 'select',
+      '#title'         => t("Position de l'icone"),
+      '#default_value' => $defaultValues[$this->config::ICON_POSITION],
+      '#description'   => t("Veuillez choisir la position de l'icone"),
       '#options'       => [
-        'top'    => t('En haut'),
-        'bottom' => t('En bas'),
+        'TopLeft'    => t('En haut a gauche'),
+        'BottomLeft' => t('En bas a gauche'),
+        'TopRight' => t('En haut a droite'),
+        'BottomRight' => t('En bas a droite'),
       ],
     ];
 

@@ -41,7 +41,12 @@ function tac_services_page_attachments(array &$attachments) {
           $globalTacConfService::COOKIE_LIST      => ($globalConfValues[$globalTacConfService::COOKIE_LIST]) ? TRUE : FALSE,
           $globalTacConfService::SHOW_ALERT_SMALL => ($globalConfValues[$globalTacConfService::SHOW_ALERT_SMALL]) ? TRUE : FALSE,
           $globalTacConfService::ADBLOCKER        => ($globalConfValues[$globalTacConfService::ADBLOCKER]) ? TRUE : FALSE,
-          $globalTacConfService::ORIENTATION      => $globalConfValues[$globalTacConfService::ORIENTATION],
+
+          // Icon
+          $globalTacConfService::SHOW_ICON => ($globalConfValues[$globalTacConfService::SHOW_ICON]) ? TRUE : FALSE,
+          $globalTacConfService::ICON_POSITION      => $globalConfValues[$globalTacConfService::ICON_POSITION],
+
+          // Alert Label
           $globalTacConfService::ALERT_LABEL      => $globalTacConfService->getAlertLabel(),
         ];
 
