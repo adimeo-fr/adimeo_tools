@@ -25,6 +25,16 @@ class TacGlobalConfigService extends ConfigServiceBase
   const PRIVACY_URL = "privacy_url";
 
   /**
+   * Constant which stores the DenyAllCta field name
+   */
+  const DENY_ALL_CTA = "deny_all_cta";
+
+  /**
+   * Constant which stores the AcceptAllCta field name
+   */
+  const ACCEPT_ALL_CTA = "accept_all_cta";
+
+  /**
    * Constant which stores the machine name of the High privacy field name.
    */
   const HIGH_PRIVACY = 'high_privacy';
@@ -108,6 +118,10 @@ class TacGlobalConfigService extends ConfigServiceBase
 
       static::HIGH_PRIVACY     => FALSE,
       static::ALLOWED_BUTTON   => TRUE,
+
+      // Controls
+      static::ACCEPT_ALL_CTA => TRUE,
+      static::DENY_ALL_CTA => TRUE,
 
 
       // Orientation (first banner position)

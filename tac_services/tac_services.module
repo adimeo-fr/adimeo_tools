@@ -45,6 +45,10 @@ function tac_services_page_attachments(array &$attachments) {
           $globalTacConfService::SHOW_ALERT_SMALL => ($globalConfValues[$globalTacConfService::SHOW_ALERT_SMALL]) ? TRUE : FALSE,
           $globalTacConfService::ADBLOCKER        => ($globalConfValues[$globalTacConfService::ADBLOCKER]) ? TRUE : FALSE,
 
+          // ACCCEPT & DENY
+          $globalTacConfService::ACCEPT_ALL_CTA        => ($globalConfValues[$globalTacConfService::ACCEPT_ALL_CTA]) ? TRUE : FALSE,
+          $globalTacConfService::DENY_ALL_CTA        => ($globalConfValues[$globalTacConfService::DENY_ALL_CTA]) ? TRUE : FALSE,
+
           // First time Banner position 
           $globalTacConfService::ORIENTATION      => $globalConfValues[$globalTacConfService::ORIENTATION],
 

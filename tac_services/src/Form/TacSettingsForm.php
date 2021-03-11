@@ -146,6 +146,20 @@ class TacSettingsForm extends FormBase {
       '#description'   => t('Afficher le petit bandeau en bas à droite ?'),
     ];
 
+    $form[$this->config::ACCEPT_ALL_CTA] = [
+      '#type'          => 'checkbox',
+      '#title'         => t('Accept All Bouton'),
+      '#default_value' => $defaultValues[$this->config::ACCEPT_ALL_CTA],
+      '#description'   => t("Afficher le bouton  'Accepter tous les cookies' ?"),
+    ];
+
+    $form[$this->config::DENY_ALL_CTA] = [
+      '#type'          => 'checkbox',
+      '#title'         => t('Deny All Bouton'),
+      '#default_value' => $defaultValues[$this->config::DENY_ALL_CTA],
+      '#description'   => t("Afficher le bouton  'Rejeter tous les cookies' ?"),
+    ];
+
     $form[$this->config::COOKIE_LIST] = [
       '#type'          => 'checkbox',
       '#title'         => t('Cookies list'),

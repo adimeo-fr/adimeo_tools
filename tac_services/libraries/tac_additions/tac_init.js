@@ -116,6 +116,10 @@ var TacEventsHandlers = {
           // Icon Management
           "showIcon": settings.show_icon, 
           "iconPosition": settings.icon_position, 
+
+          "DenyAllCta": settings.deny_all_cta,
+          "AcceptAllCta" : settings.accept_all_cta,
+          
           "adblocker": settings.adblocker, /* Afficher un message si un adblocker est détecté */
           "showAlertSmall": settings.show_alert_small, /* afficher le petit bandeau en bas à droite ? */
           "cookieslist": settings.cookie_list, /* Afficher la liste des cookies installés ? */
