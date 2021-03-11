@@ -9,7 +9,7 @@ var GMaps = function (serviceData) {
   self.init = function () {
     if (TacHelpers.checkCookie(self.serviceId)) {
       self.gmapsApiKey = serviceData.google_maps_api_key;
-      tarteaucitron.addScript('//maps.googleapis.com/maps/api/js?key=' + self.gmapsApiKey + '&callback=google_maps_api_initMap');
+      tarteaucitron.addScript('//maps.googleapis.com/maps/api/js?v=3.exp&key=' + self.gmapsApiKey + '&callback=google_maps_api_initMap');
     }
   };
 };
