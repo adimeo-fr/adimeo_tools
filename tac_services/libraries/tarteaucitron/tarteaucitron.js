@@ -605,6 +605,9 @@ var tarteaucitron = {
                     tarteaucitron.addClickEventToId("tarteaucitronManager", function () {
                         tarteaucitron.userInterface.openPanel();
                     });
+                    tarteaucitron.addClickEventToId("tarteaucitronAlertSmall", function () {
+                        tarteaucitron.userInterface.openPanel();
+                    });
                     tarteaucitron.addClickEventToId("tarteaucitronBack", function () {
                         tarteaucitron.userInterface.closePanel();
                     });
