@@ -602,6 +602,7 @@ span#tarteaucitronDisclaimerAlert {
     display: none;
     width: auto;
     z-index: 2147483646;
+    cursor: pointer;
 }
 #tarteaucitronIcon #tarteaucitronManager {
     color: transparent;
@@ -614,6 +615,7 @@ span#tarteaucitronDisclaimerAlert {
 #tarteaucitronIcon #tarteaucitronManager img {
     width: 50px;
     height: 50px;
+    cursor: pointer;
 }
 
 #tarteaucitronRoot .tarteaucitronCross::before {

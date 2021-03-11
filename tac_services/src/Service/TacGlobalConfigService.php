@@ -29,9 +29,14 @@ class TacGlobalConfigService extends ConfigServiceBase
   const ALLOWED_BUTTON = 'allowed_button';
 
   /**
-   * Constant which stores the machine name of the Orientation field name.
+   * Constant which stores the machine name of the Icon Position field name.
    */
   const ICON_POSITION = 'icon_position';
+
+  /**
+   * Constant which stores the machine name of the Orientation field name.
+   */
+  const ORIENTATION = 'orientation';
 
   /**
    * Constant which stores the machine name of the Show Icon field name
@@ -95,10 +100,13 @@ class TacGlobalConfigService extends ConfigServiceBase
       static::HIGH_PRIVACY     => FALSE,
       static::ALLOWED_BUTTON   => TRUE,
 
+      // Orientation (first banner position)
+      static::ORIENTATION => 'bottom',
+
       // Icon
       static::SHOW_ICON        => TRUE,
       static::ICON_POSITION    => 'BottomLeft',
-      
+
       static::ADBLOCKER        => FALSE,
       static::SHOW_ALERT_SMALL => TRUE,
       static::COOKIE_LIST      => TRUE,

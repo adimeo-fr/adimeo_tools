@@ -118,7 +118,8 @@ var TacEventsHandlers = {
           "adblocker": settings.adblocker, /* Afficher un message si un adblocker est détecté */
           "showAlertSmall": settings.show_alert_small, /* afficher le petit bandeau en bas à droite ? */
           "cookieslist": settings.cookie_list, /* Afficher la liste des cookies installés ? */
-          "removeCredit": true /* supprimer le lien vers la source ? */
+          "removeCredit": true, /* supprimer le lien vers la source ? */
+          "orientation": settings.orientation,
         });
         document.addEventListener(tarteaucitron.events.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
         document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
