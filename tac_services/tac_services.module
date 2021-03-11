@@ -13,11 +13,9 @@ use Drupal\tac_services\Service\TacServicesConfManager;
 function tac_services_page_attachments(array &$attachments) {
   $is_admin = \Drupal::service('router.admin_context')->isAdminRoute();
   if (!$is_admin) {
-
     /** @var TacServicesConfManager $confManager */
     $confManager = \Drupal::service(TacServicesConfManager::SERVICE_NAME);
     $services = $confManager->getTacServicesConf();
-
     if (!empty($services)) {
       $activeServices = [];
       foreach ($services as $pluginId => $service) {
@@ -62,7 +60,6 @@ function tac_services_page_attachments(array &$attachments) {
 
         // Ajout de la library tarte au citron.
         $attachments['#attached']['library'][] = 'tac_services/tac_services';
-
         // Ajout des libraries de tout les services.
         foreach ($activeServices as $pluginId => $service) {
           $attachments['#attached']['library'][] = $service['library'];
@@ -74,7 +71,6 @@ function tac_services_page_attachments(array &$attachments) {
         }
       }
     }
-
     return;
   }
 
