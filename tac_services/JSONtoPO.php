@@ -8,7 +8,6 @@ $jsonFiles = scandir($jsonDirectory);
 unset($jsonFiles[0]);
 unset($jsonFiles[1]);
 
-var_dump($jsonFiles);
 // Buildings traduction files from template
 foreach($jsonFiles as $jsonFile){
     $languagueString = str_replace('.json', '', $jsonFile);
