@@ -75,9 +75,20 @@ class TacGlobalConfigService extends ConfigServiceBase
   const COOKIE_LIST = 'cookie_list';
 
   /**
+   * Constant which stores the machine name of the handleBrowserDNTRequest field name
+   */
+  const HANDLE_DNT_REQUEST = 'handle_dnt_request';
+
+  /**
+   * Constant which stores the machine name of the Mandatory field name
+   */
+  const MANDATORY = 'mandatory';
+
+  /**
    * Libellé de l'encart d'alert.
    */
   const ALERT_LABEL = 'alert_label';
+
 
   /**
    * @var LanguageService
@@ -114,27 +125,29 @@ class TacGlobalConfigService extends ConfigServiceBase
   {
     return [
       // Privacy policy URL
-      static::PRIVACY_URL => '',
+      static::PRIVACY_URL         => '',
 
-      static::HIGH_PRIVACY     => FALSE,
-      static::ALLOWED_BUTTON   => TRUE,
+      static::HIGH_PRIVACY        => FALSE,
+      static::ALLOWED_BUTTON      => TRUE,
 
       // Controls
-      static::ACCEPT_ALL_CTA => TRUE,
-      static::DENY_ALL_CTA => TRUE,
+      static::ACCEPT_ALL_CTA     => TRUE,
+      static::DENY_ALL_CTA       => TRUE,
 
 
       // Orientation (first banner position)
-      static::ORIENTATION => 'bottom',
+      static::ORIENTATION        => 'bottom',
 
       // Icon
-      static::SHOW_ICON        => TRUE,
-      static::ICON_POSITION    => 'BottomLeft',
+      static::SHOW_ICON          => TRUE,
+      static::ICON_POSITION      => 'BottomLeft',
 
-      static::ADBLOCKER        => FALSE,
-      static::SHOW_ALERT_SMALL => TRUE,
-      static::COOKIE_LIST      => TRUE,
-      static::ALERT_LABEL      => NULL,
+      static::ADBLOCKER          => FALSE,
+      static::SHOW_ALERT_SMALL   => TRUE,
+      static::COOKIE_LIST        => TRUE,
+      static::ALERT_LABEL        => NULL,
+      static::HANDLE_DNT_REQUEST => FALSE,
+      static::MANDATORY          => TRUE,
     ];
   }
 

@@ -112,19 +112,17 @@ var TacEventsHandlers = {
           "hashtag": "#tarteaucitron", /* Ouverture automatique du panel avec le hashtag */
           "highPrivacy": settings.high_privacy, /* désactiver le consentement implicite (en naviguant) ? */
           "allowedButton": settings.allowed_button, /* Active le bouton "accepter tout les cookies". */
-
-          // Icon Management
           "showIcon": settings.show_icon, 
           "iconPosition": settings.icon_position, 
-
           "DenyAllCta": settings.deny_all_cta,
           "AcceptAllCta" : settings.accept_all_cta,
-          
+          "handleBrowserDNTRequest" : settings.handle_dnt_request,
           "adblocker": settings.adblocker, /* Afficher un message si un adblocker est détecté */
           "showAlertSmall": settings.show_alert_small, /* afficher le petit bandeau en bas à droite ? */
           "cookieslist": settings.cookie_list, /* Afficher la liste des cookies installés ? */
           "removeCredit": true, /* supprimer le lien vers la source ? */
           "orientation": settings.orientation,
+          "mandatory": settings.mandatory,
         });
         document.addEventListener(tarteaucitron.events.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
         document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);

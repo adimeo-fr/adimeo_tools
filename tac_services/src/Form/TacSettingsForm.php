@@ -168,6 +168,20 @@ class TacSettingsForm extends FormBase {
       '#description'   => t('Afficher la liste des cookies installés ?'),
     ];
 
+    $form[$this->config::HANDLE_DNT_REQUEST] = [
+      '#type'          => 'checkbox',
+      '#title'         => t('Requete DNT du navigateur'),
+      '#default_value' => $defaultValues[$this->config::HANDLE_DNT_REQUEST],
+      '#description'   => t('Activer la prise en main de la requete DNT du navigateur par TAC ?'),
+    ];
+
+    $form[$this->config::MANDATORY] = [
+      '#type'          => 'checkbox',
+      '#title'         => t('Message a propos des cookies obligatoires'),
+      '#default_value' => $defaultValues[$this->config::MANDATORY],
+      '#description'   => t('Afficher le message a propos des cookies obligatoires ?'),
+    ];
+
     $default = $this->config->getAlertLabel();
     $form[$this->config::ALERT_LABEL] = [
       '#type'          => 'text_format',
