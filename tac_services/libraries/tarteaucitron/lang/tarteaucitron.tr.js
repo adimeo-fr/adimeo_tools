@@ -57,24 +57,22 @@ tarteaucitron.lang = {
     },
     "video": {
         "title": "Videolar",
-        "details": "Video paylaşım hizmetleri siteyi multimedya içeriğiyle zenginleştirir ve görünürlüğünü artırır.\n" +
-            "\n"
+        "details": "Video paylaşım hizmetleri siteyi multimedya içeriğiyle zenginleştirir ve görünürlüğünü artırır." 
     },
     "comment": {
-        "title": "yorumlar\n",
+        "title": "yorumlar",
         "details": "Yorum yöneticileri yorumlarınızın gönderilmesini kolaylaştırır ve spam ile mücadele eder.",
     },
     "support": {
         "title": "destek",
-        "details": "Destek hizmetleri, site ekibiyle iletişim kurmanıza ve ekibinizi geliştirmenize yardımcı olur.\n" +
-            "\n"
+        "details": "Destek hizmetleri, site ekibiyle iletişim kurmanıza ve ekibinizi geliştirmenize yardımcı olur."
     },
     "api": {
         "title": "APIs",
         "details": "APIs komut dosyalarının yüklenmesine izin verir: coğrafi konum, arama motorları, çeviriler, ..."
     },
     "other": {
-        "title": "diğer\n",
+        "title": "diğer",
         "details": "Web içeriğini görüntüleme hizmetleri."
     },
     

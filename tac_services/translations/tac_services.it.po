@@ -2,19 +2,6 @@
 #
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
-# Generated from files:
-#  template.php: n/a
-#  templates/custom/embed-video.tpl.php: n/a
-#  aptar_theme.info: n/a
-#  inc/theme-functions.inc: n/a
-#  templates/node.tpl.php: n/a
-#  templates/custom/drusearch-results.tpl.php: n/a
-#  templates/custom/order-sample-pane.tpl.php: n/a
-#  templates/node/node--marketing-sheet.tpl.php: n/a
-#  templates/node/node--page-technologie.tpl.php: n/a
-#  templates/node/node--page.tpl.php: n/a
-#  templates/taxonomy/taxonomy-term--application-fields.tpl.php: n/a
-#  templates/taxonomy/taxonomy-term--collection.tpl.php: n/a
 #
 msgid ""
 msgstr ""
@@ -30,7 +17,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.2\n"
 "Language: fr_FR\n"
 
-msgid "Hello! This site is transparent and lets you chose the 3rd party services you want to allow."
+msgid "Hello! This site is transparent and lets you choose the 3rd party services you want to allow."
 msgstr "Benvenuto! Questo sito ti permette di attivare i servizi di terzi di tua scelta."
 
 msgid "Please disable your adblocker to start customizing."
@@ -55,13 +42,16 @@ msgid "Manage services"
 msgstr "Gestione dei servizi"
 
 msgid "Personalize"
-msgstr "Ok, accetta tutto"
+msgstr "Personalizza"
 
 msgid "OK, accept all"
-msgstr "Personalizza"
+msgstr "Ok, accetta tutto"
 
 msgid "Close"
 msgstr "Chiudi"
+
+msgid "Privacy policy"
+msgstr "Politica sulla riservatezza"
 
 msgid "Preference for all services"
 msgstr "Preferenze per tutti i servizi"
@@ -79,7 +69,7 @@ msgid "Deny"
 msgstr "Blocca"
 
 msgid "This service does not use cookie."
-msgstr "Questo servizio non invia nessun cookie"
+msgstr "{noCookier}"
 
 msgid "This service can install"
 msgstr "Questo servizio puo' inviare"
@@ -98,6 +88,30 @@ msgstr "Vai al sito ufficiale"
 
 msgid "Cookies manager by tarteaucitron.js"
 msgstr "Gestione dei cookies da tarteaucitron.js"
+
+msgid "This website does not use any cookie requiring your consent."
+msgstr "{noServices}"
+
+msgid "Show/hide informations about cookie storage"
+msgstr "Show/hide informations about cookie storage"
+
+msgid "Cookies management panel"
+msgstr "Cookies management panel"
+
+msgid "Cookie detail for"
+msgstr "Cookie detail for"
+
+msgid "on our site"
+msgstr "on our site"
+
+msgid "(new window)"
+msgstr "(new window)"
+
+msgid "Allow all cookies"
+msgstr "Allow all cookies"
+
+msgid "Deny all cookies"
+msgstr "Deny all cookies"
 
 msgid "is disabled."
 msgstr "è disattivato"
@@ -149,3 +163,9 @@ msgstr "Altro"
 
 msgid "Services to display web content."
 msgstr "Servizi per visualizzare contenuti web."
+
+msgid "Mandatory cookies"
+msgstr "Mandatory cookies"
+
+msgid "This site uses cookies necessary for its proper functioning which cannot be deactivated."
+msgstr "This site uses cookies necessary for its proper functioning which cannot be deactivated."

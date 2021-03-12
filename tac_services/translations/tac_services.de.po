@@ -2,19 +2,6 @@
 #
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
-# Generated from files:
-#  template.php: n/a
-#  templates/custom/embed-video.tpl.php: n/a
-#  aptar_theme.info: n/a
-#  inc/theme-functions.inc: n/a
-#  templates/node.tpl.php: n/a
-#  templates/custom/drusearch-results.tpl.php: n/a
-#  templates/custom/order-sample-pane.tpl.php: n/a
-#  templates/node/node--marketing-sheet.tpl.php: n/a
-#  templates/node/node--page-technologie.tpl.php: n/a
-#  templates/node/node--page.tpl.php: n/a
-#  templates/taxonomy/taxonomy-term--application-fields.tpl.php: n/a
-#  templates/taxonomy/taxonomy-term--collection.tpl.php: n/a
 #
 msgid ""
 msgstr ""
@@ -30,17 +17,17 @@ msgstr ""
 "X-Generator: Poedit 1.8.2\n"
 "Language: fr_FR\n"
 
-msgid "Hello! This site is transparent and lets you chose the 3rd party services you want to allow."
+msgid "Hello! This site is transparent and lets you choose the 3rd party services you want to allow."
 msgstr "Hallo! Diese Seite ist transparent und lässt Ihnen die Wahl der externen Services, die aktiviert werden dürfen."
 
 msgid "Please disable your adblocker to start customizing."
-msgstr "Bitte deaktivieren Sie Ihren 'Werbeblocker' um Konfigurieren zu können."
+msgstr "Bitte deaktivieren Sie Ihren 'Werbeblocker' um Cookie-Einstellungen vornehmen zu können."
 
 msgid "Refresh the page"
 msgstr "Seite neu laden"
 
 msgid "By continuing to scroll,"
-msgstr "Durch die fortgesetzte blättern,"
+msgstr "Durch weiterblättern,"
 
 msgid "If you continue to browse this website,"
 msgstr "Wenn Sie diese Webseite benutzen,"
@@ -49,22 +36,25 @@ msgid "you are allowing all third-party services"
 msgstr "stimmen Sie der Benutzung von externen Diensten zu"
 
 msgid "This site uses cookies and gives you control over what you want to activate"
-msgstr "Diese Webseite verwendet 'Cookies' und ermöglicht dadurch Kontrolle, welche Dienste benutzt werden dürfen"
+msgstr "Diese Webseite verwendet 'Cookies' um Inhalte und Anzeigen zu personalisieren und zu analysieren. Bestimmen Sie, welche Dienste benutzt werden dürfen"
 
 msgid "Manage services"
-msgstr "Service-Kontrolle"
+msgstr "Datenschutz-Einstellungen"
 
 msgid "Personalize"
 msgstr "Personalisieren"
 
 msgid "OK, accept all"
-msgstr "OK, akzeptiere alles"
+msgstr "Alle akzeptieren"
 
 msgid "Close"
-msgstr "Beenden"
+msgstr "Schließen"
+
+msgid "Privacy policy"
+msgstr "Datenschutzbestimmungen"
 
 msgid "Preference for all services"
-msgstr "Präferenz für alle Dienste"
+msgstr "Einstellungen für alle Dienste"
 
 msgid "Protecting your privacy"
 msgstr "Schutz der Privatsphäre"
@@ -79,13 +69,13 @@ msgid "Deny"
 msgstr "Ablehnen"
 
 msgid "This service does not use cookie."
-msgstr "Dieser Dienst nutzt keine 'Cookies'."
+msgstr "{noCookier}"
 
 msgid "This service can install"
-msgstr "Dieser Dienst kann installieren"
+msgstr "Dieser Dienst kann 'Cookies' verwenden"
 
 msgid "This service has installed"
-msgstr "Dieser Dienst hat installiert"
+msgstr "Dieser Dienst verwendet"
 
 msgid "This service has not installed any cookie."
 msgstr "Dieser Dienst hat keine 'Cookies' installiert."
@@ -97,16 +87,40 @@ msgid "View the official website"
 msgstr "Zur offiziellen Webseite"
 
 msgid "Cookies manager by tarteaucitron.js"
-msgstr "Cookies manager von tarteaucitron.js"
+msgstr "Cookie Manager von tarteaucitron.js"
+
+msgid "This website does not use any cookie requiring your consent."
+msgstr "{noServices}"
+
+msgid "Show/hide informations about cookie storage"
+msgstr "Zeige/Verberge Cookie-Einstellungen"
+
+msgid "Cookies management panel"
+msgstr "Cookie-Einstellungen"
+
+msgid "Cookie detail for"
+msgstr "Cookie Details für"
+
+msgid "on our site"
+msgstr "auf unserer Seite"
+
+msgid "(new window)"
+msgstr "(neues Fenster)"
+
+msgid "Allow all cookies"
+msgstr "Erlaube alle Cookies"
+
+msgid "Deny all cookies"
+msgstr "Verbiete alle Cookies"
 
 msgid "is disabled."
 msgstr "ist deaktiviert."
 
 msgid "Advertising network"
-msgstr "Anzeigen Netzwerke"
+msgstr "Werbenetzwerke"
 
 msgid "Ad networks can generate revenue by selling advertising space on the site."
-msgstr "Anzeigen Netzwerke können mit dem Verkauf von Werbeplatzierungen auf der Seite Einnahmen erhalten."
+msgstr "Werbenetzwerke können mit dem Verkauf von Werbeplatzierungen auf der Seite Einnahmen erhalten."
 
 msgid "Audience measurement"
 msgstr "Besucher Zähldienste"
@@ -124,7 +138,7 @@ msgid "Videos"
 msgstr "Videos"
 
 msgid "Video sharing services help to add rich media on the site and increase its visibility."
-msgstr "Video Platformen erlauben Videoinhalte einzublenden und die Sichtbarkeit der Seite zu erhöhen."
+msgstr "Videoplattformen erlauben Videoinhalte einzublenden und die Sichtbarkeit der Seite zu erhöhen."
 
 msgid "Comments"
 msgstr "Kommentare"
@@ -142,10 +156,16 @@ msgid "APIs"
 msgstr "APIs"
 
 msgid "APIs are used to load scripts: geolocation, search engines, translations, ..."
-msgstr "APIs werden benutzt um Skripte zu laden, wie: Geolokalisation, Suchmaschinen, Übersetzungen, ..."
+msgstr "APIs werden benutzt um Skripte zu laden, wie: Geolokalisierung, Suchmaschinen, Übersetzungen, ..."
 
 msgid "Other"
 msgstr "Andere"
 
 msgid "Services to display web content."
 msgstr "Dienste zum Anzeigen von Web-Inhalten."
+
+msgid "Mandatory cookies"
+msgstr "Notwendige Cookies"
+
+msgid "This site uses cookies necessary for its proper functioning which cannot be deactivated."
+msgstr "Diese Seite nutzt Cookies, um die Bedienung der Website zu ermöglichen, diese können nicht deaktiviert werden"
