@@ -9,18 +9,21 @@ function contextIsRoot(context){
 
 var TacEventsHandlers = {
     onServiceAllowAll: function (event) {
+        console.log('onServiceAllowAll');
         var elem = document.getElementById('tarteaucitronMainLineOffset'),
             $elem = jQuery(elem);
         $elem.addClass('allow');
         $elem.removeClass('deny');
     },
     onServiceDenyAll: function (event) {
+        console.log('onServiceDenyAll');
         var elem = document.getElementById('tarteaucitronMainLineOffset'),
             $elem = jQuery(elem);
         $elem.addClass('deny');
         $elem.removeClass('allow');
     },
     onServiceUpdateStatus: function (event) {
+        console.log('onServiceUpdateStatus');
         var elem = document.getElementById(event.data.key + 'Line'),
             $elem = jQuery(elem);
         switch (event.data.status) {
@@ -35,6 +38,7 @@ var TacEventsHandlers = {
         }
     },
     onLoadLanguage: function (event) {
+        console.log('onLoadLanguage');
         tarteaucitron.lang = {
             "adblock": Drupal.t("Hello! This site is transparent and lets you chose the 3rd party services you want to allow."),
             "adblock_call": Drupal.t("Please disable your adblocker to start customizing."),
@@ -124,10 +128,10 @@ var TacEventsHandlers = {
           "orientation": settings.orientation,
           "mandatory": settings.mandatory,
         });
-        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
-        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
-        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_ALLOW_ALL, TacEventsHandlers.onServiceAllowAll);
-        document.addEventListener(tarteaucitron.events.TARTEAUCITRON_SERVICE_DENY_ALL, TacEventsHandlers.onServiceDenyAll);
+        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
+        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
+        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_ALLOW_ALL, TacEventsHandlers.onServiceAllowAll);
+        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_DENY_ALL, TacEventsHandlers.onServiceDenyAll);
       }
     }
   };
