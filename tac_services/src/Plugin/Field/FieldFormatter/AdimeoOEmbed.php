@@ -48,22 +48,25 @@ class AdimeoOEmbed extends FormatterBase implements ContainerFactoryPluginInterf
 
     public function viewElements(FieldItemListInterface $items, $langcode): array
     {
+        // Get Oembed media metadata
         $mediaId = reset($items->getParent()->get('mid')->getValue());
         $thumbnailURI = $items->getParent()->get('field_media_image')->get(0)->get('entity')->getTarget()->getValue()->getFileUri();
-
-        $url = $items[0]->value;
+        $url = $items[0]->getValue();
         $provider = (parse_url($url, PHP_URL_HOST)) === "www.youtube.com" ? "youtube" : "vimeo";
         
         // Build the placeholder
         $placeholder = [];
         $placeholder[] = [
+            '#prefix' => '<a class="use-ajax" href="/">',
+            "#suffix" => '</a>',
             '#theme' => 'image_style',
             '#style_name' => 'landscape_full_page_5116w',
             '#uri' => $thumbnailURI,
             '#attributes' => [
-                'class' => 'test',
+                'class' => 'OEmbedVideoThumbnail',
                 'data-provider' => $provider,
-                'data-mediaId' => $mediaId,
+                'data-media' => $mediaId,
+                'id' => "oembed-$mediaId",
             ]
         ];
 
