@@ -8,6 +8,25 @@ use Drupal\tac_services\Service\TacGlobalConfigService;
 use Drupal\tac_services\Service\TacServicesConfManager;
 
 /**
+ * Implements hook_preprocess_page
+ */
+function tac_services_preprocess_page(&$variables)
+{
+  $confManager = \Drupal::service(TacServicesConfManager::SERVICE_NAME);
+  $services = $confManager->getTacServicesConf();
+
+  if(!empty($services)){
+    $activeServices = [];
+    foreach ($services as $pluginId => $service) {
+      if ($service['is_active']) {
+        $activeServices[$pluginId] = $service;
+      }
+    }
+  }
+  $variables['activeServices'] = $activeServices;
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function tac_services_page_attachments(array &$attachments) {

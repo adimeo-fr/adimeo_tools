@@ -92,6 +92,7 @@ tac_youtube_embed:
   version: 1
   js:
     libraries/tac_youtube_embed/tac_youtube_embed.js: {}
+    # libraries/tac_youtube_embed/embedManager.js: {}
   dependencies:
       - tac_services/tac_services
 
