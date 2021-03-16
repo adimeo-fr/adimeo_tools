@@ -19,6 +19,9 @@ var TacHelpers = {
 
         for( var i in list ){
             var split = list[i].split('=');
+            if (split[0] === '') {
+                continue;   
+            }
             cookies[split[0]] = split['1'];
         }
 
