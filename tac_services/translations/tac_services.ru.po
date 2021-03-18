@@ -2,19 +2,6 @@
 #
 # LANGUAGE translation of Drupal (general)
 # Copyright YEAR NAME <EMAIL@ADDRESS>
-# Generated from files:
-#  template.php: n/a
-#  templates/custom/embed-video.tpl.php: n/a
-#  aptar_theme.info: n/a
-#  inc/theme-functions.inc: n/a
-#  templates/node.tpl.php: n/a
-#  templates/custom/drusearch-results.tpl.php: n/a
-#  templates/custom/order-sample-pane.tpl.php: n/a
-#  templates/node/node--marketing-sheet.tpl.php: n/a
-#  templates/node/node--page-technologie.tpl.php: n/a
-#  templates/node/node--page.tpl.php: n/a
-#  templates/taxonomy/taxonomy-term--application-fields.tpl.php: n/a
-#  templates/taxonomy/taxonomy-term--collection.tpl.php: n/a
 #
 msgid ""
 msgstr ""
@@ -30,7 +17,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.2\n"
 "Language: fr_FR\n"
 
-msgid "Hello! This site is transparent and lets you chose the 3rd party services you want to allow."
+msgid "Hello! This site is transparent and lets you choose the 3rd party services you want to allow."
 msgstr "Привет! Этот сайт совершенно открытый и позволяет вам выбрать сервисы третьих лиц, которым вы хотите дать доступ."
 
 msgid "Please disable your adblocker to start customizing."
@@ -63,6 +50,9 @@ msgstr "Ок, все активировать"
 msgid "Close"
 msgstr "Закрыть"
 
+msgid "Privacy policy"
+msgstr "Политика конфиденциальности"
+
 msgid "Preference for all services"
 msgstr "Преференция всем сервисам"
 
@@ -73,13 +63,13 @@ msgid "By allowing these third party services, you accept their cookies and the 
 msgstr "Активирование сервисов третьих лиц позволяет использование их кукис и технолоний отслеживания необходимых для их функционирования"
 
 msgid "Allow"
-msgstr "Позролить"
+msgstr "Позволить"
 
 msgid "Deny"
 msgstr "Не позволить"
 
 msgid "This service does not use cookie."
-msgstr "Этот сервис не использует кукис."
+msgstr "{noCookier}"
 
 msgid "This service can install"
 msgstr "Этот сервис может быть инсталирован"
@@ -98,6 +88,30 @@ msgstr "Посетите официальный сайт"
 
 msgid "Cookies manager by tarteaucitron.js"
 msgstr "Кукис манаджер tarteaucitron.js"
+
+msgid "This website does not use any cookie requiring your consent."
+msgstr "{noServices}"
+
+msgid "Show/hide informations about cookie storage"
+msgstr "Show/hide informations about cookie storage"
+
+msgid "Cookies management panel"
+msgstr "Панель управления cookies"
+
+msgid "Cookie detail for"
+msgstr "Cookie detail for"
+
+msgid "on our site"
+msgstr "on our site"
+
+msgid "(new window)"
+msgstr "(new window)"
+
+msgid "Allow all cookies"
+msgstr "Разрешить использование cookies"
+
+msgid "Deny all cookies"
+msgstr "Запретить использование cookies"
 
 msgid "is disabled."
 msgstr "Деактивирован."
@@ -142,10 +156,16 @@ msgid "APIs"
 msgstr "АПИ"
 
 msgid "APIs are used to load scripts: geolocation, search engines, translations, ..."
-msgstr "АПИ используются для загрузки скриптов; геолокация, поисковый мотор и переводы..."
+msgstr "АПИ используются для загрузки скриптов геолокация, поисковый мотор и переводы..."
 
 msgid "Other"
 msgstr "Другие"
 
 msgid "Services to display web content."
 msgstr "Службы для отображения веб-контента."
+
+msgid "Mandatory cookies"
+msgstr "Mandatory cookies"
+
+msgid "This site uses cookies necessary for its proper functioning which cannot be deactivated."
+msgstr "This site uses cookies necessary for its proper functioning which cannot be deactivated."

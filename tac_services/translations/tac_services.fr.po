@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.2\n"
 "Language: fr_FR\n"
 
-msgid "Hello! This site is transparent and lets you chose the 3rd party services you want to allow."
+msgid "Hello! This site is transparent and lets you choose the 3rd party services you want to allow."
 msgstr "Bonjour! Ce site joue la transparence et vous donne le choix des services tiers à activer."
 
 msgid "Please disable your adblocker to start customizing."
@@ -36,7 +36,7 @@ msgid "you are allowing all third-party services"
 msgstr "vous acceptez l'utilisation de services tiers pouvant installer des cookies"
 
 msgid "This site uses cookies and gives you control over what you want to activate"
-msgstr "Ce site utilise des cookies et vous donne le contrôle sur ce que vous souhaitez activer"
+msgstr "Ce site utilise des cookies et vous donne le contrôle sur ceux que vous souhaitez activer"
 
 msgid "Manage services"
 msgstr "Gestion des services"
@@ -45,13 +45,16 @@ msgid "Personalize"
 msgstr "Personnaliser"
 
 msgid "OK, accept all"
-msgstr "OK, tout accepter"
+msgstr "Tout accepter"
 
 msgid "Close"
 msgstr "Fermer"
 
+msgid "Privacy policy"
+msgstr "Politique de confidentialité"
+
 msgid "Preference for all services"
-msgstr "Préférence pour tous les services"
+msgstr "Préférences pour tous les services"
 
 msgid "Protecting your privacy"
 msgstr "Protection de votre vie privée"
@@ -66,7 +69,7 @@ msgid "Deny"
 msgstr "Interdire"
 
 msgid "This service does not use cookie."
-msgstr "Ce service ne dépose aucun cookie."
+msgstr "{noCookier}"
 
 msgid "This service can install"
 msgstr "Ce service peut déposer"
@@ -85,6 +88,30 @@ msgstr "Voir le site officiel"
 
 msgid "Cookies manager by tarteaucitron.js"
 msgstr "Gestion des cookies par tarteaucitron.js"
+
+msgid "This website does not use any cookie requiring your consent."
+msgstr "Ce site n'utilise aucun cookie nécessitant votre consentement."
+
+msgid "Show/hide informations about cookie storage"
+msgstr "Afficher/masquer les informations sur le stockage des cookies"
+
+msgid "Cookies management panel"
+msgstr "Panneau de gestion des cookies"
+
+msgid "Cookie detail for"
+msgstr "Détail des cookies"
+
+msgid "on our site"
+msgstr "sur notre site"
+
+msgid "(new window)"
+msgstr "(nouvelle fenêtre)"
+
+msgid "Allow all cookies"
+msgstr "Tout accepter"
+
+msgid "Deny all cookies"
+msgstr "Tout refuser"
 
 msgid "is disabled."
 msgstr "est désactivé."
@@ -136,3 +163,9 @@ msgstr "Autre"
 
 msgid "Services to display web content."
 msgstr "Services visant à afficher du contenu web."
+
+msgid "Mandatory cookies"
+msgstr "Cookies obligatoires"
+
+msgid "This site uses cookies necessary for its proper functioning which cannot be deactivated."
+msgstr "Ce site utilise des cookies nécessaires à son bon fonctionnement qui ne peuvent pas être désactivés."
