@@ -20,6 +20,7 @@
             // Get noCookie placeholder
             let noCookiePlaceholder = TacHelpers.getPlaceholder(Drupal.t('Youtube Cookie is not activated.'))
             // Replace tacPlaceholder with noCookiePlaceholder
+            tacPlaceholder.replaceWith(noCookiePlaceholder);
           }
         })
       })
