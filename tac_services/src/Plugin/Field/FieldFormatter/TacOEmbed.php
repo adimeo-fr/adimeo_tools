@@ -48,6 +48,9 @@ class TacOEmbed extends FormatterBase
             //Get provider through the mediaSource metadata
             $provider = $mediaSource->getMetadata($media, 'provider_name');
 
+            //Get the tac_services library name
+            $tacLibrary = "tac_services/tac_" . strtolower($provider) . "_oembed";
+
             // Build the placeholder
             $elements[] = [
               '#type' => 'inline_template',
@@ -57,28 +60,23 @@ class TacOEmbed extends FormatterBase
                 'provider' => $provider
               ],
               '#attached' => [
-                //replace by dynamic library name to handle various services
-                'library' => ['tac_services/tac_youtube_oembed']
+                'library' => [$tacLibrary]
               ]
             ];
-
-          }
+          } 
+          // if not a media, act as the 'basic_string' formatter.
+          // @see Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter
+        } else {
+            foreach ($items as $delta => $item) {
+              // The text value has no text format assigned to it, so the user input
+              // should equal the output, including newlines.
+              $elements[$delta] = [
+                '#type' => 'inline_template',
+                '#template' => '{{ value|nl2br }}',
+                '#context' => ['value' => $item->value],
+              ];
+            }
         }
-
-
-
-      // if not a media, act as the 'basic_string' formatter.
-      // @see Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter
-      foreach ($items as $delta => $item) {
-        // The text value has no text format assigned to it, so the user input
-        // should equal the output, including newlines.
-        $elements[$delta] = [
-          '#type' => 'inline_template',
-          '#template' => '{{ value|nl2br }}',
-          '#context' => ['value' => $item->value],
-        ];
-      }
-
 
       return $elements;
     }

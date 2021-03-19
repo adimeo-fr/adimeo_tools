@@ -28,4 +28,9 @@ tac_services.settings_form:
 tac_services.ajax_oembed_render:
   path: 'ajax/tarteaucitron/display/oembed'
   defaults:
-    _controller:
+    _controller: 'Drupal\tac_services\Controller\TacAjaxController::replaceWithOembedContent'
+
+tac_services.ajax_nocookie_render:
+  path: 'ajax/tarteaucitron/display/nocookie'
+  defaults:
+    _controller: 'Drupal\tac_services\Controller\TacAjaxController::replaceWithNoCookiePlaceholder'
