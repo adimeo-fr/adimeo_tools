@@ -51,19 +51,23 @@ class TacOEmbed extends FormatterBase
             //Get the tac_services library name
             $tacLibrary = "tac_services/tac_" . strtolower($provider) . "_oembed";
 
+            //Get field name
+            $fieldName = $items->getName();
+
             // Build the placeholder
             $elements[] = [
               '#type' => 'inline_template',
-              '#template' => '<div class="tac-media-oembed-placeholder" data-media-id="{{ media_id }}" data-oembed-provider="{{ provider|lower }}"',
+              '#template' => '<div class="tac-media-oembed-placeholder" data-media-id="{{ media_id }}" data-oembed-provider="{{ provider|lower }}" data-field-name="{{ field_name }}"></div>',
               '#context' => [
                 'media_id' => $mediaId,
-                'provider' => $provider
+                'provider' => $provider,
+                'field_name' => $fieldName
               ],
               '#attached' => [
                 'library' => [$tacLibrary]
               ]
             ];
-          } 
+          }
           // if not a media, act as the 'basic_string' formatter.
           // @see Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter
         } else {
