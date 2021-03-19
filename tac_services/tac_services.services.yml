@@ -9,7 +9,22 @@ services:
     class: Drupal\tac_services\Service\TacServicesConfManager
     parent: default_plugin_manager
 
-  #Tac global settings conf manager
+  # Tac global settings conf manager
   tac_services.settings_manager:
     class: Drupal\tac_services\Service\TacGlobalConfigService
     arguments: ['@adimeo_tools.language']
+
+  # Tac Media Gateway
+  tac_services.media_gateway:
+    class: Drupal\tac_services\Gateway\TacMediaGateway
+    arguments: ['@entity_type.manager']
+
+  # Tac Media Manager
+  tac_services.media_manager:
+    class: Drupal\tac_services\Manager\TacMediaManager
+    arguments: [ '@tac_services.media_gateway' ]
+
+  # Tac Media OEmbed ajax display
+  tac_services.ajax_oembed_controller:
+    class: Drupal\tac_services\Controllers\AjaxOEmbedMedia
+    arguments: [ '@tac_services.media_manager' ]

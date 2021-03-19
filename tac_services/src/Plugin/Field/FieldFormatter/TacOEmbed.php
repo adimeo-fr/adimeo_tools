@@ -7,7 +7,7 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
 
 /**
- * Display Oembed media as a placeholder to be replaced by iframe if
+ * Display OEmbed media as a placeholder to be replaced by iframe if
  * corresponding cookie service has been accepted
  *
  * @FieldFormatter(
@@ -57,6 +57,7 @@ class TacOEmbed extends FormatterBase
                 'provider' => $provider
               ],
               '#attached' => [
+                //replace by dynamic library name to handle various services
                 'library' => ['tac_services/tac_youtube_oembed']
               ]
             ];
@@ -66,7 +67,7 @@ class TacOEmbed extends FormatterBase
 
 
 
-      // if not a video media, act as the 'basic_string' formatter.
+      // if not a media, act as the 'basic_string' formatter.
       // @see Drupal\Core\Field\Plugin\Field\FieldFormatter\BasicStringFormatter
       foreach ($items as $delta => $item) {
         // The text value has no text format assigned to it, so the user input
