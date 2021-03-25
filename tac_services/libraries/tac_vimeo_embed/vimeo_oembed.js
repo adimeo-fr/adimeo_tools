@@ -1,7 +1,7 @@
 (function ($, Drupal) {
 	// closure
 	"use strict";
-	Drupal.behaviors.youtube_oembed = {
+	Drupal.behaviors.vimeo_oembed = {
 		// behaviors
 		attach: function () {
 			// We wait for tarteaucitron to be loaded before evaluating cookies
@@ -9,10 +9,10 @@
 				tarteaucitronEvents.TARTEAUCITRON_READY,
 				(e) => {
 					// Check if the cookie is accepted or not
-					let isCookieAccepted = TacHelpers.checkCookie("youtube");
-					// Select only placehoders whose provider is Youtube
+					let isCookieAccepted = TacHelpers.checkCookie("vimeo");
+					// Select only placehoders whose provider is Vimeo
 					let tacPlaceholders = document.querySelectorAll(
-						'.tac-media-oembed-placeholder[data-oembed-provider="youtube"]'
+						'.tac-media-oembed-placeholder[data-oembed-provider="vimeo"]'
 					);
 
 					tacPlaceholders.forEach((tacPlaceholder) => {
@@ -20,7 +20,7 @@
 							let mediaId = tacPlaceholder.dataset.mediaId;
 							let fieldName = tacPlaceholder.dataset.fieldName;
 
-							//Replace the placeholders by the OEmbed iframes if the Youtube
+							//Replace the placeholders by the OEmbed iframes if the Vimeo
 							// service
 							// is accepted
 							let url =
@@ -35,7 +35,7 @@
 							// Get noCookie placeholder
 							let noCookiePlaceholder = TacHelpers.getPlaceholder(
 								Drupal.t(
-									"Vos préférences en matière de cookie ne vous permettent pas de consulter cette vidéo Youtube."
+									"Vos préférences en matière de cookie ne vous permettent pas de consulter cette vidéo Vimeo."
 								)
 							);
 							// Replace tacPlaceholder with noCookiePlaceholder
