@@ -9,21 +9,18 @@ function contextIsRoot(context){
 
 var TacEventsHandlers = {
     onServiceAllowAll: function (event) {
-        console.log('onServiceAllowAll');
         var elem = document.getElementById('tarteaucitronMainLineOffset'),
             $elem = jQuery(elem);
         $elem.addClass('allow');
         $elem.removeClass('deny');
     },
     onServiceDenyAll: function (event) {
-        console.log('onServiceDenyAll');
         var elem = document.getElementById('tarteaucitronMainLineOffset'),
             $elem = jQuery(elem);
         $elem.addClass('deny');
         $elem.removeClass('allow');
     },
     onServiceUpdateStatus: function (event) {
-        console.log('onServiceUpdateStatus');
         var elem = document.getElementById(event.data.key + 'Line'),
             $elem = jQuery(elem);
         switch (event.data.status) {
@@ -38,7 +35,6 @@ var TacEventsHandlers = {
         }
     },
     onLoadLanguage: function (event) {
-        console.log('onLoadLanguage');
         tarteaucitron.lang = {
             "middleBarHead": Drupal.t("☝ 🍪"),
             "adblock": Drupal.t("Hello! This site is transparent and lets you choose the 3rd party services you want to allow."),

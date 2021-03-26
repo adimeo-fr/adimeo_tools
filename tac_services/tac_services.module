@@ -8,6 +8,26 @@ use Drupal\tac_services\Service\TacGlobalConfigService;
 use Drupal\tac_services\Service\TacServicesConfManager;
 
 /**
+ * Implements hook_preprocess_page
+ */
+function tac_services_preprocess_page(&$variables)
+{
+  $confManager = \Drupal::service(TacServicesConfManager::SERVICE_NAME);
+  $services = $confManager->getTacServicesConf();
+
+  $activeServices = [];
+
+  if(!empty($services)){
+    foreach ($services as $pluginId => $service) {
+      if ($service['is_active']) {
+        $activeServices[$pluginId] = $service;
+      }
+    }
+  }
+  $variables['activeServices'] = $activeServices;
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function tac_services_page_attachments(array &$attachments) {
@@ -47,7 +67,7 @@ function tac_services_page_attachments(array &$attachments) {
           $globalTacConfService::ACCEPT_ALL_CTA       => ($globalConfValues[$globalTacConfService::ACCEPT_ALL_CTA]) ? TRUE : FALSE,
           $globalTacConfService::DENY_ALL_CTA         => ($globalConfValues[$globalTacConfService::DENY_ALL_CTA]) ? TRUE : FALSE,
 
-          // First time Banner position 
+          // First time Banner position
           $globalTacConfService::ORIENTATION          => $globalConfValues[$globalTacConfService::ORIENTATION],
 
           $globalTacConfService::HANDLE_DNT_REQUEST   => ($globalConfValues[$globalTacConfService::HANDLE_DNT_REQUEST]) ? TRUE : FALSE,

@@ -23,3 +23,15 @@ tac_services.settings_form:
     _title: 'Configuration globale de tarteaucitron.js'
   requirements:
     _permission: 'administer site configuration'
+
+# Route ajax de récupération des champs OEmbed rendu
+tac_services.ajax_oembed_render:
+  path: '/ajax/tarteaucitron/display/oembed/{media}/{field_name}'
+  defaults:
+    _controller: tac_services.ajax_oembed_controller:replaceWithOembedContent
+  options:
+    parameters:
+      media:
+        type: entity:media
+  requirements:
+    _permission: 'access content'
