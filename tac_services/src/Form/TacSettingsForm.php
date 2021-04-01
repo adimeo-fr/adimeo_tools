@@ -124,7 +124,7 @@ class TacSettingsForm extends FormBase {
     $form[$this->config::ORIENTATION] = [
       '#type'          => 'select',
       '#title'         => t("Position de la banniere de cookies"),
-      '#default_value' => $defaultValues[$this->config::ICON_POSITION],
+      '#default_value' => $defaultValues[$this->config::ORIENTATION],
       '#description'   => t("Celle-ci est affiche la premiere fois qu'un visiteur arrive sur le site"),
       '#options'       => [
         'bottom'    => t('En Bas'),
