@@ -2,11 +2,11 @@ tac_services:
     version: 1
     css:
         theme:
-            libraries/tarteaucitron/css/tarteaucitron.css: {}
+            libraries/tarteaucitron/css/tarteaucitron.css: { preprocess: false }
     js:
         libraries/tac_additions/polyfill/CustomEvent.js: {}
-        libraries/tarteaucitron/tarteaucitron.js: {}
-        libraries/tarteaucitron/tarteaucitron.services.js: {}
+        libraries/tarteaucitron/tarteaucitron.js: { preprocess: false }
+        libraries/tarteaucitron/tarteaucitron.services.js: { preprocess: false }
         libraries/tac_additions/tac_init.js: {}
         libraries/tac_additions/tac_helpers.js: {}
     dependencies:
