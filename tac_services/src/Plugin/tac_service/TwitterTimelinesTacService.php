@@ -11,7 +11,7 @@ use Drupal\tac_services\Interfaces\TacServiceInterface;
  * @TacServiceAnnotation(
  *   id = "twitter_timelines_tac_service",
  *   label = "Twitter Timelines",
- *   weight = 3
+ *   weight = 10
  * )
  */
 class TwitterTimelinesTacService implements TacServiceInterface {

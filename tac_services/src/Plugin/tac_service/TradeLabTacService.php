@@ -12,7 +12,7 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  * @TacServiceAnnotation(
  *   id = "tradelab_tac_service",
  *   label = "Tradelab",
- *   weight = 3
+ *   weight = 11
  * )
  */
 class TradeLabTacService implements TacServiceInterface {

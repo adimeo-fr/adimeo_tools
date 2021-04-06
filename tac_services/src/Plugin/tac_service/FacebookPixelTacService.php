@@ -12,7 +12,7 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  * @TacServiceAnnotation(
  *   id = "facebook_pixel_tac_service",
  *   label = "Facebook Pixel",
- *   weight = 3
+ *   weight = 8
  * )
  */
 class FacebookPixelTacService implements TacServiceInterface {

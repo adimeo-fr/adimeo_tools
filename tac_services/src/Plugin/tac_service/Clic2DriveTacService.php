@@ -11,7 +11,7 @@ use Drupal\tac_services\Interfaces\TacServiceInterface;
  * @TacServiceAnnotation(
  *   id = "clic2drive_tac_service",
  *   label = "Clic2Drive",
- *   weight = 4
+ *   weight = 18
  * )
  */
 class Clic2DriveTacService implements TacServiceInterface {

@@ -11,8 +11,8 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  *
  * @TacServiceAnnotation(
  *   id = "google_gtag_tac_service",
- *   label = "Google GTag.js",
- *   weight = 10
+ *   label = "Google Analytics GTag.js",
+ *   weight = 3
  * )
  */
 class GoogleGTag implements TacServiceInterface {

@@ -11,7 +11,7 @@ use Drupal\tac_services\Interfaces\TacServiceInterface;
  * @TacServiceAnnotation(
  *   id = "youtube_api_tac_service",
  *   label = "Youtube API",
- *   weight = 3
+ *   weight = 40
  * )
  */
 class YoutubeApiTacService implements TacServiceInterface {

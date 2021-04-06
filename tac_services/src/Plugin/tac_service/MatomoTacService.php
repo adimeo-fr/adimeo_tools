@@ -12,7 +12,7 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  * @TacServiceAnnotation(
  *   id = "matomo_tac_service",
  *   label = "Matomo",
- *   weight = 0
+ *   weight = 4
  * )
  */
 class MatomoTacService implements TacServiceInterface {

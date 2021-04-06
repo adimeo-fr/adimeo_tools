@@ -11,7 +11,7 @@ use Drupal\tac_services\Interfaces\TacServiceInterface;
  * @TacServiceAnnotation(
  *   id = "youtube_embed_tac_service",
  *   label = "Youtube Embed",
- *   weight = 5
+ *   weight = 0
  * )
  */
 class YoutubeEmbedTacService implements TacServiceInterface {

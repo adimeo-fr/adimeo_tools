@@ -11,7 +11,7 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  * @TacServiceAnnotation(
  *   id = "facebook_tac_services",
  *   label = "Facebook",
- *   weight = 2
+ *   weight = 7
  * )
  */
 class FacebookTacService implements TacServiceInterface {

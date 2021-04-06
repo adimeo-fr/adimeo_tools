@@ -12,7 +12,7 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  * @TacServiceAnnotation(
  *   id = "google_map_api_tac_service",
  *   label = "Google Maps API",
- *   weight = 0
+ *   weight = 2
  * )
  */
 class GoogleMapsApiTacService implements TacServiceInterface {
