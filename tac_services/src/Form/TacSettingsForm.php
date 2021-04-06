@@ -87,6 +87,13 @@ class TacSettingsForm extends FormBase {
       '#description' => 'URL interne : //mysite/{url}'
     ];
 
+    $form[$this->config::CUSTOM_DISCLAIMER] = [
+      '#type'          => 'textfield',
+      '#title'         => t('Texte de déclaration des cookies'),
+      '#default_value' => $defaultValues[$this->config::CUSTOM_DISCLAIMER],
+      '#description' => t('Vous pouvez définir le texte invitant les visiteurs à accepter les cookies. Laisser vide pour utiliser le texte par défaut.'),
+    ];
+
     $form[$this->config::HIGH_PRIVACY] = [
       '#type'          => 'checkbox',
       '#title'         => t('High privacy'),

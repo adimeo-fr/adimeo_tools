@@ -139,6 +139,14 @@ var TacEventsHandlers = {
           "orientation": settings.orientation,
           "mandatory": settings.mandatory,
         });
+        // If the disclaimer text is customized by the user, we replace it when TAC is loaded
+        if(!empty(settings.custom_disclaimer)){
+            document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, e => {
+                var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');
+                alertText.innerHTML = settings.custom_disclaimer;
+            });
+        }
+
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_ALLOW_ALL, TacEventsHandlers.onServiceAllowAll);
