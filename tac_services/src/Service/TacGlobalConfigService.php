@@ -85,6 +85,11 @@ class TacGlobalConfigService extends ConfigServiceBase
   const MANDATORY = 'mandatory';
 
   /**
+   * Constant which stores the machine name of the custom DisclaimerAlert field name;
+   */
+  const CUSTOM_DISCLAIMER = "custom_disclaimer";
+
+  /**
    * Libellé de l'encart d'alert.
    */
   const ALERT_LABEL = 'alert_label';
@@ -126,6 +131,9 @@ class TacGlobalConfigService extends ConfigServiceBase
     return [
       // Privacy policy URL
       static::PRIVACY_URL         => '',
+
+      // Custom Disclaimer
+      static::CUSTOM_DISCLAIMER   => '',
 
       static::HIGH_PRIVACY        => FALSE,
       static::ALLOWED_BUTTON      => TRUE,
