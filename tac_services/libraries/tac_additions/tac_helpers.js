@@ -41,6 +41,17 @@ var TacHelpers = {
             '<span class="js-tac-panel-opener">' + Drupal.t('Cliquez ici pour changer vos préférences') + '</span>' +
             '</div>' +
             '</div>';
+    },
+
+    /**
+     * Permet d'assigner une fonction à différents events (fournis en tableau)
+     * @param el
+     * @param events
+     * @param fn
+     *
+     */
+    'addListenerMulti': function(el, events, fn) {
+        events.forEach(e => el.addEventListener(e, fn, false));
     }
 
 };
