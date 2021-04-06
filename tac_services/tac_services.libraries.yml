@@ -101,6 +101,7 @@ tac_vimeo_oembed:
         libraries/tac_vimeo_embed/vimeo_oembed.js: {}
     dependencies:
         - tac_services/tac_vimeo_embed
+        - core/drupal.ajax
 
 tac_youtube_embed:
     version: 1
@@ -115,6 +116,7 @@ tac_youtube_oembed:
         libraries/tac_youtube_embed/youtube_oembed.js: {}
     dependencies:
         - tac_services/tac_youtube_embed
+        - core/drupal.ajax
 
 tac_tradelab:
     version: 1
