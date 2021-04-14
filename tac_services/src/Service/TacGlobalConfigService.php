@@ -90,12 +90,6 @@ class TacGlobalConfigService extends ConfigServiceBase
   const CUSTOM_DISCLAIMER = "custom_disclaimer";
 
   /**
-   * Libellé de l'encart d'alert.
-   */
-  const ALERT_LABEL = 'alert_label';
-
-
-  /**
    * @var LanguageService
    */
   private $languageService;
@@ -153,7 +147,6 @@ class TacGlobalConfigService extends ConfigServiceBase
       static::ADBLOCKER          => FALSE,
       static::SHOW_ALERT_SMALL   => TRUE,
       static::COOKIE_LIST        => TRUE,
-      static::ALERT_LABEL        => NULL,
       static::HANDLE_DNT_REQUEST => FALSE,
       static::MANDATORY          => TRUE,
     ];

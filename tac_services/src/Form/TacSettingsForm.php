@@ -80,18 +80,18 @@ class TacSettingsForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $defaultValues = $this->config->getAllValues();
 
-    $form[$this->config::PRIVACY_URL] = [
+      $form[$this->config::CUSTOM_DISCLAIMER] = [
+          '#type'          => 'textarea',
+          '#title'         => t('Texte de déclaration des cookies'),
+          '#default_value' => $defaultValues[$this->config::CUSTOM_DISCLAIMER],
+          '#description' => t('Vous pouvez définir le texte invitant les visiteurs à accepter les cookies. Laisser vide pour utiliser le texte par défaut.'),
+      ];
+
+      $form[$this->config::PRIVACY_URL] = [
       '#type'          => 'textfield',
       '#title'         => t('URL menant vers votre page de politique de vie privee.'),
       '#default_value' => $defaultValues[$this->config::PRIVACY_URL],
       '#description' => 'URL interne : //mysite/{url}'
-    ];
-
-    $form[$this->config::CUSTOM_DISCLAIMER] = [
-      '#type'          => 'textfield',
-      '#title'         => t('Texte de déclaration des cookies'),
-      '#default_value' => $defaultValues[$this->config::CUSTOM_DISCLAIMER],
-      '#description' => t('Vous pouvez définir le texte invitant les visiteurs à accepter les cookies. Laisser vide pour utiliser le texte par défaut.'),
     ];
 
     $form[$this->config::HIGH_PRIVACY] = [
@@ -218,9 +218,6 @@ class TacSettingsForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $data = $form_state->getValues();
 
-    // Modification des données "languagée".
-    $data[$this->config::ALERT_LABEL] = $this->config->get($this->config::ALERT_LABEL);
-    $data[$this->config::ALERT_LABEL][$this->languageService->getCurrentLanguageId()] = $form_state->getValue($this->config::ALERT_LABEL);
     $this->config->setAllValues($data);
 
     // Add success message.
