@@ -231,7 +231,8 @@ var tarteaucitron = {
                 "useExternalCss": false,
                 "useExternalJs": false,
                 "mandatory": true,
-                "closePopup": false
+                "closePopup": false,
+                "cookiesDuration": 365 /* Adimeo custom cookies duration */
             },
             params = tarteaucitron.parameters;
 
@@ -1409,6 +1410,9 @@ var tarteaucitron = {
         "owner": {},
         "create": function (key, status) {
             "use strict";
+
+            //Adimeo custom cookies duration
+            tarteaucitronForceExpire = tarteaucitron.parameters.cookiesDuration;
 
             if (tarteaucitronForceExpire !== '') {
                 // The number of day(s)/hour(s) can't be higher than 1 year

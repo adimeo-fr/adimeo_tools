@@ -189,6 +189,15 @@ class TacSettingsForm extends FormBase {
       '#description'   => t('Afficher le message a propos des cookies obligatoires ?'),
     ];
 
+    $form[$this->config::COOKIES_DURATION] = [
+      '#type'          => 'number',
+      '#title'         => t('Durée de conservation des cookies'),
+      '#default_value' => $defaultValues[$this->config::COOKIES_DURATION],
+      '#description'   => t('Vous pouvez définir la durée (en jours) pendant lesquelle les cookies du site seront stockés sur le navigateur de l\'internaute (365 jours par defaut).'),
+      '#min'           => 1,
+      '#max'           => 365,
+    ];
+
     $form['submit'] = [
       '#type'        => 'submit',
       '#value'       => t('Save'),

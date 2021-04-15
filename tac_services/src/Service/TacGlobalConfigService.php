@@ -90,6 +90,11 @@ class TacGlobalConfigService extends ConfigServiceBase
   const CUSTOM_DISCLAIMER = "custom_disclaimer";
 
   /**
+   * Constant which stores the machine name of the cookies duration field name;
+   */
+  const COOKIES_DURATION = "cookies_duration";
+
+  /**
    * @var LanguageService
    */
   private $languageService;
@@ -149,6 +154,8 @@ class TacGlobalConfigService extends ConfigServiceBase
       static::COOKIE_LIST        => TRUE,
       static::HANDLE_DNT_REQUEST => FALSE,
       static::MANDATORY          => TRUE,
+      //Duration
+      static::COOKIES_DURATION   => 365,
     ];
   }
 

@@ -138,6 +138,7 @@ var TacEventsHandlers = {
           "removeCredit": true, /* supprimer le lien vers la source ? */
           "orientation": settings.orientation,
           "mandatory": settings.mandatory,
+          "cookiesDuration": settings.cookies_duration, /*Durée de conservation des cookies */
         });
         // If the disclaimer text is customized by the user, we replace it when TAC is loaded
         if(settings.custom_disclaimer){
