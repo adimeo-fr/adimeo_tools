@@ -232,7 +232,7 @@ var tarteaucitron = {
                 "useExternalJs": false,
                 "mandatory": true,
                 "closePopup": false,
-                "cookiesDuration": 365 /* Adimeo custom cookies duration */
+                "cookiesDuration": 365 /* Adimeo addition */
             },
             params = tarteaucitron.parameters;
 
@@ -404,13 +404,13 @@ var tarteaucitron = {
                         html += '   </button>';
                     }
 
-                    html += '   <div id="tarteaucitronAlertBigBtnWrapper">';
+                    html += '   <div id="tarteaucitronAlertBigBtnWrapper">'; /* Adimeo addition : buttons in wrapper */
                     html += '   <button type="button" id="tarteaucitronPersonalize">';
                     html += '       ' + tarteaucitron.lang.personalize;
                     html += '   </button>';
 
                     //html += '   </span>';
-                    html += '</div>';
+                    html += '</div>';/* Adimeo addition : buttons in wrapper */
                     html += '</div>';
                 } else {
                     html += '<div id="tarteaucitronAlertBig" class="tarteaucitronAlertBig' + orientation + '">';
@@ -425,31 +425,30 @@ var tarteaucitron = {
 
                     html += '   </span>';
 
+                    /* Adimeo addition : privacy link before other buttons */
                     if (tarteaucitron.parameters.privacyUrl !== "") {
                         html += '   <button type="button" id="tarteaucitronPrivacyUrl">';
                         html += '       ' + tarteaucitron.lang.privacyUrl;
                         html += '   </button>';
                     }
 
-                    html += '   <div id="tarteaucitronAlertBigBtnWrapper">';
+                    html += '   <div id="tarteaucitronAlertBigBtnWrapper">';/* Adimeo addition : buttons in wrapper */
                     html += '   <button type="button" class="tarteaucitronCTAButton tarteaucitronAllow" id="tarteaucitronPersonalize2">';
                     html += '       <span class="tarteaucitronCheck"></span> ' + tarteaucitron.lang.acceptAll;
-
-
                     html += '   </button>';
+
                     if (tarteaucitron.parameters.DenyAllCta) {
                         html += '   <button type="button" class="tarteaucitronCTAButton tarteaucitronDeny" id="tarteaucitronAllDenied2">';
                         html += '       <span class="tarteaucitronCross"></span> ' + tarteaucitron.lang.denyAll;
                         html += '   </button>';
                         //html += '   <br/><br/>';
-
                     }
                     html += '   <button type="button" id="tarteaucitronCloseAlert">';
                     html += '       ' + tarteaucitron.lang.personalize;
                     html += '   </button>';
 
                     //html += '   </span>';
-                    html += '</div>';
+                    html += '</div>';/* Adimeo addition : buttons in wrapper */
                     html += '</div>';
                     html += '<div id="tarteaucitronPercentage"></div>';
                 }
@@ -1411,7 +1410,7 @@ var tarteaucitron = {
         "create": function (key, status) {
             "use strict";
 
-            //Adimeo custom cookies duration
+            //Adimeo addition
             tarteaucitronForceExpire = tarteaucitron.parameters.cookiesDuration;
 
             if (tarteaucitronForceExpire !== '') {
