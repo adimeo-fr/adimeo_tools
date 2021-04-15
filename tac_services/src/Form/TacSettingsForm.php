@@ -189,14 +189,6 @@ class TacSettingsForm extends FormBase {
       '#description'   => t('Afficher le message a propos des cookies obligatoires ?'),
     ];
 
-    $default = $this->config->getAlertLabel();
-    $form[$this->config::ALERT_LABEL] = [
-      '#type'          => 'text_format',
-      '#title'         => t('Message de l\'encart d\'alert'),
-      '#default_value' => $default ? $default['value'] : '',
-      '#format'        => $default ? $default['format'] : 'full_html',
-    ];
-
     $form['submit'] = [
       '#type'        => 'submit',
       '#value'       => t('Save'),

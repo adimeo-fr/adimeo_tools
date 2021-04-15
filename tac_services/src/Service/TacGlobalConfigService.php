@@ -173,28 +173,4 @@ class TacGlobalConfigService extends ConfigServiceBase
   {
     return [];
   }
-
-  /**
-   * Retourne le libellé dans la langue courante.
-   *
-   * @params string $langCode
-   *   Le language pour lequel retourner la valeur.
-   *
-   * @return string|null
-   *   Le libelle de la langue courante si existante.
-   */
-  public function getAlertLabel($langCode = NULL)
-  {
-    if ($labels = $this->get(static::ALERT_LABEL)) {
-      $langCode = $langCode ?: $this->languageService->getCurrentLanguageId();
-      if (array_key_exists($langCode, $labels)) {
-        $label = $labels[$langCode];
-        if (!empty($label) && !empty($label['value'])) {
-          return $label;
-        }
-      }
-    }
-
-    return NULL;
-  }
 }
