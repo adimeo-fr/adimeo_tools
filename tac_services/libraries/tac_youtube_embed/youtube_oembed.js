@@ -5,16 +5,16 @@
 		// behaviors
 		attach: function () {
 			// We wait for tarteaucitron to be loaded before evaluating cookies
-			TacHelpers.addListenerMulti(document,[tarteaucitronEvents.TARTEAUCITRON_READY,tarteaucitronEvents.TARTEAUCITRON_SERVICE_UPDATE_STATUS,'youtube_added','youtube_loaded'],function (e){
+			TacHelpers.addListenerMulti(document,['youtube_added','youtube_loaded'],function (e){
 				// Check if the cookie is accepted or not
 				let isCookieAccepted = TacHelpers.checkCookie("youtube");
-				// Select only placehoders whose provider is Youtube
-				let tacPlaceholders = document.querySelectorAll(
-					'.tac-media-oembed-placeholder[data-oembed-provider="youtube"]'
-				);
-
-				tacPlaceholders.forEach((tacPlaceholder) => {
-					if (isCookieAccepted || e.type === 'youtube_loaded') {
+				if (isCookieAccepted || e.type === 'youtube_loaded') {
+					// Select only placehoders whose provider is Youtube and doesn't have "js-validated" class
+					let tacPlaceholders = document.querySelectorAll(
+						'.tac-media-oembed-placeholder[data-oembed-provider="youtube"]:not(.js-validated)'
+					);
+					//ajouter foreach sans if cookieAccepted
+					tacPlaceholders.forEach((tacPlaceholder) => {
 						let mediaId = tacPlaceholder.dataset.mediaId;
 						let fieldName = tacPlaceholder.dataset.fieldName;
 
@@ -26,10 +26,19 @@
 							mediaId +
 							"/" +
 							fieldName;
-						console.log(url);
 						let ajaxObject = Drupal.ajax({ url: url });
 						ajaxObject.execute();
-					} else {
+						tacPlaceholder.classList.add('js-validated');
+						tacPlaceholder.classList.remove('js-declined');
+					});
+
+				}
+				else{
+					// Select only placehoders whose provider is Youtube and doesn't have "js-validated" class
+					let tacPlaceholders = document.querySelectorAll(
+						'.tac-media-oembed-placeholder[data-oembed-provider="youtube"]:not(.js-declined)'
+					);
+					tacPlaceholders.forEach((tacPlaceholder) => {
 						// Get noCookie placeholder
 						let noCookiePlaceholder = TacHelpers.getPlaceholder(
 							Drupal.t(
@@ -42,8 +51,11 @@
 							noCookiePlaceholder
 						);
 						//tacPlaceholder.remove();
-					}
-				});
+						tacPlaceholder.classList.add('js-declined');
+						tacPlaceholder.classList.remove('js-validated');
+					});
+
+				}
 			});
 		},
 	};
