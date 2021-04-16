@@ -630,6 +630,15 @@ span#tarteaucitronDisclaimerAlert {
     padding: 5px 10px;
 }
 
+#tarteaucitronAlertBig #tarteaucitronPrivacyUrl{
+    display: block;
+    margin: 0px auto 10px;
+}
+
+#tarteaucitronAlertBig #tarteaucitronAlertBigBtnWrapper{
+    text-align: center;
+}
+
 #tarteaucitronPercentage {
     background: #0A0!important;
     box-shadow: 0 0 2px #fff, 0 1px 2px #555;

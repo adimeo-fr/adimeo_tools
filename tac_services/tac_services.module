@@ -80,8 +80,8 @@ function tac_services_page_attachments(array &$attachments) {
           $globalTacConfService::SHOW_ICON            => ($globalConfValues[$globalTacConfService::SHOW_ICON]) ? TRUE : FALSE,
           $globalTacConfService::ICON_POSITION        => $globalConfValues[$globalTacConfService::ICON_POSITION],
 
-          // Alert Label
-          $globalTacConfService::ALERT_LABEL          => $globalTacConfService->getAlertLabel(),
+          //Cookies Duration
+          $globalTacConfService::COOKIES_DURATION     => ($globalConfValues[$globalTacConfService::COOKIES_DURATION]),
         ];
 
         // Ajout de la library tarte au citron.

@@ -90,10 +90,9 @@ class TacGlobalConfigService extends ConfigServiceBase
   const CUSTOM_DISCLAIMER = "custom_disclaimer";
 
   /**
-   * Libellé de l'encart d'alert.
+   * Constant which stores the machine name of the cookies duration field name;
    */
-  const ALERT_LABEL = 'alert_label';
-
+  const COOKIES_DURATION = "cookies_duration";
 
   /**
    * @var LanguageService
@@ -153,9 +152,10 @@ class TacGlobalConfigService extends ConfigServiceBase
       static::ADBLOCKER          => FALSE,
       static::SHOW_ALERT_SMALL   => TRUE,
       static::COOKIE_LIST        => TRUE,
-      static::ALERT_LABEL        => NULL,
       static::HANDLE_DNT_REQUEST => FALSE,
       static::MANDATORY          => TRUE,
+      //Duration
+      static::COOKIES_DURATION   => 365,
     ];
   }
 
@@ -179,29 +179,5 @@ class TacGlobalConfigService extends ConfigServiceBase
   public function getStateAllowedKeysDefaultValues()
   {
     return [];
-  }
-
-  /**
-   * Retourne le libellé dans la langue courante.
-   *
-   * @params string $langCode
-   *   Le language pour lequel retourner la valeur.
-   *
-   * @return string|null
-   *   Le libelle de la langue courante si existante.
-   */
-  public function getAlertLabel($langCode = NULL)
-  {
-    if ($labels = $this->get(static::ALERT_LABEL)) {
-      $langCode = $langCode ?: $this->languageService->getCurrentLanguageId();
-      if (array_key_exists($langCode, $labels)) {
-        $label = $labels[$langCode];
-        if (!empty($label) && !empty($label['value'])) {
-          return $label;
-        }
-      }
-    }
-
-    return NULL;
   }
 }
