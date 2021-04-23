@@ -5,20 +5,20 @@
 		// behaviors
 		attach: function () {
 			// We wait for tarteaucitron to be loaded before evaluating cookies
-			TacHelpers.addListenerMulti(document,[tarteaucitronEvents.TARTEAUCITRON_READY,tarteaucitronEvents.TARTEAUCITRON_SERVICE_UPDATE_STATUS,'vimeo_added','vimeo_loaded'],function (e){
+			TacHelpers.addListenerMulti(document,['vimeo_added','vimeo_loaded'],function (e){
 				// Check if the cookie is accepted or not
 				let isCookieAccepted = TacHelpers.checkCookie("vimeo");
-				// Select only placehoders whose provider is Vimeo
-				let tacPlaceholders = document.querySelectorAll(
-					'.tac-media-oembed-placeholder[data-oembed-provider="vimeo"]'
-				);
-
-				tacPlaceholders.forEach((tacPlaceholder) => {
-					if (isCookieAccepted || e.type === 'vimeo_loaded') {
+				if (isCookieAccepted || e.type === 'vimeo_loaded') {
+					// Select only placehoders whose provider is vimeo and doesn't have "js-validated" class
+					let tacPlaceholders = document.querySelectorAll(
+						'.tac-media-oembed-placeholder[data-oembed-provider="vimeo"]:not(.js-validated)'
+					);
+					//ajouter foreach sans if cookieAccepted
+					tacPlaceholders.forEach((tacPlaceholder) => {
 						let mediaId = tacPlaceholder.dataset.mediaId;
 						let fieldName = tacPlaceholder.dataset.fieldName;
 
-						//Replace the placeholders by the OEmbed iframes if the Vimeo
+						//Replace the placeholders by the OEmbed iframes if the vimeo
 						// service
 						// is accepted
 						let url =
@@ -26,14 +26,23 @@
 							mediaId +
 							"/" +
 							fieldName;
-						console.log(url);
 						let ajaxObject = Drupal.ajax({ url: url });
 						ajaxObject.execute();
-					} else {
+						tacPlaceholder.classList.add('js-validated');
+						tacPlaceholder.classList.remove('js-declined');
+					});
+
+				}
+				else{
+					// Select only placehoders whose provider is vimeo and doesn't have "js-validated" class
+					let tacPlaceholders = document.querySelectorAll(
+						'.tac-media-oembed-placeholder[data-oembed-provider="vimeo"]:not(.js-declined)'
+					);
+					tacPlaceholders.forEach((tacPlaceholder) => {
 						// Get noCookie placeholder
 						let noCookiePlaceholder = TacHelpers.getPlaceholder(
 							Drupal.t(
-								"Vos préférences en matière de cookie ne vous permettent pas de consulter cette vidéo Vimeo."
+								"Vos préférences en matière de cookie ne vous permettent pas de consulter cette vidéo vimeo."
 							)
 						);
 						// Replace tacPlaceholder with noCookiePlaceholder
@@ -41,9 +50,12 @@
 							"beforeend",
 							noCookiePlaceholder
 						);
-						tacPlaceholder.remove();
-					}
-				});
+						//tacPlaceholder.remove();
+						tacPlaceholder.classList.add('js-declined');
+						tacPlaceholder.classList.remove('js-validated');
+					});
+
+				}
 			});
 		},
 	};
