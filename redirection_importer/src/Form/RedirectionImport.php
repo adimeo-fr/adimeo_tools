@@ -4,10 +4,14 @@
 namespace Drupal\redirection_importer\Form;
 
 use Drupal\adimeo_tools\Shared\BatchTrait;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\redirect\Entity\Redirect;
+use Drupal\redirect\RedirectRepository;
+use Drupal\redirection_importer\Service\RedirectionMapper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RedirectionImport extends FormBase
 {
@@ -18,6 +22,25 @@ class RedirectionImport extends FormBase
   const FIELD_FILE = 'file';
   const SEPARATOR = ';';
   const WRAPPER = '"';
+
+  protected $redirectRepository;
+
+  public function __construct(RedirectRepository $redirectRepository)
+  {
+    $this->redirectRepository = $redirectRepository;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // Instantiates this form class.
+    return new static(
+    // Load the service required to construct this class.
+      $container->get('redirect.repository');
+  );
+  }
+
   /**
    * Returns a unique string identifying the form.
    *
@@ -56,10 +79,15 @@ class RedirectionImport extends FormBase
       '#description' => 'Type: csv
                                <br/>séparateur: ";"
                                <br/>wrapper: """<br/>
-
-                               <br/>Pas d\'entête de colonne,
-                               <br/>ordre: "source"(url à redirigée ex: /node/4501);"redirection"(url vers laquelle on redirige ex: internal:/node/4502 ou);"language"(code lang ex: fr, en);"status code"(301 to permanante redirection)',
+                               <br/>Pas d\'entête de colonne
+                               <br/>
+                               <br/><b>Ordre: source; destination; langage; status code</b>
+                               <br/><em>source:</em> url à rediriger (ex: /node/4501) - Doit commencer par un slash
+                               <br/><em>destination:</em> url vers laquelle on redirige l\'utilisateur - doit commencer par un slash pour les url internes, ou par http(s) pour les url externes)
+                               <br/><em>language:</em> code lang, par exemple "fr" ou "en"
+                               <br/><em>status code:</em> 300, 301, 302, etc... (plus couramment utilisée: 301 => redirection permanente)',
     ];
+
 
     $form['submit'] = [
       '#type'        => 'submit',
@@ -131,15 +159,44 @@ class RedirectionImport extends FormBase
     if (!array_key_exists('errors', $context['results'])) {
       $context['results']['errors'] = [];
     }
+    $dataMapper = RedirectionMapper::getInstance();
+    $redirectRepo = \Drupal::service('redirect.repository');
     // On stocke la ligne courante, c'est plus simple pour l'accès.
     /** @var static $form */
     $form = new static();
+    $context['results']['total'] = 0;
+    $context['results']['imported'] = 0;
+    $context['results']['duplicates'] = 0;
+    $context['results']['failed'] = 0;
+
     foreach ($data as $line) {
       if(is_null($data)) {
         continue;
       }
-      $context['results']['imported'] += $form->importRedirection($line, $context['results']['errors']) ? 1 : 0;
-      $context['results']['total']++;
+      try {
+        $redirection = $dataMapper->mapDataToRedirection($line);
+        $redirection->save();
+        $context['results']['imported']++;
+
+      }
+      catch (EntityStorageException $entityStorageException) {
+        switch ($entityStorageException->getCode()) {
+          case 23000:
+            $this->redirectRepository->findBySourcePath($redirection->getSourceUrl());
+            $context['results']['duplicates']++;
+            break;
+          default:
+            throw $entityStorageException;
+        }
+      }
+      catch (\Exception $e) {
+        $context['results']['errors']++;
+        throw $e;
+      }
+
+      finally {
+        $context['results']['total']++;
+      }
     }
   }
 
@@ -167,9 +224,15 @@ class RedirectionImport extends FormBase
    */
   public static function processEnd($success, array $results, array $operations) {
 
-    if ($success) {
-      $message = count($results) . ' processed.';
+    if ($success === TRUE) {
+      $message = sprintf('total items: %d, items successfully imported: %d, duplicates source entries: %d, operations failed: %d',
+        $results['total'],
+        $results['imported'],
+        $results['duplicates'],
+        $results['failed']);
+
+      \Drupal::messenger()->addMessage(t($message));
     }
-    \Drupal::messenger()->addMessage(t($message));
+
   }
 }
