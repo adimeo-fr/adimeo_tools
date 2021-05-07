@@ -56,8 +56,8 @@ class RedirectionMapper {
     if (!$isExternal) {
       $pattern = '/^(?:internal:)?(?:\/)?(.*)/m';
       $subst = 'internal:/${1}';
-      $test = preg_replace($pattern, $subst, $dest );
-      return $test;
+      $formattedDest = preg_replace($pattern, $subst, $dest );
+      return $formattedDest;
     }
     else {
       return $dest;
