@@ -83,7 +83,7 @@ class TacSettingsForm extends FormBase {
       $form[$this->config::CUSTOM_DISCLAIMER] = [
           '#type'          => 'textarea',
           '#title'         => t('Texte de déclaration des cookies'),
-          '#default_value' => t($defaultValues[$this->config::CUSTOM_DISCLAIMER]),
+          '#default_value' => $defaultValues[$this->config::CUSTOM_DISCLAIMER],
           '#description' => t('Vous pouvez définir le texte invitant les visiteurs à accepter les cookies. Laisser vide pour utiliser le texte par défaut.'),
       ];
 
