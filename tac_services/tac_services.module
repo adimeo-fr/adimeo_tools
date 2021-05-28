@@ -57,7 +57,7 @@ function tac_services_page_attachments(array &$attachments) {
           // Privacy Policy URL
           $globalTacConfService::PRIVACY_URL          => $globalConfValues[$globalTacConfService::PRIVACY_URL],
 
-          $globalTacConfService::CUSTOM_DISCLAIMER    => $globalConfValues[$globalTacConfService::CUSTOM_DISCLAIMER],
+          $globalTacConfService::CUSTOM_DISCLAIMER    => t($globalConfValues[$globalTacConfService::CUSTOM_DISCLAIMER]),
 
           $globalTacConfService::HIGH_PRIVACY         => ($globalConfValues[$globalTacConfService::HIGH_PRIVACY]) ? TRUE : FALSE,
           $globalTacConfService::ALLOWED_BUTTON       => ($globalConfValues[$globalTacConfService::ALLOWED_BUTTON]) ? TRUE : FALSE,
