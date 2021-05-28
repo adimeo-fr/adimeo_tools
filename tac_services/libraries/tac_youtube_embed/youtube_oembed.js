@@ -14,7 +14,7 @@
 						'.tac-media-oembed-placeholder[data-oembed-provider="youtube"]:not(.js-validated)'
 					);
 					//ajouter foreach sans if cookieAccepted
-					tacPlaceholders.forEach((tacPlaceholder) => {
+					tacPlaceholders.forEach(function(tacPlaceholder) {
 						let mediaId = tacPlaceholder.dataset.mediaId;
 						let fieldName = tacPlaceholder.dataset.fieldName;
 
@@ -38,7 +38,7 @@
 					let tacPlaceholders = document.querySelectorAll(
 						'.tac-media-oembed-placeholder[data-oembed-provider="youtube"]:not(.js-declined)'
 					);
-					tacPlaceholders.forEach((tacPlaceholder) => {
+					tacPlaceholders.forEach(function (tacPlaceholder) {
 						// Get noCookie placeholder
 						let noCookiePlaceholder = TacHelpers.getPlaceholder(
 							Drupal.t(

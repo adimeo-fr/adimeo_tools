@@ -142,7 +142,7 @@ var TacEventsHandlers = {
         });
         // If the disclaimer text is customized by the user, we replace it when TAC is loaded
         if(settings.custom_disclaimer){
-            document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, e => {
+            document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, function (e) {
                 var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');
                 alertText.innerHTML = settings.custom_disclaimer;
             });

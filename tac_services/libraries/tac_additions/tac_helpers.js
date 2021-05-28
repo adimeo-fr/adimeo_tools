@@ -51,7 +51,7 @@ var TacHelpers = {
      *
      */
     'addListenerMulti': function(el, events, fn) {
-        events.forEach(e => el.addEventListener(e, fn, false));
+        events.forEach(function (e) {el.addEventListener(e, fn, false)} );
     }
 
 };
