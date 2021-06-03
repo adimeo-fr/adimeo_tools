@@ -27,6 +27,13 @@ tac_google_ga:
     dependencies:
         - tac_services/tac_services
 
+tac_google_ga_old:
+  version: 1
+  js:
+    libraries/tac_google_analytics_old/tac_ga_old.js: {}
+  dependencies:
+    - tac_services/tac_services
+
 tac_google_maps_api:
     version: 1
     js:
