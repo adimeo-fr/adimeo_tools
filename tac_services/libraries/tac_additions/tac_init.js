@@ -10,6 +10,12 @@ function contextIsRoot(context){
 // Contains handlers for events triggered by TAC
 var TacEventsHandlers = {
     onReady: function (settings) {
+        // Remove scrolling behavior
+        console.log(settings.scrolling_behavior)
+        if(!settings.scrolling_behavior){
+            tarteaucitron.initEvents.scrollEvent = (e) => e;
+        }
+
         // If the disclaimer text is customized by the user, we replace it when TAC is loaded
         if(settings.custom_disclaimer){
             var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');

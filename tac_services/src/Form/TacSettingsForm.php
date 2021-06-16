@@ -87,6 +87,13 @@ class TacSettingsForm extends FormBase {
           '#description' => t('Vous pouvez définir le texte invitant les visiteurs à accepter les cookies. Laisser vide pour utiliser le texte par défaut.'),
       ];
 
+      $form[$this->config::SCROLLING_BEHAVIOR] = [
+        '#type' => 'checkbox',
+        '#title' => t('Autoriser le consentement via scrolling'),
+        '#default_value' => $defaultValues[$this->config::SCROLLING_BEHAVIOR],
+        '#description' => t('Si activée, les cookies pourront être acceptés via le scolling de la page.')
+      ];
+
       $form[$this->config::PRIVACY_URL] = [
       '#type'          => 'textfield',
       '#title'         => t('URL menant vers votre page de politique de vie privee.'),

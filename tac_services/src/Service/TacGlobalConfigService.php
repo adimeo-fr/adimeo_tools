@@ -20,6 +20,11 @@ class TacGlobalConfigService extends ConfigServiceBase
   const SERVICE_NAME = 'tac_services.settings_manager';
 
   /**
+   * Constant which stores the scrolling behaviour field name.
+   */
+  const SCROLLING_BEHAVIOR = 'scrolling_behavior';
+
+  /**
    * Constant which stores the Privacy policy URL field name
    */
   const PRIVACY_URL = "privacy_url";
@@ -135,6 +140,9 @@ class TacGlobalConfigService extends ConfigServiceBase
     return [
       // Privacy policy URL
       static::PRIVACY_URL         => '',
+      
+      // Scrolling behavior
+      static::SCROLLING_BEHAVIOR => TRUE,
 
       // Custom Disclaimer
       static::CUSTOM_DISCLAIMER   => '',
