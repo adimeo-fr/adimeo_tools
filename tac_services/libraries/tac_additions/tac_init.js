@@ -7,6 +7,7 @@ function contextIsRoot(context){
     return 'HTML' === jQuery(jQuery(context).children()[0]).prop("tagName");
 }
 
+// Contains handlers for events triggered by TAC
 var TacEventsHandlers = {
     onReady: function (settings) {
         // If the disclaimer text is customized by the user, we replace it when TAC is loaded
@@ -136,6 +137,8 @@ var TacEventsHandlers = {
     }
 };
 
+
+// Retrieves settings from Drupal configuration and initiates TAC
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.tacServices = {
     attach: function attach(context) {

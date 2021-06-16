@@ -2,7 +2,7 @@ tac_services:
     version: 1
     css:
         theme:
-            libraries/tarteaucitron/css/tarteaucitron.css: {}
+            libraries/tarteaucitron/css/tarteaucitron.css: { preprocess: false }
             style/tacNormalize.css: {}
     js:
         libraries/tac_additions/polyfill/CustomEvent.js: {}

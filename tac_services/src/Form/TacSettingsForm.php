@@ -119,6 +119,7 @@ class TacSettingsForm extends FormBase {
       '#type' => 'textfield',
       '#title' => t("URL de l'icone"),
       '#default_value' => $defaultValues[$this->config::ICON_SOURCE],
+      '#description' => t("URL externe de l'icône de votre choix. Icône par défaut si laissé vide.")
     ];
 
     $form[$this->config::ICON_POSITION] = [
