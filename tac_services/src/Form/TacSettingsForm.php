@@ -115,6 +115,12 @@ class TacSettingsForm extends FormBase {
       '#description' => t("Cette icone permet a l'utilisateur de modifier ses parametres de gestion de cookies"),
     ];
 
+    $form[$this->config::ICON_SOURCE] = [
+      '#type' => 'textfield',
+      '#title' => t("URL de l'icone"),
+      '#default_value' => $defaultValues[$this->config::ICON_SOURCE],
+    ];
+
     $form[$this->config::ICON_POSITION] = [
       '#type'          => 'select',
       '#title'         => t("Position de l'icone"),

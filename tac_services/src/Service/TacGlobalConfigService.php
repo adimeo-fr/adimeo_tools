@@ -60,6 +60,11 @@ class TacGlobalConfigService extends ConfigServiceBase
   const SHOW_ICON = 'show_icon';
 
   /**
+   * Constant which stores the machine name of the Icon Source field name
+   */
+  const ICON_SOURCE = 'icon_source';
+
+  /**
    * Constant which stores the machine name of the Adblocker field name.
    */
   const ADBLOCKER = 'adblocker';
@@ -140,14 +145,15 @@ class TacGlobalConfigService extends ConfigServiceBase
       // Controls
       static::ACCEPT_ALL_CTA     => TRUE,
       static::DENY_ALL_CTA       => TRUE,
-
-
+      
+      
       // Orientation (first banner position)
       static::ORIENTATION        => 'bottom',
-
+      
       // Icon
       static::SHOW_ICON          => TRUE,
       static::ICON_POSITION      => 'BottomLeft',
+      static::ICON_SOURCE => '',
 
       static::ADBLOCKER          => FALSE,
       static::SHOW_ALERT_SMALL   => TRUE,
