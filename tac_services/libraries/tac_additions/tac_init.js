@@ -7,7 +7,33 @@ function contextIsRoot(context){
     return 'HTML' === jQuery(jQuery(context).children()[0]).prop("tagName");
 }
 
+// Contains handlers for events triggered by TAC
 var TacEventsHandlers = {
+    onReady: function (settings) {
+        // Remove scrolling behavior
+        console.log(settings.scrolling_behavior)
+        if(!settings.scrolling_behavior){
+            tarteaucitron.initEvents.scrollEvent = (e) => e;
+        }
+
+        // If the disclaimer text is customized by the user, we replace it when TAC is loaded
+        if(settings.custom_disclaimer){
+            var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');
+            alertText.innerHTML = settings.custom_disclaimer;
+        }
+
+        // Icon
+        if(settings.icon_source){
+            document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, function (e) {
+                var icon = document.querySelector("#tarteaucitronIcon button img");
+                // Hide while loading
+                icon.style.display = 'none';
+                icon.setAttribute('src', settings.icon_source)
+                icon.style.display = 'block';
+            })
+        }
+    },
+
     onServiceAllowAll: function (event) {
         var elem = document.getElementById('tarteaucitronMainLineOffset'),
             $elem = jQuery(elem);
@@ -117,6 +143,8 @@ var TacEventsHandlers = {
     }
 };
 
+
+// Retrieves settings from Drupal configuration and initiates TAC
 (function ($, Drupal, drupalSettings) {
   Drupal.behaviors.tacServices = {
     attach: function attach(context) {
@@ -140,14 +168,8 @@ var TacEventsHandlers = {
           "mandatory": settings.mandatory,
           "cookiesDuration": settings.cookies_duration, /*Durée de conservation des cookies */
         });
-        // If the disclaimer text is customized by the user, we replace it when TAC is loaded
-        if(settings.custom_disclaimer){
-            document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, function (e) {
-                var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');
-                alertText.innerHTML = settings.custom_disclaimer;
-            });
-        }
 
+        document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, TacEventsHandlers.onReady(settings))
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_LOAD_LANGUAGE, TacEventsHandlers.onLoadLanguage);
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_UPDATE_STATUS, TacEventsHandlers.onServiceUpdateStatus);
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_SERVICE_ALLOW_ALL, TacEventsHandlers.onServiceAllowAll);

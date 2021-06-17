@@ -57,6 +57,8 @@ function tac_services_page_attachments(array &$attachments) {
           // Privacy Policy URL
           $globalTacConfService::PRIVACY_URL          => $globalConfValues[$globalTacConfService::PRIVACY_URL],
 
+          $globalTacConfService::SCROLLING_BEHAVIOR   => ($globalConfValues[$globalTacConfService::SCROLLING_BEHAVIOR]) ? TRUE : FALSE,
+
           $globalTacConfService::CUSTOM_DISCLAIMER    => t($globalConfValues[$globalTacConfService::CUSTOM_DISCLAIMER]),
 
           $globalTacConfService::HIGH_PRIVACY         => ($globalConfValues[$globalTacConfService::HIGH_PRIVACY]) ? TRUE : FALSE,
@@ -79,6 +81,7 @@ function tac_services_page_attachments(array &$attachments) {
           // Icon
           $globalTacConfService::SHOW_ICON            => ($globalConfValues[$globalTacConfService::SHOW_ICON]) ? TRUE : FALSE,
           $globalTacConfService::ICON_POSITION        => $globalConfValues[$globalTacConfService::ICON_POSITION],
+          $globalTacConfService::ICON_SOURCE        => $globalConfValues[$globalTacConfService::ICON_SOURCE],
 
           //Cookies Duration
           $globalTacConfService::COOKIES_DURATION     => ($globalConfValues[$globalTacConfService::COOKIES_DURATION]),

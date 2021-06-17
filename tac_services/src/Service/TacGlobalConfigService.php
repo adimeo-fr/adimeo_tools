@@ -20,6 +20,11 @@ class TacGlobalConfigService extends ConfigServiceBase
   const SERVICE_NAME = 'tac_services.settings_manager';
 
   /**
+   * Constant which stores the scrolling behaviour field name.
+   */
+  const SCROLLING_BEHAVIOR = 'scrolling_behavior';
+
+  /**
    * Constant which stores the Privacy policy URL field name
    */
   const PRIVACY_URL = "privacy_url";
@@ -58,6 +63,11 @@ class TacGlobalConfigService extends ConfigServiceBase
    * Constant which stores the machine name of the Show Icon field name
    */
   const SHOW_ICON = 'show_icon';
+
+  /**
+   * Constant which stores the machine name of the Icon Source field name
+   */
+  const ICON_SOURCE = 'icon_source';
 
   /**
    * Constant which stores the machine name of the Adblocker field name.
@@ -130,6 +140,9 @@ class TacGlobalConfigService extends ConfigServiceBase
     return [
       // Privacy policy URL
       static::PRIVACY_URL         => '',
+      
+      // Scrolling behavior
+      static::SCROLLING_BEHAVIOR => TRUE,
 
       // Custom Disclaimer
       static::CUSTOM_DISCLAIMER   => '',
@@ -140,14 +153,15 @@ class TacGlobalConfigService extends ConfigServiceBase
       // Controls
       static::ACCEPT_ALL_CTA     => TRUE,
       static::DENY_ALL_CTA       => TRUE,
-
-
+      
+      
       // Orientation (first banner position)
       static::ORIENTATION        => 'bottom',
-
+      
       // Icon
       static::SHOW_ICON          => TRUE,
       static::ICON_POSITION      => 'BottomLeft',
+      static::ICON_SOURCE => '',
 
       static::ADBLOCKER          => FALSE,
       static::SHOW_ALERT_SMALL   => TRUE,
