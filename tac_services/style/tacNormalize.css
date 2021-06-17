@@ -74,3 +74,11 @@
 #tarteaucitronIcon button {
     padding: 0 !important;
 }
+
+#tarteaucitronRoot button {
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+body #tarteaucitronAlertBig #tarteaucitronAlertBigBtnWrapper button {
+    display: inline-block;
+}
