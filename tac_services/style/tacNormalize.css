@@ -1,13 +1,13 @@
 /* Variables */
 :root {
-    --main-color: black;
-    --secondary-color: white;
+    --tac-main-color: black;
+    --tac-secondary-color: white;
 }
 
 /*  Banner */
 #tarteaucitronAlertBig {
-    color: var(--secondary-color) !important;
-    background-color: var(--main-color) !important;
+    color: var(--tac-secondary-color) !important;
+    background-color: var(--tac-main-color) !important;
 }
 
 #tarteaucitronDisclaimerAlert {
@@ -17,40 +17,40 @@
 
 /* Buttons */
 .tarteaucitronCTAButton {
-    color: var(--main-color) !important;
-    background-color: var(--secondary-color) !important;
+    color: var(--tac-main-color) !important;
+    background-color: var(--tac-secondary-color) !important;
 }
 
 .tarteaucitronAllow {
-    color: var(--main-color) !important;
-    background-color: var(--secondary-color) !important;
+    color: var(--tac-main-color) !important;
+    background-color: var(--tac-secondary-color) !important;
     border-radius: 0 !important;
 }
 
 .tarteaucitronDeny {
-    color: var(--main-color) !important;
-    background-color: var(--secondary-color) !important;
+    color: var(--tac-main-color) !important;
+    background-color: var(--tac-secondary-color) !important;
     border-radius: 0 !important;
 }
 
 .tarteaucitronCheck::before {
-    color: var(--main-color) !important;
+    color: var(--tac-main-color) !important;
     margin-right: 5px;
 }
 
 .tarteaucitronCross::before {
-    color: var(--main-color) !important;
+    color: var(--tac-main-color) !important;
     margin-right: 5px;
 }
 
 /* Panel */
 .tarteaucitronMainLine {
-    background-color: var(--main-color) !important;
-    color: var(--secondary-color) !important;
+    background-color: var(--tac-main-color) !important;
+    color: var(--tac-secondary-color) !important;
 }
 
 #tarteaucitronInfo {
-    background-color: var(--main-color) !important;
+    background-color: var(--tac-main-color) !important;
     border: none !important;
     font-size: 12px !important; 
 }
