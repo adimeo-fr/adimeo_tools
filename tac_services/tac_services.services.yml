@@ -21,4 +21,4 @@ services:
   # Tac Media OEmbed ajax display
   tac_services.ajax_oembed_controller:
     class: Drupal\tac_services\Controller\AjaxOEmbedMediaController
-    arguments: ['@tac_services.media_manager']
+    arguments: ['@tac_services.media_manager','@renderer']

@@ -35,3 +35,15 @@ tac_services.ajax_oembed_render:
         type: entity:media
   requirements:
     _permission: 'access content'
+
+# Route ajax de récupération des entité OEmbed pour ckeditor
+tac_services.ajax_oembed_ckeditor_render:
+  path: '/ajax/tarteaucitron/ckeditor/oembed/{media}/{field_name}'
+  defaults:
+    _controller: tac_services.ajax_oembed_controller:returnOembedContentForCkEditor
+  options:
+    parameters:
+      media:
+        type: entity:media
+  requirements:
+    _permission: 'access content'
