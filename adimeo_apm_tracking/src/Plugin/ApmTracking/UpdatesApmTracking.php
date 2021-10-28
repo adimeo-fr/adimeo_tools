@@ -21,9 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class UpdatesApmTracking extends FetchUpdatesManager implements ApmTrackingInterface, ContainerFactoryPluginInterface
 {
 
-  const REGULAR_UPDATES = 'releases';
-
-
   /**
    * @var UpdateManagerInterface
    */
@@ -57,8 +54,8 @@ class UpdatesApmTracking extends FetchUpdatesManager implements ApmTrackingInter
 
     $updates = array();
     foreach ($projects as $project) {
-      if (!empty($project['releases']) && $project['status'] !== $this->updateManager::CURRENT) {
-        $updates[$project['name']] = $this->getUpdates($project, self::REGULAR_UPDATES);
+      if ($project['status'] === $this->updateManager::NOT_CURRENT) {
+        $updates[] = $this->getUpdate($project);
       }
     }
 

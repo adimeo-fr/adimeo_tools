@@ -19,10 +19,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SecurityUpdatesApmTracking extends FetchUpdatesManager implements ApmTrackingInterface, ContainerFactoryPluginInterface
 {
-
-  const SECURITY_UPDATES = 'security updates';
-
-
   /**
    * @var UpdateManagerInterface
    */
@@ -56,8 +52,11 @@ class SecurityUpdatesApmTracking extends FetchUpdatesManager implements ApmTrack
 
     $updates = array();
     foreach ($projects as $project) {
-      if ($project['status'] === $this->updateManager::NOT_SECURE) {
-        $updates[$project['name']] = $this->getUpdates($project, self::SECURITY_UPDATES);
+      if ($project['status'] === $this->updateManager::NOT_SECURE
+       || $project['status'] === $this->updateManager::REVOKED
+       || $project['status'] === $this->updateManager::NOT_SUPPORTED
+      ) {
+        $updates[] = $this->getUpdate($project);
       }
     }
 

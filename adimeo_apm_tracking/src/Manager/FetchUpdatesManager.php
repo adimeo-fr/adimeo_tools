@@ -11,17 +11,12 @@ abstract class FetchUpdatesManager extends ApmTrackingBase implements FetchUpdat
 
   /**
    * @param array $project
-   * @param string $updateType Type of update
-   * @return array
+   *
+   * @return string
    */
-  public function getUpdates(array $project, string $updateType)
+  public function getUpdate(array $project): string
   {
-    $updates = array();
-    foreach ($project[$updateType] as $update) {
-      $updates[$update['version']] = $update;
-    }
-
-    return $updates;
+    return $project['title'] . ' (<a href="'. $project['link'] .'">' . $project['name'] . '</a>) : ' . $project['info']['version'] . ' => ' . $project['recommended'];
   }
 
 }

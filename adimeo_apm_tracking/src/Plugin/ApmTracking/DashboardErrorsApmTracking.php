@@ -59,7 +59,23 @@ class DashboardErrorsApmTracking extends ApmTrackingBase implements ApmTrackingI
       }
     }
 
-    return $errors;
+    return array_map(function ($errorData) {
+      $description = $errorData['description'];
+
+      if (is_array($errorData['description'])) {
+        if (isset(reset($errorData['description'])['#markup'])) {
+          $description = reset($errorData['description'])['#markup'];
+        }
+        elseif (isset($errorData['description']['#context']) && isset($errorData['description']['#context']['error'])) {
+          $description = $errorData['description']['#context']['error'];
+        }
+        else {
+          return false;
+        }
+      }
+
+      return $errorData['title'] . ' : ' . $description;
+    }, $errors);
   }
 
 
