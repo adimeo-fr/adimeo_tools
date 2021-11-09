@@ -14,15 +14,15 @@ var GMaps = function (serviceData) {
   };
 };
 
-(function ($, Drupal, DrupalSettings) { // closure
+(function (Drupal, DrupalSettings) { // closure
   'use strict';
   Drupal.behaviors.gmapsApiInit = { // behaviors
     attach: function (context) {
       if (contextIsRoot(context)) {
-        var serviceData = drupalSettings.tacServices.google_map_api_tac_service;
+        var serviceData = DrupalSettings.tacServices.google_map_api_tac_service;
         var Map = new GMaps(serviceData);
         Map.init();
       }
     }
   };
-}(jQuery, Drupal, drupalSettings));
+}(Drupal, drupalSettings));

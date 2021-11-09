@@ -56,30 +56,50 @@ var TacHelpers = {
 
 };
 
-(function ($, Drupal) {
+(function (Drupal) {
     Drupal.behaviors.tacHelpers = {
         attach: function attach(context) {
 
             var tac_settings = drupalSettings.tacServices.globalSettings;
 
             // OPEN THE PANEL ON CLICK ON ELEMENT WITH THE CLASS 'js-tac-panel-opener'
-            $(document).on('click', '.js-tac-panel-opener', function () {
-                tarteaucitron.userInterface.openPanel();
-            });
-
-            // PREVENT CLICK EVENT TO BUBBLE UP TO THE PARENT
-            $(document).on('click', '.TacNoCookieMessage', function (e) {
-                e.stopPropagation();
-            });
-
-            // RELOAD PAGE AFTER CLICK ON COOKIE BUTTON "YES TO ALL"
-            $('body').on('click', '#tarteaucitronPersonalize', function () {
-                if (!tac_settings.high_privacy) {
-                    setTimeout(function () {
-                        location = location;
-                    }, 50);
+            document.addEventListener('click', function(event) {
+                if(event.target.classList.contains('js-tac-panel-opener')) {
+                    tarteaucitron.userInterface.openPanel();
                 }
             });
+            // $(document).on('click', '.js-tac-panel-opener', function () {
+            //     tarteaucitron.userInterface.openPanel();
+            // });
+
+            // PREVENT CLICK EVENT TO BUBBLE UP TO THE PARENT
+            document.addEventListener('click', function(event) {
+                if(event.target.classList.contains('TacNoCookieMessage')) {
+                    event.stopPropagation();
+                }
+            });
+
+            // $(document).on('click', '.TacNoCookieMessage', function (e) {
+            //     e.stopPropagation();
+            // });
+
+            // RELOAD PAGE AFTER CLICK ON COOKIE BUTTON "YES TO ALL"
+            document.addEventListener('click', function(event) {
+                if(event.target.id === 'tarteaucitronPersonalize') {
+                    if (!tac_settings.high_privacy) {
+                        setTimeout(function () {
+                            location = location;
+                        }, 50);
+                    }
+                }
+            });
+            // $('body').on('click', '#tarteaucitronPersonalize', function () {
+            //     if (!tac_settings.high_privacy) {
+            //         setTimeout(function () {
+            //             location = location;
+            //         }, 50);
+            //     }
+            // });
         }
     };
-})(jQuery, Drupal);
+})(Drupal);

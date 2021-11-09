@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
   Drupal.behaviors.facebook = {
     attach: function attach(context) {
       if (contextIsRoot(context)) {
@@ -16,4 +16,4 @@
       }
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);

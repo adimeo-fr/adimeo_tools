@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
   Drupal.behaviors.tacMatomo = {
     attach: function attach(context) {
       tarteaucitron.user.matomoId = drupalSettings.tacServices.matomo_tac_service.site_id;
@@ -6,4 +6,4 @@
       (tarteaucitron.job = tarteaucitron.job || []).push('matomo');
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);

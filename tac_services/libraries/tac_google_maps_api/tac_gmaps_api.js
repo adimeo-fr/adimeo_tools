@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function (Drupal) {
   Drupal.behaviors.tacServiceGmapsApi = {
     attach: function attach(context) {
       if (contextIsRoot(context)) {
@@ -27,4 +27,4 @@
       }
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal);

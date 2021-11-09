@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
     Drupal.behaviors.tacServiceGAJS = {
         attach: function attach(context) {
             if (contextIsRoot(context)) {
@@ -9,4 +9,4 @@
             }
         }
     };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);

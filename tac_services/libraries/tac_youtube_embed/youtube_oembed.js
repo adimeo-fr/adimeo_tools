@@ -1,4 +1,4 @@
-(function ($, Drupal) {
+(function (Drupal) {
 	// closure
 	"use strict";
 	Drupal.behaviors.youtube_oembed = {
@@ -59,4 +59,4 @@
 			});
 		},
 	};
-})(jQuery, Drupal);
+})(Drupal);

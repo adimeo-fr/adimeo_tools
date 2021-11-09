@@ -1,4 +1,4 @@
-(function ($, Drupal) {
+(function (Drupal) {
   Drupal.behaviors.tacServiceYoutubeApi = {
     attach: function attach(context) {
       if (contextIsRoot(context)) {
@@ -25,4 +25,4 @@
       }
     }
   };
-})(jQuery, Drupal);
+})(Drupal);

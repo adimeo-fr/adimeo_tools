@@ -1,5 +1,5 @@
 // Conditional call of the youtube api (according to tarteaucitron cookie)
-var YoutubeApi = function ($) {
+var YoutubeApi = function () {
   var self = this;
   self.serviceId = 'youtubeapi';
 
@@ -19,12 +19,12 @@ var YoutubeApi = function ($) {
   };
 };
 
-(function ($, Drupal) { // closure
+(function (Drupal) { // closure
   'use strict';
   Drupal.behaviors.youtubeApiInit = { // behaviors
     attach: function () {
-      var Youtube = new YoutubeApi($);
+      var Youtube = new YoutubeApi();
       Youtube.init();
     }
   };
-}(jQuery, Drupal));
+}(Drupal));

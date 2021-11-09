@@ -11,7 +11,7 @@ tarteaucitron.services.clic2drive = {
         tarteaucitron.addScript('https://widget.clic2drive.com/assets/c2d.js?ver=1.0');
     }
 };
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
     Drupal.behaviors.tacServiceC2D = {
         attach: function attach(context) {
             if (contextIsRoot(context)) {
@@ -19,4 +19,4 @@ tarteaucitron.services.clic2drive = {
             }
         }
     };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);

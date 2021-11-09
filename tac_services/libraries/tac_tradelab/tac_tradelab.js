@@ -10,7 +10,7 @@ tarteaucitron.services.tradelab = {
         tarteaucitron.addScript('//cdn.tradelab.fr/tag/' + tarteaucitron.user.tradelabId + '.js');
     }
 };
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
   Drupal.behaviors.tacServiceTradelab = {
     attach: function attach(context) {
       if (contextIsRoot(context)) {
@@ -19,4 +19,4 @@ tarteaucitron.services.tradelab = {
       }
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);

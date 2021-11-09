@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function (Drupal) {
 	Drupal.behaviors.tacServiceVimeoEmbeb = {
 		attach: function attach(context) {
 			if (contextIsRoot(context)) {
@@ -6,4 +6,4 @@
 			}
 		},
 	};
-})(jQuery, Drupal, drupalSettings);
+})(Drupal);

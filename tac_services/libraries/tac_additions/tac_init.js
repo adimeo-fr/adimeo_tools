@@ -3,8 +3,12 @@
  * @param context
  * @returns {boolean}
  */
-function contextIsRoot(context){
-    return 'HTML' === jQuery(jQuery(context).children()[0]).prop("tagName");
+ function contextIsRoot(context){
+    if (context.children.length >= 1) {
+        return 'HTML' === context.children[0].tagName;
+    } else {
+        return false;
+    }
 }
 
 // Contains handlers for events triggered by TAC
@@ -35,28 +39,25 @@ var TacEventsHandlers = {
     },
 
     onServiceAllowAll: function (event) {
-        var elem = document.getElementById('tarteaucitronMainLineOffset'),
-            $elem = jQuery(elem);
-        $elem.addClass('allow');
-        $elem.removeClass('deny');
+        var elem = document.getElementById('tarteaucitronMainLineOffset');
+            elem.classList.add('allow');
+            elem.classList.remove('deny');
     },
     onServiceDenyAll: function (event) {
-        var elem = document.getElementById('tarteaucitronMainLineOffset'),
-            $elem = jQuery(elem);
-        $elem.addClass('deny');
-        $elem.removeClass('allow');
+        var elem = document.getElementById('tarteaucitronMainLineOffset');
+            elem.classList.add('deny');
+            elem.classList.remove('allow');
     },
     onServiceUpdateStatus: function (event) {
-        var elem = document.getElementById(event.data.key + 'Line'),
-            $elem = jQuery(elem);
+        var elem = document.getElementById(event.data.key + 'Line');
         switch (event.data.status) {
             case true:
-                $elem.addClass("allow");
-                $elem.removeClass("deny");
+                elem.classList.add('allow');
+                elem.classList.remove('deny');
                 break;
             case false:
-                $elem.addClass("deny");
-                $elem.removeClass("allow");
+                elem.classList.add('deny');
+                elem.classList.remove('allow');
                 break;
         }
     },
@@ -145,7 +146,7 @@ var TacEventsHandlers = {
 
 
 // Retrieves settings from Drupal configuration and initiates TAC
-(function ($, Drupal, drupalSettings) {
+(function (Drupal, drupalSettings) {
   Drupal.behaviors.tacServices = {
     attach: function attach(context) {
       if (contextIsRoot(context)) {
@@ -177,4 +178,4 @@ var TacEventsHandlers = {
       }
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings);
