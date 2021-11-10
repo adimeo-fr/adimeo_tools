@@ -2,7 +2,6 @@
 
   CKEDITOR.plugins.add( 'tacoembeddisplay', {
     afterInit: function( editor ) {
-      console.log(editor);
       var loadMediaOEmbed = function (editor) {
         var document = editor.document;
         var tacPlaceholders = document.$.querySelectorAll('.tac-media-oembed-placeholder:not(.js-validated)');
