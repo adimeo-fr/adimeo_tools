@@ -52,7 +52,7 @@ function bo_additions_toolbar() {
   $manager = \Drupal::service('plugin.manager.menu.local_task');
   $localTasks = $manager->getLocalTasks(\Drupal::routeMatch()->getRouteName());
   uasort($localTasks['tabs'], function ($a, $b) {
-    return $a['#weight'] > $b['#weight'];
+    return $a['#weight'] <=> $b['#weight'];
   });
 
   // Build a list of links for the menu.
