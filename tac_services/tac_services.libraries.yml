@@ -160,3 +160,10 @@ tac_matomo:
         libraries/tac_matomo/tac_matomo.js: {}
     dependencies:
         - tac_services/tac_services
+
+tac_dailymotion_embed:
+  version: 1
+  js:
+    libraries/tac_dailymotion_embed/tac_dailymotion_embed.js: {}
+  dependencies:
+    - tac_services/tac_services

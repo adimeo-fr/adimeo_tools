@@ -2,7 +2,7 @@
     // closure
     "use strict";
 
-    function initYoutubeIframe(placeholder) {
+    function initDailymotionIframe(placeholder) {
         let width = placeholder.dataset.width;
         let height = placeholder.dataset.height;
         let frameborder = placeholder.dataset.frameborder;
@@ -18,22 +18,23 @@
         return iframe;
     }
 
-    Drupal.behaviors.tac_youtube_field_renderer = {
+    Drupal.behaviors.tac_dailymotion_field_renderer = {
 
         attach: function () {
+
             // We wait for tarteaucitron to be loaded before evaluating cookies
-            TacHelpers.addListenerMulti(document, ['youtube_added', 'youtube_loaded'], function (e) {
+            TacHelpers.addListenerMulti(document, ['dailymotion_added', 'dailymotion_loaded'], function (e) {
                 // Check if the cookie is accepted or not
-                let isCookieAccepted = TacHelpers.checkCookie("youtube");
-                if (isCookieAccepted || e.type === 'youtube_loaded') {
-                    // Select only placehoders whose provider is Youtube and doesn't have "js-validated" class
+                let isCookieAccepted = TacHelpers.checkCookie("dailymotion");
+                if (isCookieAccepted || e.type === 'dailymotion_loaded') {
+                    // Select only placehoders whose provider is dailymotion and doesn't have "js-validated" class
                     let tacPlaceholders = document.querySelectorAll(
-                        '.tac-video-embed-field[data-provider="youtube"]:not(.js-validated)'
+                        '.dailymotion_provider:not(.js-validated)'
                     );
                     tacPlaceholders.forEach(function (tacPlaceholder) {
 
-                      //Creating the iframe
-                        let iframe = initYoutubeIframe(tacPlaceholder);
+                        //Creating the iframe
+                        let iframe = initDailymotionIframe(tacPlaceholder);
 
                         // Add specific class
                         tacPlaceholder.classList.add('js-validated');
@@ -47,15 +48,15 @@
                     });
 
                 } else {
-                    // Select only placehoders whose provider is Youtube and doesn't have "js-validated" class
+                    // Select only placehoders whose provider is dailymotion and doesn't have "js-validated" class
                     let tacPlaceholders = document.querySelectorAll(
-                        '.tac-video-embed-field[data-provider="youtube"]:not(.js-declined)'
+                        '.dailymotion_provider:not(.js-declined)'
                     );
                     tacPlaceholders.forEach(function (tacPlaceholder) {
                         // Get noCookie placeholder
                         let noCookiePlaceholder = TacHelpers.getPlaceholder(
                             Drupal.t(
-                                "Vos préférences en matière de cookie ne vous permettent pas de consulter cette vidéo Youtube."
+                                "Vos préférences en matière de cookie ne vous permettent pas de consulter cette vidéo dailymotion."
                             )
                         );
                         // Replace tacPlaceholder with noCookiePlaceholder

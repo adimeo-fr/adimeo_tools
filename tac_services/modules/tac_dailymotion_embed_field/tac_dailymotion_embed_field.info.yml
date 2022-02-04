@@ -1,0 +1,12 @@
+name: TAC Youtube Field
+description: Override the contrib module Video Embed dailymotion in order to use tac_services with it.
+package: Web services
+
+type: module
+core_version_requirement: ^8 || ^9
+core: 8.x
+
+dependencies:
+  - tac_services
+  - video_embed_field
+  - video_embed_dailymotion
