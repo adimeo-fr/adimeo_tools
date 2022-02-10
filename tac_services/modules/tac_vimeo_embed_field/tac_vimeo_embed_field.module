@@ -2,12 +2,12 @@
 /**
  ** Implements hook_theme().
  **/
-function tac_youtube_embed_field_theme($existing, $type, $theme, $path) {
+function tac_vimeo_embed_field_theme($existing, $type, $theme, $path) {
 
   $templates = $path . '/templates';
 
-  $return['video_embed_iframe__youtube'] = [
-    'template' => 'video-embed-iframe--youtube',
+  $return['video_embed_iframe__vimeo'] = [
+    'template' => 'video-embed-iframe--vimeo',
     'path' => $templates,
       'variables' => [
         'url' => '',
