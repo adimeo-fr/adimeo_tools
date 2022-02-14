@@ -167,3 +167,37 @@ tac_dailymotion_embed:
     libraries/tac_dailymotion_embed/tac_dailymotion_embed.js: {}
   dependencies:
     - tac_services/tac_services
+
+tac_calameo:
+  js:
+    libraries/tac_calameo/tac_calameo.js: {}
+  dependencies:
+    - tac_services/tac_services
+
+tac_padlet:
+  js:
+    libraries/tac_padlet/tac_padlet.js: {}
+  dependencies:
+    - tac_services/tac_services
+    - tac_services/tac_padlet_service
+
+tac_padlet_service:
+  js:
+    libraries/tac_padlet/tac_padlet_service.js: {}
+  dependencies:
+    - tac_services/tac_services
+    - core/drupal.ajax
+
+tac_genially:
+  js:
+    libraries/tac_genially/tac_genially.js: {}
+  dependencies:
+    - tac_services/tac_services
+    - tac_services/tac_genially_service
+
+tac_genially_service:
+  js:
+    libraries/tac_genially/tac_genially_service.js: {}
+  dependencies:
+    - tac_services/tac_services
+    - core/drupal.ajax
