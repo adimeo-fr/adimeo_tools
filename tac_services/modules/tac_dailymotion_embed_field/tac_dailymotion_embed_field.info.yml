@@ -1,4 +1,4 @@
-name: TAC Youtube Field
+name: TAC Dailymotion Field
 description: Override the contrib module Video Embed dailymotion in order to use tac_services with it.
 package: Web services
 
