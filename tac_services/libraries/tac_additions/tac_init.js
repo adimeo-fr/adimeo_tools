@@ -15,15 +15,16 @@
 var TacEventsHandlers = {
     onReady: function (settings) {
         // Remove scrolling behavior
-        console.log(settings.scrolling_behavior)
         if(!settings.scrolling_behavior){
             tarteaucitron.initEvents.scrollEvent = (e) => e;
         }
 
         // If the disclaimer text is customized by the user, we replace it when TAC is loaded
         if(settings.custom_disclaimer){
-            var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');
-            alertText.innerHTML = settings.custom_disclaimer;
+            document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, function (e) {
+                var alertText = document.querySelector('#tarteaucitronDisclaimerAlert');
+                alertText.innerHTML = settings.custom_disclaimer;
+            })
         }
 
         // Icon
