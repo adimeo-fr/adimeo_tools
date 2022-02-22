@@ -16,13 +16,14 @@
           var url = "ajax/tarteaucitron/ckeditor/oembed/" + mediaId + "/" + fieldName;
 
           var httpRequest = new XMLHttpRequest();
-          httpRequest.responseType = 'document';
-          httpRequest.onreadystatechange = function (html) {
-            tacPlaceholders[i].html(html);
-            
-            tacPlaceholders[i].classList.add('js-validated');
-            tacPlaceholders[i].classList.remove('js-declined');
-          }
+          httpRequest.customItem = tacPlaceholders[i];
+          httpRequest.onreadystatechange = function () {
+            var item = this.customItem;
+            item.innerHTML = this.response;
+
+            item.classList.add('js-validated');
+            item.classList.remove('js-declined');
+          };
           httpRequest.open('GET', Drupal.url(url))
           httpRequest.send();
           // jQuery.get({
