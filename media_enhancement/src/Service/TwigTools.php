@@ -81,11 +81,9 @@ class TwigTools extends \Twig_Extension {
         return '';
       }
     }
-    
-    $a = $media->$imageFieldName;
 
     // If media is not a Media entity, then we exit.
-    if (is_null($media->$imageFieldName) || !($media instanceof Media) || count($media->$imageFieldName) == 0) {
+    if (!($media instanceof Media) || is_null($media->$imageFieldName) || count($media->$imageFieldName) == 0) {
       return '';
     }
 
