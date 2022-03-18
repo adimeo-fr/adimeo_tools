@@ -1512,7 +1512,7 @@ tarteaucitron.services.gajs = {
 tarteaucitron.services.analytics = {
     "key": "analytics",
     "type": "analytic",
-    "name": "Google Analytics (universal)",
+    "name": "Google Analytics",
     "uri": "https://support.google.com/analytics/answer/6004245",
     "needConsent": true,
     "cookies": (function () {
