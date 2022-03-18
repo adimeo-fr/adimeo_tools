@@ -203,6 +203,13 @@ class TacSettingsForm extends FormBase {
       '#description'   => t('Afficher le message a propos des cookies obligatoires ?'),
     ];
 
+    $form[$this->config::MORE_INFO_LINK] = [
+      '#type'          => 'checkbox',
+      '#title'         => t('Lien "en savoir plus"'),
+      '#default_value' => $defaultValues[$this->config::MANDATORY],
+      '#description'   => t('Afficher le lien "en savoir plus" menant vers le service tarteaucitron concerné'),
+    ];
+
     $form[$this->config::COOKIES_DURATION] = [
       '#type'          => 'number',
       '#title'         => t('Durée de conservation des cookies'),

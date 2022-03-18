@@ -169,6 +169,7 @@ var TacEventsHandlers = {
           "orientation": settings.orientation,
           "mandatory": settings.mandatory,
           "cookiesDuration": settings.cookies_duration, /*Durée de conservation des cookies */
+           "moreInfoLink": settings.more_info_link,
         });
 
         document.addEventListener(tarteaucitronEvents.TARTEAUCITRON_READY, TacEventsHandlers.onReady(settings))
