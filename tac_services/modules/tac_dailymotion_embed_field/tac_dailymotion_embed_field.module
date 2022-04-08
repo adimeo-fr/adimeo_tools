@@ -1,0 +1,5 @@
+<?php
+
+function tac_dailymotion_embed_field_video_embed_field_provider_info_alter(&$info) {
+  $info['dailymotion']['class'] = 'Drupal\tac_dailymotion_embed_field\Plugin\video_embed_field\Provider\ExtendedDailymotion';
+}
