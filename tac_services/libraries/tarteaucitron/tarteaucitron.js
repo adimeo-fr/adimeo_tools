@@ -721,7 +721,6 @@ var tarteaucitron = {
             html += '   <div class="tarteaucitronName">';
             html += '       <span class="tarteaucitronH3" role="heading" aria-level="3">' + service.name + '</span>';
             html += '       <span id="tacCL' + service.key + '" class="tarteaucitronListCookies"></span><br/>';
-
             if (tarteaucitron.parameters.moreInfoLink == true) {
 
                 var link = 'https://tarteaucitron.io/service/' + service.key + '/';
@@ -735,10 +734,10 @@ var tarteaucitron = {
                 html += '           ' + tarteaucitron.lang.more;
                 html += '       </a>';
                 html += '        - ';
-                html += '       <a href="' + service.uri + '" target="_blank" rel="noreferrer noopener" title="' + service.name + ' ' + tarteaucitron.lang.newWindow + '">';
-                html += '           ' + tarteaucitron.lang.source;
-                html += '       </a>';
             }
+            html += '       <a href="' + service.uri + '" target="_blank" rel="noreferrer noopener" title="' + service.name + ' ' + tarteaucitron.lang.newWindow + '">';
+            html += '           ' + tarteaucitron.lang.source;
+            html += '       </a>';
 
             html += '   </div>';
             html += '   <div class="tarteaucitronAsk">';
