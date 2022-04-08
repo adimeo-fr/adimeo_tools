@@ -11,7 +11,7 @@ use Drupal\tac_services\Service\TacServicesConfManager;
  *
  * @TacServiceAnnotation(
  *   id = "google_analytics_tac_service",
- *   label = "Google Analytics (universal)",
+ *   label = "Google Analytics",
  *   weight = 2
  * )
  */

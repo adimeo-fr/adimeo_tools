@@ -104,6 +104,7 @@ class TacGlobalConfigService extends ConfigServiceBase
    */
   const COOKIES_DURATION = "cookies_duration";
 
+  const MORE_INFO_LINK = "more_info_link";
   /**
    * @var LanguageService
    */
@@ -170,6 +171,7 @@ class TacGlobalConfigService extends ConfigServiceBase
       static::MANDATORY          => TRUE,
       //Duration
       static::COOKIES_DURATION   => 365,
+      static::MORE_INFO_LINK => TRUE,
     ];
   }
 
