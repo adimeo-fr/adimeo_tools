@@ -11,6 +11,7 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\adimeo_tools\Service\LanguageService;
+use Drupal;
 
 /**
  * Class Misc.

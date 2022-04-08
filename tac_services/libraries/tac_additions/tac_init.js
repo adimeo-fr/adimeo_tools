@@ -16,7 +16,7 @@ var TacEventsHandlers = {
     onReady: function (settings) {
         // Remove scrolling behavior
         if(!settings.scrolling_behavior){
-            tarteaucitron.initEvents.scrollEvent = (e) => e;
+            tarteaucitron.initEvents.scrollEvent = function(e){return e;};
         }
 
         // If the disclaimer text is customized by the user, we replace it when TAC is loaded
