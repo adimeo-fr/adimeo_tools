@@ -85,6 +85,8 @@ function tac_services_page_attachments(array &$attachments) {
 
           //Cookies Duration
           $globalTacConfService::COOKIES_DURATION     => ($globalConfValues[$globalTacConfService::COOKIES_DURATION]),
+
+          $globalTacConfService::MORE_INFO_LINK => ($globalConfValues[$globalTacConfService::MORE_INFO_LINK]),
         ];
 
         // Ajout de la library tarte au citron.

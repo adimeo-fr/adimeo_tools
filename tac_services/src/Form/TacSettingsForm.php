@@ -206,7 +206,7 @@ class TacSettingsForm extends FormBase {
     $form[$this->config::MORE_INFO_LINK] = [
       '#type'          => 'checkbox',
       '#title'         => t('Lien "en savoir plus"'),
-      '#default_value' => $defaultValues[$this->config::MANDATORY],
+      '#default_value' => $defaultValues[$this->config::MORE_INFO_LINK],
       '#description'   => t('Afficher le lien "en savoir plus" menant vers le service tarteaucitron concerné'),
     ];
 
