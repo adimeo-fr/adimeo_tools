@@ -643,10 +643,10 @@ var tarteaucitron = {
                         tarteaucitron.userInterface.closePanel();
                     });
                     tarteaucitron.addClickEventToId("tarteaucitronPrivacyUrl", function () {
-                        document.location = tarteaucitron.parameters.privacyUrl;
+                        window.open(tarteaucitron.parameters.privacyUrl, "_blank");
                     });
                     tarteaucitron.addClickEventToId("tarteaucitronPrivacyUrlDialog", function () {
-                        document.location = tarteaucitron.parameters.privacyUrl;
+                        window.open(tarteaucitron.parameters.privacyUrl, "_blank");
                     });
                     tarteaucitron.addClickEventToId("tarteaucitronCookiesNumber", function () {
                         tarteaucitron.userInterface.toggleCookiesList();
