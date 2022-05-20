@@ -1,0 +1,13 @@
+<?php
+
+use Drupal\adimeo_summary\Traits\SummaryTrait;
+
+function adimeo_summary_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  foreach ($variables['content'] as $fieldName => $field) {
+    if (strpos($fieldName, 'field_') === 0 && $variables['content'][$fieldName]['#field_type'] == 'string') {
+      $variables['content'][$fieldName]['#attributes']['id'] = SummaryTrait::stringToKebabCase($paragraph->get($fieldName)->get(0)->getString());
+    }
+  }
+}

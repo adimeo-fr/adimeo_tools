@@ -1,0 +1,5 @@
+services:
+  adimeo_summary.twig.kebabCaseFilter:
+    class: Drupal\adimeo_summary\Twig\KebabCaseFilter
+    tags:
+      - { name: twig.extension }
