@@ -201,3 +201,15 @@ tac_genially_service:
   dependencies:
     - tac_services/tac_services
     - core/drupal.ajax
+
+tac_pinterest_addons:
+  js:
+    libraries/tac_pinterest/tac_pinterest_addons.js: {}
+  dependencies:
+    - tac_services/tac_services
+
+tac_pinterest_tracking:
+  js:
+    libraries/tac_pinterest/tac_pinterest_tracking.js: {}
+  dependencies:
+    - tac_services/tac_services
