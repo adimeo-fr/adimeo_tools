@@ -40,6 +40,7 @@ function bo_additions_toolbar() {
       'toolbar_bo_additions_toolbar_content' => array(
         '#pre_render' => [[ToolbarPrerender::class, 'toolbar_content_pre_render']],
         '#type' => 'container',
+        '#cache'  => ['max-age' => 0],
         '#attributes' => array(
           'class' => array('toolbar-menu-administration'),
         ),
