@@ -213,3 +213,27 @@ tac_pinterest_tracking:
     libraries/tac_pinterest/tac_pinterest_tracking.js: {}
   dependencies:
     - tac_services/tac_services
+
+tac_soundcloud:
+  js:
+    libraries/tac_soundcloud/tac_soundcloud.js: {}
+  dependencies:
+    - tac_services/tac_services
+
+tac_sharethis:
+  js:
+    libraries/tac_sharethis/tac_sharethis.js: {}
+  dependencies:
+    - tac_services/tac_services
+
+tac_mathtag:
+  js:
+    libraries/tac_mathtag/tac_mathtag.js: {}
+  dependencies:
+    - tac_services/tac_services
+
+tac_weborama:
+  js:
+    libraries/tac_weborama/tac_weborama.js: {}
+  dependencies:
+    - tac_services/tac_services
