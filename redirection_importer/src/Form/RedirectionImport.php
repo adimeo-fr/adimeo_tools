@@ -145,6 +145,8 @@ class RedirectionImport extends FormBase
 
   public function importRedirection($data, &$errors) {
 
+    static::removeRedirectIfExists($data[0]);
+
     Redirect::create([
       'redirect_source' => $data[0], // Set your custom URL.
       'redirect_redirect' => $data[1], // Set internal path to a node for example.
@@ -172,4 +174,14 @@ class RedirectionImport extends FormBase
     }
     \Drupal::messenger()->addMessage(t($message));
   }
+
+  protected static function removeRedirectIfExists($sourceUrl) {
+    $redirects = \Drupal::entityTypeManager()->getStorage('redirect')->loadByProperties(['redirect_source' => $sourceUrl]);
+    if(!empty($redirects)) {
+      foreach ($redirects as $redirect) {
+        $redirect->delete();
+      }
+    }
+  }
+
 }
