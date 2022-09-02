@@ -192,7 +192,7 @@ class RedirectionImport extends FormBase {
     $parsed_url = UrlHelper::parse(trim($sourceUrl));
     $path = isset($parsed_url['path']) ? $parsed_url['path'] : NULL;
     $query = isset($parsed_url['query']) ? $parsed_url['query'] : NULL;
-    $hash = Redirect::generateHash($path, $query, $lang);
+    $hash = Redirect::generateHash(static::getPathByAlias($path), $query, $lang);
 
     // Search for duplicate.
     $redirects = \Drupal::entityTypeManager()->getStorage('redirect')->loadByProperties(['hash' => $hash]);
@@ -210,7 +210,15 @@ class RedirectionImport extends FormBase {
    * @return array|int|mixed|string|string[]
    */
   protected static function getPathByAlias($alias) {
-    $path = \Drupal::service('path_alias.manager')->getPathByAlias($alias);
+    return static::cleanPathSlash(\Drupal::service('path_alias.manager')->getPathByAlias($alias));
+  }
+
+  /**
+   * @param $path
+   *
+   * @return array|string|string[]
+   */
+  protected static function cleanPathSlash($path) {
     return strpos($path, '/') == 0 ? substr_replace($path, '', 0, strlen('/')) : $path;
   }
 
