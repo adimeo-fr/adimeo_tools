@@ -4,10 +4,14 @@
 namespace Drupal\redirection_importer\Form;
 
 use Drupal\adimeo_tools\Shared\BatchTrait;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\redirect\Entity\Redirect;
+use Drupal\redirect\RedirectRepository;
+use Drupal\redirection_importer\Service\RedirectionMapper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RedirectionImport extends FormBase
 {
@@ -18,6 +22,8 @@ class RedirectionImport extends FormBase
   const FIELD_FILE = 'file';
   const SEPARATOR = ';';
   const WRAPPER = '"';
+
+
   /**
    * Returns a unique string identifying the form.
    *
@@ -47,23 +53,28 @@ class RedirectionImport extends FormBase
   public function buildForm(array $form, FormStateInterface $form_state)
   {
     $form[static::FIELD_FILE] = [
-      '#type'              => 'managed_file',
-      '#title'             => t('Fichier'),
+      '#type' => 'managed_file',
+      '#title' => t('Fichier'),
       '#upload_validators' => [
         'file_validate_extensions' => ['csv'],
-        'file_validate_size'       => array(25600000)
+        'file_validate_size' => array(25600000)
       ],
       '#description' => 'Type: csv
                                <br/>séparateur: ";"
                                <br/>wrapper: """<br/>
-
-                               <br/>Pas d\'entête de colonne,
-                               <br/>ordre: "source"(url à redirigée ex: /node/4501);"redirection"(url vers laquelle on redirige ex: internal:/node/4502 ou);"language"(code lang ex: fr, en);"status code"(301 to permanante redirection)',
+                               <br/>Pas d\'entête de colonne
+                               <br/>
+                               <br/><b>Ordre: source; destination; langage; status code</b>
+                               <br/><em>source:</em> url à rediriger (ex: /node/4501) - Doit commencer par un slash
+                               <br/><em>destination:</em> url vers laquelle on redirige l\'utilisateur - doit commencer par un slash pour les url internes, ou par http(s) pour les url externes)
+                               <br/><em>language:</em> code lang, par exemple "fr" ou "en"
+                               <br/><em>status code:</em> 300, 301, 302, etc... (plus couramment utilisée: 301 => redirection permanente)',
     ];
 
+
     $form['submit'] = [
-      '#type'        => 'submit',
-      '#value'       => t('Save'),
+      '#type' => 'submit',
+      '#value' => t('Save'),
       '#button_type' => 'primary',
     ];
 
@@ -87,12 +98,11 @@ class RedirectionImport extends FormBase
       '\\' . get_called_class() . '::processLine',
       $dataImport
     );
-
     // Launch batch.
     $batch = array(
-      'title'      => 'Import des metatags',
+      'title' => 'Import des metatags',
       'operations' => $operations,
-      'finished'   => '\\' . get_called_class() . '::processEnd',
+      'finished' => '\\' . get_called_class() . '::processEnd',
     );
     batch_set($batch);
 
@@ -104,7 +114,8 @@ class RedirectionImport extends FormBase
    * @return array
    *   La liste de données.
    */
-  protected function getDataToImport(FormStateInterface $formState) {
+  protected function getDataToImport(FormStateInterface $formState)
+  {
     $nodesDataList = [];
 
     // On récupère le fichier.
@@ -126,24 +137,57 @@ class RedirectionImport extends FormBase
     return [];
   }
 
-  public static function processLine(array $data, array &$context) {
+  public static function processLine(array $data, array &$context)
+  {
 
     if (!array_key_exists('errors', $context['results'])) {
       $context['results']['errors'] = [];
     }
+    $dataMapper = RedirectionMapper::getInstance();
+    /** @var RedirectRepository $redirectRepository */
+    $redirectRepository = \Drupal::service('redirect.repository');
     // On stocke la ligne courante, c'est plus simple pour l'accès.
     /** @var static $form */
     $form = new static();
+
     foreach ($data as $line) {
-      if(is_null($data)) {
+      if (is_null($data)) {
         continue;
       }
-      $context['results']['imported'] += $form->importRedirection($line, $context['results']['errors']) ? 1 : 0;
-      $context['results']['total']++;
+      $redirection = $dataMapper->mapDataToRedirection($line);
+      try {
+        $redirection->save();
+        $context['results']['imported']++;
+
+      } catch (EntityStorageException $entityStorageException) {
+        switch ($entityStorageException->getCode()) {
+          case 23000:
+            /** @var Redirect[] $existingRedirection */
+            $existingRedirections = $redirectRepository->findBySourcePath($redirection->getSourceUrl());
+            foreach ($existingRedirections as $existingRedirection) {
+              if ($existingRedirection->get('language')->getLangcode() === $redirection->get('language')->getLangcode()) {
+                $existingRedirection->setRedirect(self::removeInternalFromPath($redirection->getRedirect()['uri']), [], $redirection->getRedirectOptions());
+                $existingRedirection->save();
+                $context['results']['updated']++;
+              }
+            }
+
+
+            break;
+          default:
+            throw $entityStorageException;
+        }
+      } catch (\Exception $e) {
+        $context['results']['errors']++;
+        throw $e;
+      } finally {
+        $context['results']['total']++;
+      }
     }
   }
 
-  public function importRedirection($data, &$errors) {
+  public function importRedirection($data, &$errors)
+  {
 
     static::removeRedirectIfExists($data[0]);
 
@@ -167,12 +211,30 @@ class RedirectionImport extends FormBase
    * @param array $operations
    *   Les opérations.
    */
-  public static function processEnd($success, array $results, array $operations) {
+  public static function processEnd($success, array $results, array $operations)
+  {
+    $results['total'] = $results['total'] ?? 0;
+    $results['imported'] = $results['imported'] ?? 0;
+    $results['updated'] = $results['updated'] ?? 0;
+    $results['failed'] = $results['failed'] ?? 0;
 
-    if ($success) {
-      $message = count($results) . ' processed.';
+
+    if ($success === TRUE) {
+      $message = sprintf('total items: %d, items successfully imported: %d, updated: %d, operations failed: %d',
+        $results['total'],
+        $results['imported'],
+        $results['updated'],
+        $results['failed']);
+
+      \Drupal::messenger()->addMessage(t($message));
     }
-    \Drupal::messenger()->addMessage(t($message));
+  }
+
+  public static function removeInternalFromPath(string $path): string
+  {
+    $pattern = '/^(?:internal:)?(.*)/m';
+    $subst = '${1}';
+    return preg_replace($pattern, $subst, $path);
   }
 
   protected static function removeRedirectIfExists($sourceUrl) {
