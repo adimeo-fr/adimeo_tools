@@ -1,0 +1,10 @@
+services:
+
+  # Manager
+  adimeo_domain.domain.manager:
+    class: Drupal\adimeo_domain\Manager\DomainManager
+    arguments: [ '@entity_type.manager', '@domain.current_domain_context', '@domain.negotiator' ]
+
+  adimeo_domain.entity_domain_access_check.manager:
+    class: Drupal\adimeo_domain\Manager\EntityDomainAccessCheckManager
+    arguments: [ '@adimeo_domain.domain.manager' ]

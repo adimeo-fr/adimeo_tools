@@ -1,0 +1,7 @@
+adimeo_domain.dev:
+  path: '/admin/adimeo-domain/dev'
+  defaults:
+    _title: 'Adimeo Domain Dev'
+    _controller: '\Drupal\adimeo_domain\Controller\AdimeoDomainDevController::build'
+  requirements:
+    _permission: 'access content'
