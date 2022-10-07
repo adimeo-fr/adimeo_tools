@@ -48,8 +48,8 @@ class AdimeoDomainDevController extends ControllerBase {
     $allDomainsIds = $adimeoDomainManager->getAllDomains();
     $allDomainsEntities = $adimeoDomainManager->getAllDomains(TRUE);
 
-    /* Getting QueryInterface with current domain condition. No other condition is set, so use it as base query for any queries. */
-    $query = $adimeoDomainManager->getCurrentDomainBasedQuery();
+    /* Getting EntityQuery instance of given entity type id with current domain condition. No other condition is set, so use it as base query for any queries. */
+    $query = $adimeoDomainManager->getCurrentDomainBasedEntityQuery('node');
 
 
     #### ENTITY ACCESS CHECK MANAGER ####

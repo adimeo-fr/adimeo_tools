@@ -113,10 +113,14 @@ class DomainManager {
   }
 
   /**
+   * @param string $entityTypeId
+   *
    * @return \Drupal\Core\Entity\Query\QueryInterface
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  public function getCurrentDomainBasedQuery(): QueryInterface {
-    return $this->getDomainStorage()->getQuery()->condition($this->getDomainAccessFieldName(),
+  public function getCurrentDomainBasedEntityQuery(string $entityTypeId): QueryInterface {
+    return $this->entityTypeManager->getStorage($entityTypeId)->getQuery()->condition($this->getDomainAccessFieldName(),
       $this->getCurrentDomainId(),
       'IN');
   }
