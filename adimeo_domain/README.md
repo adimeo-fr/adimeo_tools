@@ -1,11 +1,12 @@
 Adimeo Domain
 ======
 
-Tools usage to handle domains easily 
+## Usage 
 
 ```php
 #### DOMAIN MANAGER ####
     
+    /* Instantiate Adimeo Domain Manager */
     /**
      * @var \Drupal\adimeo_domain\Manager\DomainManager $adimeoDomainManager
      */
@@ -37,6 +38,7 @@ Tools usage to handle domains easily
 
  #### ENTITY ACCESS CHECK MANAGER ####
 
+    /* Instantiate Adimeo Entity Access Check Manager */
     /**
      * @var \Drupal\adimeo_domain\Manager\EntityDomainAccessCheckManager $adimeoEntityDomainAccessCheckManager
      */
