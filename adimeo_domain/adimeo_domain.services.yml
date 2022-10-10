@@ -8,3 +8,11 @@ services:
   adimeo_domain.entity_domain_access_check.manager:
     class: Drupal\adimeo_domain\Manager\EntityDomainAccessCheckManager
     arguments: [ '@adimeo_domain.domain.manager' ]
+
+  adimeo_domain.access_plugin_handler.manager:
+    class: Drupal\adimeo_domain\Manager\DomainAccessPluginHandlerManager
+    arguments: ['@config.manager', '@plugin.manager.adimeo_domain_access']
+
+  plugin.manager.adimeo_domain_access:
+    class: Drupal\adimeo_domain\Manager\AdimeoDomainAccessPluginManager
+    parent: default_plugin_manager

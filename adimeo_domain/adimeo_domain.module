@@ -1,2 +1,17 @@
 <?php
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+
+/**
+ * Implements hook_entity_access().
+ */
+function adimeo_domain_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  /**
+   * @var \Drupal\adimeo_domain\Manager\DomainAccessPluginHandlerManager $accessPluginHandler
+   */
+  $accessPluginHandler = Drupal::service('adimeo_domain.access_plugin_handler.manager');
+  $accessPlugin = $accessPluginHandler->handle();
+  $access = $accessPlugin->checkAccess($entity, $operation, $account);
+  $stop='';
+}
