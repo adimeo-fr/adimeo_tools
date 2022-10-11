@@ -1,0 +1,4 @@
+services:
+  adimeo_share.plugin_manager.share:
+    class: Drupal\adimeo_share\Plugin\SocialManager
+    parent: default_plugin_manager

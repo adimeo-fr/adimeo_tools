@@ -1,0 +1,6 @@
+name: Adimeo Share
+type: module
+description: Provides social share tools
+package: Adimeo
+core_version_requirement: ^9 || ^10
+

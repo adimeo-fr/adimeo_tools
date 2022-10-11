@@ -1,0 +1,21 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function adimeo_share_help($route_name, RouteMatchInterface $route_match): string {
+  $output = '';
+  switch ($route_name) {
+    case 'help.page.adimeo_share':
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Adimeo Share module enable users to add share links to content and see how each link perform.');
+      break;
+
+    default:
+      break;
+  }
+
+  return $output;
+}
