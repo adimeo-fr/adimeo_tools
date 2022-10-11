@@ -128,10 +128,17 @@ class DomainManager {
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *
-   * @return array
+   * @return array|null
    */
-  public function getEntityDomainAccessValues(EntityInterface $entity): array {
-    $values = $entity->hasField($this->getDomainAccessFieldName()) ? $entity->get($this->getDomainAccessFieldName())->getValue() : [];
+  public function getEntityDomainAccessValues(EntityInterface $entity) {
+
+    // If there is no domain access field, entity is not concerned by domain restriction.
+    if (!method_exists($entity, 'hasField') || !$entity->hasField($this->getDomainAccessFieldName())) {
+      return NULL;
+    }
+
+    $values =  !$entity->get($this->getDomainAccessFieldName())->isEmpty() ? $entity->get($this->getDomainAccessFieldName())->getValue() : [];
+
     $domainIds = [];
     foreach ($values as $value) {
       $domainIds[] = $value['target_id'];

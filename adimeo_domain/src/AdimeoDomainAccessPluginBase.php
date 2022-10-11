@@ -18,6 +18,11 @@ abstract class AdimeoDomainAccessPluginBase extends PluginBase implements Contai
   protected EntityDomainAccessCheckManager $accessCheckManager;
 
   /**
+   * @var bool|null
+   */
+  protected ?bool $currentDomainAccessValue = NULL;
+
+  /**
    * AdimeoDomainAccessPluginBase constructor.
    *
    * @param array $configuration

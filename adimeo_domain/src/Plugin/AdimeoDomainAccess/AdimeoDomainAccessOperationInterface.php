@@ -2,7 +2,7 @@
 
 namespace Drupal\adimeo_domain\Plugin\AdimeoDomainAccess;
 
-use Drupal\adimeo_domain\AdimeoDomainAccessPluginBase;
+
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Access\AccessResultForbidden;
@@ -19,7 +19,7 @@ use Drupal\Core\Session\AccountProxyInterface;
  *   description = @Translation("Default domain entity access plugin.")
  * )
  */
-class DefaultAccess extends AdimeoDomainAccessPluginBase implements AdimeoDomainAccessOperationInterface {
+interface AdimeoDomainAccessOperationInterface {
 
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
@@ -28,18 +28,7 @@ class DefaultAccess extends AdimeoDomainAccessPluginBase implements AdimeoDomain
    *
    * @return \Drupal\Core\Access\AccessResultNeutral|mixed|null
    */
-  public function checkAccess(EntityInterface $entity, string $operation, AccountProxyInterface $accountProxy) {
-
-    $this->currentDomainAccessValue = $this->accessCheckManager->checkCurrentDomainAccess($entity);
-
-    return match ($operation) {
-      'view' => $this->viewOperation($entity, $accountProxy),
-      'update' => $this->updateOperation($entity, $accountProxy),
-      'create' => $this->createOperation($entity, $accountProxy),
-      default => AccessResultNeutral::neutral(),
-    };
-
-  }
+  public function checkAccess(EntityInterface $entity, string $operation, AccountProxyInterface $accountProxy);
 
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
@@ -47,15 +36,7 @@ class DefaultAccess extends AdimeoDomainAccessPluginBase implements AdimeoDomain
    *
    * @return \Drupal\Core\Access\AccessResultAllowed|\Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
    */
-  public function viewOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResultForbidden|AccessResultNeutral|AccessResultAllowed {
-
-    // If NULL, entity is not concerned by domain restriction
-    if ($this->currentDomainAccessValue === NULL) {
-      return AccessResultNeutral::neutral();
-    }
-
-    return $this->currentDomainAccessValue ? AccessResultAllowed::allowed() : AccessResultForbidden::forbidden();
-  }
+  public function viewOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResultForbidden|AccessResultNeutral|AccessResultAllowed;
 
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
@@ -63,9 +44,7 @@ class DefaultAccess extends AdimeoDomainAccessPluginBase implements AdimeoDomain
    *
    * @return \Drupal\Core\Access\AccessResult
    */
-  public function updateOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResult {
-    return AccessResultNeutral::neutral();
-  }
+  public function updateOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResult;
 
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
@@ -73,8 +52,5 @@ class DefaultAccess extends AdimeoDomainAccessPluginBase implements AdimeoDomain
    *
    * @return \Drupal\Core\Access\AccessResult
    */
-  public function createOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResult {
-    return AccessResultNeutral::neutral();
-  }
-
+  public function createOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResult;
 }

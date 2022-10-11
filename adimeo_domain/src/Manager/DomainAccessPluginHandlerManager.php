@@ -43,7 +43,6 @@ class DomainAccessPluginHandlerManager {
 
     return $this->adimeoDomainAccessPluginManager->createInstance('default_access');
 
-    // @DCG place your code here.
   }
 
 }

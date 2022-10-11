@@ -39,11 +39,11 @@ class EntityDomainAccessCheckManager {
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *
-   * @return bool
+   * @return bool|null
    */
-  public function checkCurrentDomainAccess(EntityInterface $entity): bool {
+  public function checkCurrentDomainAccess(EntityInterface $entity): ?bool {
     $entityDomainAccessValue = $this->domainManager->getEntityDomainAccessValues($entity);
-    return $entityDomainAccessValue === [] || in_array($this->domainManager->getCurrentDomainId(), $entityDomainAccessValue) || FALSE;
+    return $entityDomainAccessValue === NULL ? NULL : in_array($this->domainManager->getCurrentDomainId(), $entityDomainAccessValue);
   }
 
 }
