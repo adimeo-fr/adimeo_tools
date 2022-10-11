@@ -19,7 +19,7 @@ use Drupal\Core\Session\AccountProxyInterface;
  *   description = @Translation("Default domain entity access plugin.")
  * )
  */
-class DefaultAccess extends AdimeoDomainAccessPluginBase implements AdimeoDomainAccessOperationInterface {
+class DefaultAccess extends AdimeoDomainAccessPluginBase {
 
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity

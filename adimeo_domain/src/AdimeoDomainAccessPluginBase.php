@@ -3,6 +3,7 @@
 namespace Drupal\adimeo_domain;
 
 use Drupal\adimeo_domain\Manager\EntityDomainAccessCheckManager;
+use Drupal\adimeo_domain\Plugin\AdimeoDomainAccess\AdimeoDomainAccessOperationInterface;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Access\AccessResultAllowed;
@@ -16,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Base class for adimeo_domain_access plugins.
  */
-abstract class AdimeoDomainAccessPluginBase extends PluginBase implements ContainerFactoryPluginInterface, AdimeoDomainAccessInterface {
+abstract class AdimeoDomainAccessPluginBase extends PluginBase implements ContainerFactoryPluginInterface, AdimeoDomainAccessInterface, AdimeoDomainAccessOperationInterface {
 
   /**
    * @var \Drupal\adimeo_domain\Manager\EntityDomainAccessCheckManager
