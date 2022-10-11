@@ -4,7 +4,13 @@ namespace Drupal\adimeo_domain;
 
 use Drupal\adimeo_domain\Manager\EntityDomainAccessCheckManager;
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Access\AccessResultAllowed;
+use Drupal\Core\Access\AccessResultForbidden;
+use Drupal\Core\Access\AccessResultNeutral;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -44,12 +50,7 @@ abstract class AdimeoDomainAccessPluginBase extends PluginBase implements Contai
    * @return \Drupal\adimeo_domain\AdimeoDomainAccessPluginBase|static
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('adimeo_domain.entity_domain_access_check.manager')
-    );
+    return new static($configuration, $plugin_id, $plugin_definition, $container->get('adimeo_domain.entity_domain_access_check.manager'));
   }
 
   /**
@@ -67,5 +68,31 @@ abstract class AdimeoDomainAccessPluginBase extends PluginBase implements Contai
     // Cast the label to a string since it is a TranslatableMarkup object.
     return (string) $this->pluginDefinition['description'];
   }
+
+  /**
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   * @param string $operation
+   * @param \Drupal\Core\Session\AccountProxyInterface $accountProxy
+   *
+   * @return \Drupal\Core\Access\AccessResult|\Drupal\Core\Access\AccessResultAllowed|\Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
+   */
+  public function checkAccess(EntityInterface $entity, string $operation, AccountProxyInterface $accountProxy): AccessResultForbidden|AccessResultNeutral|AccessResult|AccessResultAllowed {
+
+    // If access value is NULL, entity is not concerned by domain restriction
+    if ($this->currentDomainAccessValue === NULL) {
+      return AccessResultNeutral::neutral();
+    }
+
+    $this->currentDomainAccessValue = $this->accessCheckManager->checkCurrentDomainAccess($entity);
+
+    return match ($operation) {
+      'view' => $this->viewOperation($entity, $accountProxy),
+      'update' => $this->updateOperation($entity, $accountProxy),
+      'create' => $this->createOperation($entity, $accountProxy),
+      default => AccessResultNeutral::neutral(),
+    };
+
+  }
+
 
 }
