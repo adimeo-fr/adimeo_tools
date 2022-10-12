@@ -2,12 +2,16 @@
 
 namespace Drupal\adimeo_domain\Manager;
 
+use Drupal\adimeo_domain\Form\AdimeoDomainAccessConfigForm;
+use Drupal\Core\Access\AccessResultNeutral;
 use Drupal\Core\Config\ConfigManagerInterface;
 
 /**
  * Service description.
  */
 class DomainAccessPluginHandlerManager {
+
+  const SERVICE_NAME = 'adimeo_domain.access_plugin_handler.manager';
 
   /**
    * The config manager.
@@ -33,16 +37,22 @@ class DomainAccessPluginHandlerManager {
   }
 
   /**
-   * @param String|NULL $domainId
+   * @param string $domainId
    *
-   * @return object
+   * @return object|null
    * @throws \Drupal\Component\Plugin\Exception\PluginException
    */
-  public function handle(String $domainId = NULL) {
-    // todo get domain plugin from config
+  public function handle(string $domainId): ?object {
+    $configs = $this->getAdimeoAccessPluginConfigs();
+    return !empty($configs['domain_' . $domainId]) ? $this->adimeoDomainAccessPluginManager->createInstance($configs['domain_' . $domainId]) : NULL;
 
-    return $this->adimeoDomainAccessPluginManager->createInstance('default_access');
+  }
 
+  /**
+   * @return array|mixed|null
+   */
+  public function getAdimeoAccessPluginConfigs() {
+    return $this->configManager->getConfigFactory()->get(AdimeoDomainAccessConfigForm::ACCESS_CONFIG_NAME)->get(AdimeoDomainAccessConfigForm::CONFIG_KEY);
   }
 
 }

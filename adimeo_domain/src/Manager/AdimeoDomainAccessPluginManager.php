@@ -11,6 +11,8 @@ use Drupal\Core\Plugin\DefaultPluginManager;
  */
 class AdimeoDomainAccessPluginManager extends DefaultPluginManager {
 
+  const SERVICE_NAME = 'plugin.manager.adimeo_domain_access';
+
   /**
    * Constructs AdimeoDomainAccessPluginManager object.
    *

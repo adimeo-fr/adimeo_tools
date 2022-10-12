@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\adimeo_domain\Manager\DomainAccessPluginHandlerManager;
+use Drupal\adimeo_domain\Manager\DomainManager;
+use Drupal\Core\Access\AccessResultNeutral;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 
@@ -10,7 +13,13 @@ function adimeo_domain_entity_access(EntityInterface $entity, $operation, Accoun
   /**
    * @var \Drupal\adimeo_domain\Manager\DomainAccessPluginHandlerManager $accessPluginHandler
    */
-  $accessPluginHandler = Drupal::service('adimeo_domain.access_plugin_handler.manager');
-  $accessPlugin = $accessPluginHandler->handle();
-  return $accessPlugin->checkAccess($entity, $operation, $account);
+  $accessPluginHandler = Drupal::service(DomainAccessPluginHandlerManager::SERVICE_NAME);
+
+  /**
+   * @var \Drupal\adimeo_domain\Manager\DomainManager $domainManager
+   */
+  $domainManager = Drupal::service(DomainManager::SERVICE_NAME);
+
+  $accessPlugin = $accessPluginHandler->handle($domainManager->getCurrentDomainId());
+  return $accessPlugin ? $accessPlugin->checkAccess($entity, $operation, $account) : AccessResultNeutral::neutral();
 }

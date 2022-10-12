@@ -11,6 +11,8 @@ use Drupal\Core\Entity\EntityInterface;
  */
 class EntityDomainAccessCheckManager {
 
+  const SERVICE_NAME = 'adimeo_domain.entity_domain_access_check.manager';
+
   /**
    * @var \Drupal\adimeo_domain\Manager\DomainManager
    */

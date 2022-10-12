@@ -17,6 +17,8 @@ use Drupal\domain\DomainNegotiator;
  */
 class DomainManager {
 
+  const SERVICE_NAME = 'adimeo_domain.domain.manager';
+
   /**
    * The domain.current_domain_context service.
    *

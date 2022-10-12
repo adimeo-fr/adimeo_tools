@@ -1,0 +1,13 @@
+<?php
+
+use Drupal\adimeo_domain\Form\AdimeoDomainAccessConfigForm;
+
+/**
+ * Implements hook_uninstall().
+ */
+function adimeo_domain_uninstall($is_syncing) {
+  $config = Drupal::service('config.factory')->getEditable(AdimeoDomainAccessConfigForm::ACCESS_CONFIG_NAME);
+  if ($config) {
+    $config->delete();
+  }
+}
