@@ -1,0 +1,74 @@
+<?php
+
+use Drupal\adimeo_domain\Manager\DomainManager;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_token_info().
+ */
+function adimeo_domain_metatag_token_info() {
+
+  $types['node'] = [
+    'name' => t('Adimeo Domain Metatag Tokens'),
+    'description' => t('Adimeo Domain Metatag Tokens.'),
+  ];
+
+  $adimeoDomainManager = Drupal::service(DomainManager::SERVICE_NAME);
+  $allDomains = $adimeoDomainManager->getAllDomains();
+
+  if (!empty($allDomains)) {
+    $tokens = [];
+    foreach ($allDomains as $domainId) {
+      $tokenName = sprintf('field_domain_source:default:%s', $domainId);
+      $tokens[$tokenName] = [
+        'name' => t('Adimeo Domain Metatag Tokens'),
+        'description' => t('Adimeo Domain Metatag Tokens.'),
+      ];
+    }
+
+    return [
+      'types' => $types,
+      'tokens' => ['node' => $tokens],
+    ];
+  }
+
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function adimeo_domain_metatag_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable) {
+
+  if ($type == 'node') {
+
+    $replacements = [];
+
+    foreach ($tokens as $name => $original) {
+
+      if (str_contains($name, 'field_domain_source')) {
+        $tokenArray = explode(':', $name);
+        $defaultDomainId = str_replace(']', '', end($tokenArray));
+        $node = reset($data);
+
+        // Get node url and source domain.
+        $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()])->toString();
+        $adimeoDomainManager = Drupal::service(DomainManager::SERVICE_NAME);
+        $nodeDomainSourceId = $adimeoDomainManager->getEntityDomainSourceValue($node);
+
+        // Load relevant domain entity.
+        $domainEntity = $adimeoDomainManager->getDomainStorage()->load($nodeDomainSourceId ?? $defaultDomainId);
+
+        // Build full url.
+        $path = parse_url($url, PHP_URL_PATH);
+        $pathWithoutSlash = '/' . substr($path, 1);
+        $hostname = $domainEntity->buildUrl($pathWithoutSlash);
+
+        // Replace token
+        $replacements[$original] = $hostname;
+      }
+    }
+    return $replacements;
+  }
+}
+

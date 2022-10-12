@@ -1,0 +1,7 @@
+name: Adimeo Domain Metatag
+type: module
+description: Provides a Domain Metatag module extra tools
+package: Adimeo
+core_version_requirement: ^9 || ^10
+dependencies:
+  - adimeo_domain

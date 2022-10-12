@@ -148,4 +148,18 @@ class DomainManager {
     return $domainIds;
   }
 
+  /**
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *
+   * @return null
+   */
+  public function getEntityDomainSourceValue(EntityInterface $entity) {
+    // If there is no domain access field, entity is not concerned by domain restriction.
+    if (!method_exists($entity, 'hasField') || !$entity->hasField($this->getDomainAccessFieldName())) {
+      return NULL;
+    }
+    $sourceFieldName = $this->getDomainSourceFieldName();
+    return $entity->{$sourceFieldName}->target_id;
+  }
+
 }
