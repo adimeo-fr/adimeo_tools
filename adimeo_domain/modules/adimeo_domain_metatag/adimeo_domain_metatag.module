@@ -20,10 +20,10 @@ function adimeo_domain_metatag_token_info() {
   if (!empty($allDomains)) {
     $tokens = [];
     foreach ($allDomains as $domainId) {
-      $tokenName = sprintf('field_domain_source_url:default:%s', $domainId);
+      $tokenName = sprintf('field_domain_source_canonical:default:%s', $domainId);
       $tokens[$tokenName] = [
-        'name' => t('Adimeo Domain Metatag Tokens'),
-        'description' => t('Adimeo Domain Metatag Tokens.'),
+        'name' => t('Adimeo Domain Canonical (' . $domainId . ')'),
+        'description' => t('Canonical Url from domain set in field_domain_source. If not defined, ' . $domainId .' will be used.'),
       ];
     }
 
@@ -46,7 +46,7 @@ function adimeo_domain_metatag_tokens($type, $tokens, array $data, array $option
 
     foreach ($tokens as $name => $original) {
 
-      if (str_contains($name, 'field_domain_source_url')) {
+      if (str_contains($name, 'field_domain_source_canonical')) {
         $tokenArray = explode(':', $name);
         $defaultDomainId = str_replace(']', '', end($tokenArray));
         $node = reset($data);
