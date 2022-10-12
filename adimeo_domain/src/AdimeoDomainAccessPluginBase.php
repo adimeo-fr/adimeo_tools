@@ -27,7 +27,7 @@ abstract class AdimeoDomainAccessPluginBase extends PluginBase implements Contai
   /**
    * @var bool|null
    */
-  protected ?bool $currentDomainAccessValue = NULL;
+  protected ?bool $entityHasAccessToCurrentDomain = NULL;
 
   /**
    * AdimeoDomainAccessPluginBase constructor.
@@ -79,12 +79,12 @@ abstract class AdimeoDomainAccessPluginBase extends PluginBase implements Contai
    */
   public function checkAccess(EntityInterface $entity, string $operation, AccountProxyInterface $accountProxy): AccessResultForbidden|AccessResultNeutral|AccessResult|AccessResultAllowed {
 
-    // If access value is NULL, entity is not concerned by domain restriction
-    if ($this->currentDomainAccessValue === NULL) {
+    $this->entityHasAccessToCurrentDomain = $this->accessCheckManager->checkCurrentDomainAccess($entity);
+
+    // If access value is NULL, it is probably because entity is not concerned by domain restriction
+    if ($this->entityHasAccessToCurrentDomain === NULL) {
       return AccessResultNeutral::neutral();
     }
-
-    $this->currentDomainAccessValue = $this->accessCheckManager->checkCurrentDomainAccess($entity);
 
     return match ($operation) {
       'view' => $this->viewOperation($entity, $accountProxy),

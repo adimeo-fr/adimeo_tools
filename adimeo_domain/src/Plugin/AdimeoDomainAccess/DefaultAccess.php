@@ -28,7 +28,7 @@ class DefaultAccess extends AdimeoDomainAccessPluginBase {
    * @return \Drupal\Core\Access\AccessResultAllowed|\Drupal\Core\Access\AccessResultForbidden|\Drupal\Core\Access\AccessResultNeutral
    */
   public function viewOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResultForbidden|AccessResultNeutral|AccessResultAllowed {
-    return $this->currentDomainAccessValue ? AccessResultAllowed::allowed() : AccessResultForbidden::forbidden();
+    return $this->entityHasAccessToCurrentDomain ? AccessResultAllowed::allowed() : AccessResultForbidden::forbidden();
   }
 
   /**
