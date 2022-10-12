@@ -1,0 +1,4 @@
+adimeo_domain.access.settings:
+  title: Adimeo Domain Access settings
+  route_name: adimeo_domain.domain_access_config
+  base_route: domain.admin

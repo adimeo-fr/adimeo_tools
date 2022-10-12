@@ -1,0 +1,6 @@
+adimeo_domain.access.settings:
+  title: Adimeo Domain Access settings
+  route_name: adimeo_domain.domain_acces_config
+  parent: domain.admin
+  description: 'Adimeo Domain Access settings'
+  weight: 12

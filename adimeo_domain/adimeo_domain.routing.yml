@@ -4,4 +4,12 @@ adimeo_domain.dev:
     _title: 'Adimeo Domain Dev'
     _controller: '\Drupal\adimeo_domain\Controller\AdimeoDomainDevController::build'
   requirements:
-    _permission: 'access content'
+    _permission: 'administer domains'
+
+adimeo_domain.domain_access_config:
+  path: '/admin/config/domain/adimeo_domain_access'
+  defaults:
+    _title: 'Adimeo domain access'
+    _form: 'Drupal\adimeo_domain\Form\AdimeoDomainAccessConfigForm'
+  requirements:
+    _permission: 'administer domains'
