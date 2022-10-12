@@ -20,7 +20,7 @@ function adimeo_domain_metatag_token_info() {
   if (!empty($allDomains)) {
     $tokens = [];
     foreach ($allDomains as $domainId) {
-      $tokenName = sprintf('field_domain_source:default:%s', $domainId);
+      $tokenName = sprintf('field_domain_source_url:default:%s', $domainId);
       $tokens[$tokenName] = [
         'name' => t('Adimeo Domain Metatag Tokens'),
         'description' => t('Adimeo Domain Metatag Tokens.'),
@@ -46,7 +46,7 @@ function adimeo_domain_metatag_tokens($type, $tokens, array $data, array $option
 
     foreach ($tokens as $name => $original) {
 
-      if (str_contains($name, 'field_domain_source')) {
+      if (str_contains($name, 'field_domain_source_url')) {
         $tokenArray = explode(':', $name);
         $defaultDomainId = str_replace(']', '', end($tokenArray));
         $node = reset($data);
