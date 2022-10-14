@@ -53,4 +53,13 @@ interface AdimeoDomainAccessOperationInterface {
    * @return \Drupal\Core\Access\AccessResult
    */
   public function createOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResult;
+
+  /**
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   * @param \Drupal\Core\Session\AccountProxyInterface $accountProxy
+   *
+   * @return \Drupal\Core\Access\AccessResult
+   */
+  public function deleteOperation(EntityInterface $entity, AccountProxyInterface $accountProxy): AccessResult;
+
 }

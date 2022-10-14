@@ -90,6 +90,7 @@ abstract class AdimeoDomainAccessPluginBase extends PluginBase implements Contai
       'view' => $this->viewOperation($entity, $accountProxy),
       'update' => $this->updateOperation($entity, $accountProxy),
       'create' => $this->createOperation($entity, $accountProxy),
+      'delete' => $this->deleteOperation($entity, $accountProxy),
       default => AccessResultNeutral::neutral(),
     };
 
