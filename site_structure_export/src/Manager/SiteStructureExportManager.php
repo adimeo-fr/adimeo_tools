@@ -58,24 +58,6 @@ class SiteStructureExportManager {
     return $structure;
   }
 
-  public function exportToCsv($data) {
-    if(!empty($data)) {
-      $delimiter = ',';
-      $filename = $this->configFactory->get('system.site')->getName().'_structure.csv';
-
-      // Create a file pointer
-      $f = fopen('php://output', 'w+');
-
-      foreach ($data as $type => $bundle) {
-        fputcsv($f,$type,$delimiter);
-
-        foreach ($bundle as $name => $fields) {
-
-        }
-
-      }
-    }
-  }
 
   public function exportToXsl() {
     // filename for download
