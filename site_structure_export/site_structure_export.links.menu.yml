@@ -1,0 +1,6 @@
+site_structure_export.menu:
+  title: 'Export site structure'
+  route_name: site_structure_export.form
+  menu_name: adimeo.toole
+  parent: system.admin_config_development
+  weight: 100
