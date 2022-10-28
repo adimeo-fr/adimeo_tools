@@ -1567,14 +1567,16 @@ tarteaucitron.services.gtag = {
     "uri": "https://support.google.com/analytics/answer/6004245",
     "needConsent": true,
     "cookies": (function () {
-        var googleIdentifier = tarteaucitron.user.gtagUa,
-        tagUaCookie = '_gat_gtag_' + googleIdentifier,
-        tagGCookie = '_ga_' + googleIdentifier;
+        var googleIdentifier = tarteaucitron.user.analyticsUa,
+            tagUaCookie = '_gat_gtag_' + googleIdentifier,
+            tagGCookie = '_ga_' + googleIdentifier,
+            tagGUaCookie = '_gat_' + googleIdentifier;
 
         tagUaCookie = tagUaCookie.replace(/-/g, '_');
         tagGCookie = tagGCookie.replace(/G-/g, '');
+        tagGUaCookie = tagGUaCookie.replace(/G-/g, '');
 
-        return ['_ga', '_gat', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmz', tagUaCookie, tagGCookie];
+        return ['_ga', '_gat', '_gid', '__utma', '__utmb', '__utmc', '__utmt', '__utmz', tagUaCookie, tagGCookie, tagGUaCookie];
     })(),
     "js": function () {
         "use strict";
@@ -3292,7 +3294,7 @@ tarteaucitron.services.facebookpixel = {
     "name": "Facebook Pixel",
     "uri": "https://fr-fr.facebook.com/business/help/www/651294705016616",
     "needConsent": true,
-    "cookies": ['datr', 'fr', 'reg_ext_ref', 'reg_fb_gate', 'reg_fb_ref', 'sb', 'wd', 'x-src'],
+    "cookies": ['datr', 'fr', 'reg_ext_ref', 'reg_fb_gate', 'reg_fb_ref', 'sb', 'wd', 'x-src', '_fbp'],
     "js": function () {
         "use strict";
         var n;
