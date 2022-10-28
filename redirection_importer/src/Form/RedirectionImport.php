@@ -4,20 +4,24 @@
 namespace Drupal\redirection_importer\Form;
 
 use Drupal\adimeo_tools\Shared\BatchTrait;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\redirect\Entity\Redirect;
 
-class RedirectionImport extends FormBase
-{
+class RedirectionImport extends FormBase {
 
   use BatchTrait;
 
   const FORM_ID = 'redirection_importer.redirection_import';
+
   const FIELD_FILE = 'file';
+
   const SEPARATOR = ';';
+
   const WRAPPER = '"';
+
   /**
    * Returns a unique string identifying the form.
    *
@@ -28,8 +32,7 @@ class RedirectionImport extends FormBase
    * @return string
    *   The unique string identifying the form.
    */
-  public function getFormId()
-  {
+  public function getFormId() {
     return static::FORM_ID;
   }
 
@@ -44,14 +47,13 @@ class RedirectionImport extends FormBase
    * @return array
    *   The form structure.
    */
-  public function buildForm(array $form, FormStateInterface $form_state)
-  {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $form[static::FIELD_FILE] = [
-      '#type'              => 'managed_file',
-      '#title'             => t('Fichier'),
+      '#type' => 'managed_file',
+      '#title' => t('Fichier'),
       '#upload_validators' => [
         'file_validate_extensions' => ['csv'],
-        'file_validate_size'       => array(25600000)
+        'file_validate_size' => [25600000],
       ],
       '#description' => 'Type: csv
                                <br/>séparateur: ";"
@@ -62,8 +64,8 @@ class RedirectionImport extends FormBase
     ];
 
     $form['submit'] = [
-      '#type'        => 'submit',
-      '#value'       => t('Save'),
+      '#type' => 'submit',
+      '#value' => t('Save'),
       '#button_type' => 'primary',
     ];
 
@@ -77,23 +79,22 @@ class RedirectionImport extends FormBase
    *   An associative array containing the structure of the form.
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
+   *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+
     $dataImport = $this->getDataToImport($form_state);
 
-    $operations = $this->getBatchOperations(
-      '\\' . get_called_class() . '::processLine',
-      $dataImport
-    );
+    $operations = $this->getBatchOperations('\\' . get_called_class() . '::processLine',
+      $dataImport);
 
     // Launch batch.
-    $batch = array(
-      'title'      => 'Import des metatags',
+    $batch = [
+      'title' => 'Import des metatags',
       'operations' => $operations,
-      'finished'   => '\\' . get_called_class() . '::processEnd',
-    );
+      'finished' => '\\' . get_called_class() . '::processEnd',
+    ];
     batch_set($batch);
 
   }
@@ -135,7 +136,7 @@ class RedirectionImport extends FormBase
     /** @var static $form */
     $form = new static();
     foreach ($data as $line) {
-      if(is_null($data)) {
+      if (is_null($data)) {
         continue;
       }
       $context['results']['imported'] += $form->importRedirection($line, $context['results']['errors']) ? 1 : 0;
@@ -145,12 +146,16 @@ class RedirectionImport extends FormBase
 
   public function importRedirection($data, &$errors) {
 
-    Redirect::create([
-      'redirect_source' => $data[0], // Set your custom URL.
+    static::removeRedirectIfExists($data[0], $data[2]);
+
+    $values = [
+      'redirect_source' => static::getPathByAlias($data[0]), // Set your custom URL.
       'redirect_redirect' => $data[1], // Set internal path to a node for example.
       'language' => $data[2], // Set the current language or undefined.
       'status_code' => $data[3], // Set HTTP code.
-    ])->save();
+    ];
+
+    Redirect::create($values)->save();
 
     return TRUE;
   }
@@ -172,4 +177,49 @@ class RedirectionImport extends FormBase
     }
     \Drupal::messenger()->addMessage(t($message));
   }
+
+  /**
+   * @param $sourceUrl
+   * @param $lang
+   *
+   * @return void
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
+   */
+  protected static function removeRedirectIfExists($sourceUrl, $lang) {
+
+    $parsed_url = UrlHelper::parse(trim($sourceUrl));
+    $path = isset($parsed_url['path']) ? $parsed_url['path'] : NULL;
+    $query = isset($parsed_url['query']) ? $parsed_url['query'] : NULL;
+    $hash = Redirect::generateHash(static::getPathByAlias($path), $query, $lang);
+
+    // Search for duplicate.
+    $redirects = \Drupal::entityTypeManager()->getStorage('redirect')->loadByProperties(['hash' => $hash]);
+
+    if (!empty($redirects)) {
+      foreach ($redirects as $redirect) {
+        $redirect->delete();
+      }
+    }
+  }
+
+  /**
+   * @param $alias
+   *
+   * @return array|int|mixed|string|string[]
+   */
+  protected static function getPathByAlias($alias) {
+    return static::cleanPathSlash(\Drupal::service('path_alias.manager')->getPathByAlias($alias));
+  }
+
+  /**
+   * @param $path
+   *
+   * @return array|string|string[]
+   */
+  protected static function cleanPathSlash($path) {
+    return strpos($path, '/') == 0 ? substr_replace($path, '', 0, strlen('/')) : $path;
+  }
+
 }
