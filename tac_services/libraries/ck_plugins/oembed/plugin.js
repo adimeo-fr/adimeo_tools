@@ -4,7 +4,7 @@
     afterInit: function( editor ) {
       var loadMediaOEmbed = function (editor) {
         var document = editor.document;
-        var tacPlaceholders = document.querySelectorAll('.tac-media-oembed-placeholder:not(.js-validated)');
+        var tacPlaceholders = document.$.querySelectorAll('.tac-media-oembed-placeholder:not(.js-validated)');
         for(var i = 0; i < tacPlaceholders.length; i++) {
           //tacPlaceholder = jQuery(tacPlaceholder);
           var mediaId = tacPlaceholders[i].dataset.mediaId;
