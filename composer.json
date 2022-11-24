@@ -17,19 +17,8 @@
     },
     "require": {
         "cocur/slugify": "^v3.2",
-        "wikimedia/composer-merge-plugin": "^2.0"
-    },
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "adimeo_domain_sitemap/composer.json",
-                "adimeo_social_wall/composer.json"
-            ]
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "wikimedia/composer-merge-plugin": true
-        }
+        "drupal/simple_sitemap": "^4.1",
+        "drupal/social_wall": "^3.0",
+        "google/apiclient": "^2.0"
     }
 }
