@@ -1,0 +1,30 @@
+{#
+/**
+* Available variables:
+* - elements: Includes all posts
+* - post: one post
+*  - post.creation_timestamp: post creation date as timestamp
+*  - post.post_url: post external link
+*  - post.body_text:
+* - account: Twitter account infos
+*  - account.url: Account URL
+*  - account.name: Account name
+*/
+#}
+
+<ul class="social-networks twitter">
+  <p class="social-networks-name">Twitter</p>
+  {% for post in elements %}
+    <li class="social-networks-items">
+      <div class="social-networks-details">
+        <p class="social-networks-date">{{ post.creation_timestamp|format_date('short') }}</p>
+        <p class="social-networks-post">{{ post.body_text }}</p>
+        <a class="see-more" href="{{ post.post_url }}" target="_blank" title="{{ 'See post on @sn (new window)'|t({ '@sn': 'Twitter' }) }}">
+          {{ 'See post on @sn'|t({ '@sn': 'Twitter' }) }}
+        </a>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{{ account.url }}" target="_blank">{{ "Follow us" | t }}</a>

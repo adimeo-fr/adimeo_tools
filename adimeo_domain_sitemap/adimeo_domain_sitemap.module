@@ -1,0 +1,16 @@
+<?php
+
+use Drupal\adimeo_domain_sitemap\Controller\DomainSimpleSitemapController;
+use Drupal\simple_sitemap\Entity\SimpleSitemapInterface;
+
+/**
+ * Add the current domain ID as a third party setting after generating all links.
+ * This allows us to know what sitemap is linked to which domain.
+ *
+ * Implements hook_simple_sitemap_links_alter().
+ */
+function adimeo_domain_sitemap_simple_sitemap_links_alter(array &$links, SimpleSitemapInterface $sitemap): void {
+  $activeId = \Drupal::service('domain.negotiator')->getActiveId();
+  $sitemap->setThirdPartySetting(DomainSimpleSitemapController::MODULE_NAME, DomainSimpleSitemapController::DOMAIN_ID_SETTING, $activeId);
+  $sitemap->save();
+}
