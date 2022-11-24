@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function adimeo_share_install($is_syncing) {
+
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function adimeo_share_uninstall($is_syncing) {
+
+}
+
+
+function share_schema() {
+  return [
+    'description' => '',
+    'fields' => [
+      'id' => [
+        'description' => '',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'nid' => [
+        'description' => '',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ],
+      'total' => [
+        'description' => '',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'favorite_social' => [
+        'description' => '',
+        'type' => 'varchar',
+        'length' => 128,
+      ],
+      'data' => [
+        'description' => '',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ],
+    ],
+    'primary key' => ['id', 'nid']
+  ];
+}

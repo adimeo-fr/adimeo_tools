@@ -6,6 +6,7 @@ use Drupal\adimeo_share\Plugin\SocialManager;
 use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -45,7 +46,25 @@ class SocialBlock extends BlockBase implements ContainerFactoryPluginInterface {
     );
   }
 
-  public function build() {
+  /**
+   * @inheritDoc
+   */
+  public function blockForm($form, FormStateInterface $form_state): array {
+    $config = $this->getConfiguration();
+    $form['options'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Select social network displayed'),
+      '#default_value' => $config['options'] ?? [],
+      '#options' => $this->getOptions(),
+      '#required' => TRUE,
+      '#multiple' => TRUE,
+    ];
+
+    return $form;
+  }
+
+
+  public function build(): array {
     $items = [];
     if (($node = $this->routeMatch->getParameter('node')) === NULL) {
       return $items;
@@ -67,6 +86,23 @@ class SocialBlock extends BlockBase implements ContainerFactoryPluginInterface {
     }
 
     return $items;
+  }
+
+  /**
+   * Retrieve all Social plugins in a key value pair.
+   * The key is the plugin ID and the value is the plugin Label.
+   *
+   * @return array
+   */
+  protected function getOptions(): array {
+    $socials = $this->socialManager->getDefinitions();
+    $options = [];
+
+    foreach ($socials as $social) {
+      $options[$social['id']] = $social['label'];
+    }
+
+    return $options;
   }
 
 }

@@ -15,7 +15,6 @@ use Drupal\Core\Link;
  */
 class Twitter extends SocialBase {
 
-
   public function generateLink(EntityInterface $entity) {
     $url = $entity->toUrl();
     $link = new Link($this->t('Share to %social', ['%social' => $this->getLabel()]), $url);
