@@ -1,0 +1,10 @@
+{
+    "name": "drupal/adimeo_domain_sitemap",
+    "description": "Custom Domain Sitemap @Adimeo",
+    "type": "drupal-module",
+    "autoload": {},
+    "require": {
+        "drupal/simple_sitemap": "^4.1"
+    },
+    "extra": {}
+}

@@ -9,7 +9,27 @@
             "email": "contact@adimeo.com"
         }
     ],
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
     "require": {
-        "cocur/slugify": "^v3.2"
+        "cocur/slugify": "^v3.2",
+        "wikimedia/composer-merge-plugin": "^2.0"
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "adimeo_domain_sitemap/composer.json",
+                "adimeo_social_wall/composer.json"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "wikimedia/composer-merge-plugin": true
+        }
     }
 }

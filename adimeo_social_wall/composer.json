@@ -1,0 +1,11 @@
+{
+    "name": "drupal/adimeo_social_wall",
+    "description": "Custom Social Wall @Adimeo",
+    "type": "drupal-module",
+    "autoload": {},
+    "require": {
+        "drupal/social_wall": "^3.0",
+        "google/apiclient": "^2.0"
+    },
+    "extra": {}
+}

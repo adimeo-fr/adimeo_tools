@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+function adimeo_social_wall_theme($existing, $type, $theme, $path): array {
+  return [
+    'social_network_youtube_block' => [
+      'variables' => [
+        'elements' => [],
+        'channel' => [],
+      ],
+    ],
+    'social_network_twitter_with_account_infos_block' => [
+      'variables' => [
+        'elements' => [],
+        'account' => [],
+      ],
+    ],
+  ];
+}

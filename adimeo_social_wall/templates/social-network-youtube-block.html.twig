@@ -1,0 +1,34 @@
+{#
+/**
+* Available variables:
+* - elements: Includes all posts
+* - video: one post
+*  - video.videoId: Video ID
+*  - video.videoLink: Video link
+*  - video.embedVideoLink: Video embed link (Used in an iframe)
+*  - video.title: Video title
+*  - video.channelTitle: Channel title
+*  - video.description: Video description
+*  - video.publishedAt: Published date as a timestamp
+* - channel: Channel informations
+*  - channel.id: Channel ID
+*  - channel.url: Channel URL
+*  - channel.name: Channel name
+*  - channel.description: Channel description
+*/
+#}
+
+<ul class="social-networks youtube">
+  <p class="social-networks-name">Youtube</p>
+  {% for video in elements %}
+    <li class="social-networks-items">
+      <div class="social-networks-details">
+        <iframe class="social-networks-embed" src="{{ video.embedVideoLink }}"></iframe>
+        <p class="social-networks-title">{{ video.title }}</p>
+        <p class="social-networks-date">{{ video.publishedAt|format_date('short') }}</p>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="{{ channel.url }}" target="_blank">{{ "Follow us" | t }}</a>

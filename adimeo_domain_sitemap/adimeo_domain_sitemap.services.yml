@@ -1,0 +1,5 @@
+services:
+  adimeo_domain_sitemap.route_subscriber:
+    class: Drupal\adimeo_domain_sitemap\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
