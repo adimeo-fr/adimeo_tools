@@ -88,4 +88,39 @@ class SiteStructureExportManager {
     if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
   }
 
+  public function exportToWord() {
+    // filename for download
+    $siteName = $this->configFactory->get('system.site')->get('name');
+    $filename = $siteName."_structure.doc";
+
+
+    header("Content-Type: application/vnd.msword");
+    header("content-disposition: attachment;filename=" . $filename);
+
+    $data = $this->getAllEntityTypeStructure();
+
+    echo "<html>";
+    echo "<body>";
+    echo "<h1 style='color: #dc4453; margin-bottom: 50px'>Structure du site '".$siteName."'</h1>";
+
+    foreach($data as $type => $bundle) {
+      echo "<div><h2 style='color: #0d7ab8'>Entity type " .$type.":</h2>";
+      foreach ($bundle as $bundleName => $field) {
+        echo "<div><h3 style='color: #00836d'>Bundle ".$bundleName.":</h3>";
+        foreach ($field as $fieldName => $data) {
+          echo "<p><strong>Champ ".$fieldName.": </strong></p>";
+          foreach ($data as $k => $v) {
+            echo "<p>".$k.": ".$v." </p>";
+          }
+        }
+        echo "</div>";
+      }
+      echo "</div>";
+    }
+    echo "</body>";
+    echo "</html>";
+
+    exit;
+  }
+
 }

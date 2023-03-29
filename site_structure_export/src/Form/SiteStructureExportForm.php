@@ -38,10 +38,18 @@ class SiteStructureExportForm extends \Drupal\Core\Form\FormBase {
       '#type' => 'actions',
     ];
 
-    // Add a submit button that handles the submission of the form.
-    $form['actions']['submit'] = [
+    $form['actions']['submit_word'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Export structure data'),
+      '#value' => $this->t('Export structure data to word'),
+      '#submit' => [
+        [$this, 'submitWord']
+      ]
+    ];
+
+    // Add a submit button that handles the submission of the form.
+    $form['actions']['submit_xls'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Export structure data to xls'),
     ];
 
     return $form;
@@ -54,6 +62,10 @@ class SiteStructureExportForm extends \Drupal\Core\Form\FormBase {
   public function submitForm(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
     $this->siteExportManager->exportToXsl();
 
+  }
+
+  public function submitWord() {
+    $this->siteExportManager->exportToWord();
   }
 
 }
