@@ -1,0 +1,7 @@
+site_structure_export.form:
+  path: '/site-structure-export'
+  defaults:
+    _form: 'Drupal\site_structure_export\Form\SiteStructureExportForm'
+    _title: 'Export the site structure'
+  requirements:
+    _permission: 'access content'
