@@ -226,12 +226,6 @@ tac_sharethis:
   dependencies:
     - tac_services/tac_services
 
-tac_mathtag:
-  js:
-    libraries/tac_mathtag/tac_mathtag.js: {}
-  dependencies:
-    - tac_services/tac_services
-
 tac_weborama:
   js:
     libraries/tac_weborama/tac_weborama.js: {}
