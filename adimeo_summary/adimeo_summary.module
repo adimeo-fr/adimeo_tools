@@ -1,13 +1,20 @@
 <?php
 
-use Drupal\adimeo_summary\Traits\SummaryTrait;
+use Drupal\adimeo_summary\Helpers\FormatHelpers;
+use Drupal\paragraphs\Entity\Paragraph;
 
-function adimeo_summary_preprocess_paragraph(&$variables) {
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+function adimeo_summary_preprocess_paragraph(&$variables): void {
+  /** @var Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   foreach ($variables['content'] as $fieldName => $field) {
-    if (strpos($fieldName, 'field_') === 0 && $variables['content'][$fieldName]['#field_type'] == 'string') {
-      $variables['content'][$fieldName]['#attributes']['id'] = SummaryTrait::stringToKebabCase($paragraph->get($fieldName)->get(0)->getString());
+    if (str_starts_with($fieldName, 'field_') && array_key_exists('#field_type', $variables['content'][$fieldName])) {
+      if ($variables['content'][$fieldName]['#field_type'] == 'string') {
+        $variables['content'][$fieldName]['#attributes']['id'] = FormatHelpers::stringToKebabCase(
+          FormatHelpers::unAccent(
+            $paragraph->get($fieldName)->get(0)->getString()
+          )
+        );
+      }
     }
   }
 }

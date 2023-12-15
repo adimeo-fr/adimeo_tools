@@ -35,7 +35,7 @@ class SummaryBlock extends BlockBase implements ContainerFactoryPluginInterface 
   /**
    * @inheritDoc
    */
-  public function build() {
+  public function build(): array {
     return $this->buildSummary();
   }
 
@@ -68,7 +68,7 @@ class SummaryBlock extends BlockBase implements ContainerFactoryPluginInterface 
     return static::ANCHOR_FIELD_NAME;
   }
 
-  protected function hasToBeBuild($handlerSettings) {
+  protected function hasToBeBuild($handlerSettings): bool {
     return (empty(static::PARAGRAPH_TYPES) || $handlerSettings['target_bundles'] == NULL) || (!empty(array_intersect($handlerSettings['target_bundles'], static::PARAGRAPH_TYPES)));
   }
 

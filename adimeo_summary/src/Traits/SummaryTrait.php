@@ -2,6 +2,7 @@
 
 namespace Drupal\adimeo_summary\Traits;
 
+use Drupal\adimeo_summary\Helpers\FormatHelpers;
 use Drupal\paragraphs\Entity\Paragraph;
 
 trait SummaryTrait {
@@ -19,6 +20,7 @@ trait SummaryTrait {
     $summary = [
       '#theme' => 'item_list',
       '#list_type' => 'ul',
+      '#title' => $this->t('Summary'),
       '#items' => [],
       '#wrapper_attributes' => [
         'class' => ['summary-list'],
@@ -62,14 +64,9 @@ trait SummaryTrait {
     ];
   }
 
-
   /** Here is where you decide how you construct your anchor (element id)
    * Here we decided to build the id with the title, but you can also build it with paragraph id */
   protected function buildAnchorId(Paragraph $entity): string {
-    return "#" . self::stringToKebabCase($entity->get($this->getAnchorFieldName())->value);
-  }
-
-  public static function stringToKebabCase(string $text): string {
-    return str_replace(' ', '-', strtolower($text));
+    return "#" . FormatHelpers::stringToKebabCase(FormatHelpers::unAccent($entity->get($this->getAnchorFieldName())->value));
   }
 }
